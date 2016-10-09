@@ -1,0 +1,64 @@
+#page-content {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+@-webkit-keyframes loadAnimations {
+    from {
+        opacity: 0;
+        margin-top: 25%;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+@-moz-keyframes loadAnimations {
+    from {
+        opacity: 0;
+        margin-top: 25%;
+
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+@keyframes loadAnimations {
+    from {
+        opacity: 0;
+        margin-top: 25%;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+.load-animations {
+    margin-top: 25%;
+    opacity: 0;
+    -webkit-animation: loadAnimations ease-in 1;
+    -moz-animation: loadAnimations ease-in 1;
+    animation: loadAnimations ease-in 1;
+
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+}
+
+.logo-image {
+    margin: 10px auto auto;
+    vertical-align: middle;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 200px;
+    min-height: 200px;
+}

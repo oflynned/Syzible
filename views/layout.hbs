@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-red.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!-- top nav bar -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Syzible</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="/">About</a>
+                <a class="mdl-navigation__link" href="/work-experience">Work Experience</a>
+                <a class="mdl-navigation__link" href="/language-experience">Language Experience</a>
+                <a class="mdl-navigation__link" href="">Google Play</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="mdl-card__actions mdl-card--border"></div>
+
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Self</span>
+        <nav class="mdl-navigation">
+            <i ></i><a class="mdl-navigation__link" href="/project/iompar">iompar</a>
+            <a class="mdl-navigation__link" href="/project/zoomba">Zoomba</a>
+            <a class="mdl-navigation__link" href="/project/file-server">File Server</a>
+            <a class="mdl-navigation__link" href="/project/meat-timer">Meat Timer</a>
+            <a class="mdl-navigation__link" href="/project/chat-server">Chat Server</a>
+            <a class="mdl-navigation__link" href="/project/irish-grammar">Irish Grammar</a>
+            <a class="mdl-navigation__link" href="/project/facial-recognition">Facial Recognition</a>
+        </nav>
+
+        <span class="mdl-layout-title">GlassByte</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/project/drink-tracker">Drink Tracker</a>
+            <a class="mdl-navigation__link" href="/project/neurobranch">Neurobranch</a>
+        </nav>
+
+        <span class="mdl-layout-title">University</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/project/proxy-server">Proxy Server</a>
+            <a class="mdl-navigation__link" href="/project/tcd-udp">TCP-UDP</a>
+        </nav>
+    </div>
+
+    <main class="mdl-layout__content" style="flex: 1 0 auto;">
+        <div class="page-content">
+            {{{body}}}
+        </div>
+    </main>
+    <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Privacy & Terms</a></li>
+                <li>Syzible &copy; <span id="year">2015</span></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+</body>
+
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script>
+    var dateId = document.getElementById("year");
+    var foundingYear = 2015;
+    var currentYear = new Date().getFullYear();
+
+    if (currentYear == foundingYear) {
+        dateId.innerHTML = currentYear
+    } else {
+        dateId.innerHTML = foundingYear + "-" + currentYear;
+    }
+</script>
+</html>
