@@ -53,6 +53,12 @@
     animation-duration: 0.5s;
 }
 
+.tile {
+    width: auto;
+    margin: 0 auto;
+    padding: 10px
+}
+
 .logo-image {
     margin: 10px auto auto;
     vertical-align: middle;

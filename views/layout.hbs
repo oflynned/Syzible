@@ -74,13 +74,7 @@
 <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 <script>
     var dateId = document.getElementById("year");
-    var foundingYear = 2015;
     var currentYear = new Date().getFullYear();
-
-    if (currentYear == foundingYear) {
-        dateId.innerHTML = currentYear
-    } else {
-        dateId.innerHTML = foundingYear + "-" + currentYear;
-    }
+    dateId.innerHTML = currentYear;
 </script>
 </html>

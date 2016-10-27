@@ -7,11 +7,15 @@
   },
   "dependencies": {
     "body-parser": "~1.15.1",
+    "cheerio": "^0.22.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "fs": "0.0.1-security",
     "hbs": "~4.0.0",
     "morgan": "~1.7.0",
+    "promise": "^7.1.1",
+    "request": "^2.76.0",
     "serve-favicon": "~2.3.0"
   }
 }

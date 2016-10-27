@@ -6,7 +6,7 @@ router.get('/', function (req, res) {
         {
             title: "iompar",
             description: "Transportation app for the Luas light-rail system with logic based on set theory.",
-            url: "#"
+            url: "./project/iompar"
         },
         {
             title: "Neurobranch",
@@ -36,14 +36,30 @@ router.get('/', function (req, res) {
     ];
 
     res.render('index', {
-        projects: projects
+        projects: projects,
+        title: "Syzible"
     });
 });
 
 router.get('/project/:project', function (req, res) {
-    var projectName = req.params.project;
+    var projectName = JSON.stringify(req.params.project).replace(/"/g, "");
+    var projectDetails = {};
+
+    switch (projectName) {
+        case "iompar":
+            projectDetails["title"] = "iompar";
+            projectDetails["url"] = "http://glassbyte.com/_include/img/work/full/image-02-full.jpg";
+            break;
+        default:
+            projectDetails["title"] = "Unknown project";
+            break;
+    }
+
+    console.log(projectDetails);
+
     res.render('project', {
-        title: projectName
+        projectDetails: projectDetails,
+        title: projectDetails["title"]
     });
 });
 
@@ -116,7 +132,10 @@ router.get('/language-experience', function (req, res) {
         }
     ];
 
-    res.render('language-experience', {languages: languages});
+    res.render('language-experience', {
+        languages: languages,
+        title: "Languages"
+    });
 });
 
 router.get('/work-experience', function (req, res) {
@@ -144,10 +163,21 @@ router.get('/work-experience', function (req, res) {
             period: "August 2015",
             url: "http://www.huawei.com",
             image: "/images/huawei.png"
+        },
+        {
+            employer: "TIC Summer Camp",
+            location: "Bethesda, Maryland, USA",
+            title: "Programming/Robotics Camp Counsellor",
+            period: "June - September 2014",
+            url: "http://www.ticcamp.com",
+            image: "/images/tic.jpg"
         }
     ];
 
-    res.render('work-experience', {jobs: jobs});
+    res.render('work-experience', {
+        jobs: jobs,
+        title: "Work Experience"
+    });
 });
 
 module.exports = router;
