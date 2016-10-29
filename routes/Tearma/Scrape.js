@@ -31,22 +31,15 @@ var typeMap = {
 router.get('/', function (req, res) {
     // common
     var searchTerm, searchType;
-    var root, synonyms, examples;
-    var domain, signpost;
-    var declension, rootDeclension;
-    var type, rootType;
+    var signpost;
+    var declension;
     var metaData;
 
     // if noun
-    var nomPlu, genSing, genPlu, gender;
+    var gender;
+    var searchDeclension = 0, searchGender = null;
 
-    // if verb
-    var gerund, participle, preposition;
-
-    var searchDeclension = 0, searchGender= "";
-
-    var term = req.query['term'];
-    term = decodeURIComponent(term);
+    var term = encodeURIComponent(req.query['term']);
     var lang;
     if (req.query['lang'] != undefined)
         lang = req.query['lang'] === "en" ? EN_PARAM : GA_PARAM;
@@ -56,7 +49,7 @@ router.get('/', function (req, res) {
         var data = [];
         var $ = cheerio.load(html);
 
-        //first dArticle is definitions, subsequent are related terms
+        //first dArticle set is definitions, subsequent are related terms after result section div
         $('.dArticle').filter(function () {
             var searchMutations = [];
 
@@ -95,6 +88,8 @@ router.get('/', function (req, res) {
 
             //determine details about the word from each bullet point
             $(this).find('.dSense').each(function () {
+                signpost = $(this).find('.dSignpost > .dIntro').text();
+
                 var domains = [];
                 $(this).find('.dDomains > .dDomain').each(function () {
                     domains.push({
@@ -174,6 +169,7 @@ router.get('/', function (req, res) {
                         searchDeclension: searchDeclension,
                         searchGender: genderMap[searchGender],
                         searchMutations: searchMutations,
+                        signpost: signpost,
                         synonyms: synonyms,
                         gender: genderMap[gender],
                         mutations: mutations,
