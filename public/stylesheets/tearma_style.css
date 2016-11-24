@@ -1,10 +1,23 @@
 .search-box {
-    margin: 25% auto auto;
+    margin: 10% auto auto;
     height: auto;
     width: 50%;
 }
 
-.search-area {
+.search-area {;
     margin-left: 2em;
     margin-right: 2em;
+}
+
+.result-card {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    padding: 1em
+}
+
+.results {
+    width: 50%;
+    height: auto;
+    margin-top: 2em;
 }

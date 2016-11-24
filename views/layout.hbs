@@ -19,8 +19,7 @@
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="/">About</a>
-                <a class="mdl-navigation__link" href="/work-experience">Work Experience</a>
+                <a class="mdl-navigation__link" href="/">Home</a>
                 <a class="mdl-navigation__link" href="/tearma">Tearma.ie</a>
             </nav>
         </div>
@@ -29,27 +28,15 @@
     <div class="mdl-card__actions mdl-card--border"></div>
 
     <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Self</span>
+        <span class="mdl-layout-title">Web Apps</span>
         <nav class="mdl-navigation">
-            <i ></i><a class="mdl-navigation__link" href="/project/iompar">iompar</a>
-            <a class="mdl-navigation__link" href="/project/zoomba">Zoomba</a>
-            <a class="mdl-navigation__link" href="/project/file-server">File Server</a>
-            <a class="mdl-navigation__link" href="/project/meat-timer">Meat Timer</a>
-            <a class="mdl-navigation__link" href="/project/chat-server">Chat Server</a>
-            <a class="mdl-navigation__link" href="/project/irish-grammar">Irish Grammar</a>
-            <a class="mdl-navigation__link" href="/project/facial-recognition">Facial Recognition</a>
+            <i></i><a class="mdl-navigation__link" href="/tearma">Tearma.ie</a>
         </nav>
 
-        <span class="mdl-layout-title">GlassByte</span>
+        <span class="mdl-layout-title">About</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="/project/drink-tracker">Drink Tracker</a>
-            <a class="mdl-navigation__link" href="/project/neurobranch">Neurobranch</a>
-        </nav>
-
-        <span class="mdl-layout-title">University</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="/project/proxy-server">Proxy Server</a>
-            <a class="mdl-navigation__link" href="/project/tcd-udp">TCP-UDP</a>
+            <i></i><a class="mdl-navigation__link" href="#">About</a>
+            <i></i><a class="mdl-navigation__link" href="/work-experience">Work Experience</a>
         </nav>
     </div>
 
@@ -63,7 +50,7 @@
             <ul class="mdl-mini-footer__link-list">
                 <li><a href="#">Help</a></li>
                 <li><a href="#">Privacy & Terms</a></li>
-                <li>Syzible &copy; <span id="year">2015</span></li>
+                <li>Syzible &copy; <span id="year">2016</span></li>
             </ul>
         </div>
     </footer>
@@ -72,6 +59,10 @@
 </body>
 
 <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
 <script>
     var dateId = document.getElementById("year");
     var currentYear = new Date().getFullYear();

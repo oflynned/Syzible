@@ -4,7 +4,6 @@
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-var Promise = require('promise')
 
 const BASE_URL = "http://www.tearma.ie/Search.aspx?term=";
 const GA_PARAM = "&lang=3116659";
@@ -50,16 +49,26 @@ function scrapeData(queries, callback) {
     var searchDeclension = 0, searchGender = null;
 
     var term = encodeURIComponent(queries['term']);
-    var lang;
-    var limit = queries["limit"] = undefined ? -1 : queries["limit"];
-    var showExamples = queries["examples"] === "true";
 
-    if (queries['lang'] != undefined)
-        lang = queries['lang'] === "en" ? EN_PARAM : GA_PARAM;
+    var langID;
+
+    if(queries["lang"] === "on")
+        langID = "en";
+    else if(queries["lang"] === undefined)
+        langID = "ga";
+    else
+        langID = queries["lang"];
+
+    var lang = langID === "en" ? EN_PARAM : GA_PARAM;
+    var limit = queries["limit"] = undefined ? -1 : queries["limit"];
     var url = lang === undefined ? BASE_URL + term : BASE_URL + term + lang;
 
     request(url, function (error, response, html) {
         var data = [];
+        data.push({
+            searchLang: langID
+        });
+
         var $ = cheerio.load(html);
 
         //first dArticle set is definitions, subsequent are related terms after result section div
@@ -72,12 +81,12 @@ function scrapeData(queries, callback) {
                 searchGender = searchType.replace(/[0-9]/g, '');
 
                 $(this).find('.dAnnotPOS').empty();
-                searchTerm = $(this).text().trim();
-                searchMutations.push({root: searchTerm});
+                searchTerm = $(this).text().trim().replace(/\s\s+/g, " ").replace("¶", "");
+                searchMutations.push({root: searchTerm.replace("¶", "")});
             });
 
             $(this).find('.dHeadTerm > .dTerm > .dTermSubline > .dInflect').each(function () {
-                var label = $(this).find('.dLabel').text().replace(/[^a-zA-Z]+/g, '');
+                var label = $(this).find('.dLabel').text();
                 var mutation = $(this).find('.dValue').text();
 
                 if (label === "gu")
@@ -116,25 +125,26 @@ function scrapeData(queries, callback) {
                     });
                 });
 
-                /*var synonyms = [];
-                 // synonyms area below the search word
-                 $(this).find('.dSynonyms > .dTerm').each(function () {
-                 $(this).find('span > a > span > span').each(function () {
-                 var metaData = $(this).find('.dAnnotPOS').text();
-                 var type = metaData.replace(/[0-9]/g, '');
-                 var syn_declension = parseInt(metaData.match(/\d+/g, ''));
+                var synonyms = [];
+                // synonyms area below the search word
+                $(this).find('.dSynonyms > .dTerm').each(function () {
+                    $(this).find('span > a > span > span').each(function () {
+                        var metaData = $(this).find('.dAnnotPOS').text();
+                        var type = metaData.replace(/[0-9]/g, '');
+                        var syn_declension = parseInt(metaData.match(/\d+/g, ''));
 
-                 $(this).find('.dAnnotPOS').empty();
-                 var term = $(this).parent().text().trim();
+                        $(this).find('.dAnnotPOS').empty();
+                        var term = $(this).parent().text().trim();
 
-                 synonyms.push({
-                 synonym: term,
-                 type: genderMap[type],
-                 declension: syn_declension
-                 });
-                 });
-                 });
+                        synonyms.push({
+                            synonym: term,
+                            type: genderMap[type],
+                            declension: syn_declension
+                        });
+                    });
+                });
 
+                /*
                  var examples = [];
                  $(this).find('.dExamples > .dExample').each(function () {
                  var source = $(this).find('.dSource').text();
@@ -156,7 +166,8 @@ function scrapeData(queries, callback) {
                         gender = metaData.replace(/[0-9]/g, '');
 
                         $(this).find('.dAnnotPOS').empty();
-                        mutations.push({root: $(this).parent().text().trim().replace(/\s\s+/g, ' ')});
+                        var mutationRoot = $(this).parent().text();
+                        mutations.push({root: cleanFormatting(mutationRoot)});
                     });
 
                     $(this).find('.dTermSubline > .dInflect').each(function () {
@@ -181,26 +192,50 @@ function scrapeData(queries, callback) {
                             mutations[0]["participle"] = mutation;
                     });
 
-                    data.push({
-                        lang: lang === undefined ? -1 : lang,
-                        searchTerm: String(searchTerm).replace(/\s\s+/g, " "),
-                        searchType: String(decTypeMap[searchType]),
-                        searchDeclension: isNaN(searchDeclension) ? -1 : parseInt(searchDeclension),
-                        searchGender: searchGender === 's' ? -1 : genderMap[searchGender],
-                        searchMutations: searchMutations,
-                        signpost: signpost === "" ? -1 : signpost,
-                        //synonyms: synonyms === [] ? -1 : synonyms,
-                        gender: genderMap[gender],
-                        mutations: mutations,
-                        domains: domains
-                        //examples: examples
-                    });
+                    if (langID === "en") {
+                        data.push({
+                            enSearchTerm: String(searchTerm),
+                            enSearchType: String(decTypeMap[searchType]),
+                            enSearchMutations: searchMutations,
+                            gaDeclension: isNaN(declension) ? -1 : parseInt(declension),
+                            gaGender: genderMap[gender],
+                            gaMutations: mutations,
+                            signpost: signpost === "" ? -1 : signpost,
+                            domains: domains
+                        });
+                    } else if (langID === "ga") {
+                        data.push({
+                            gaSearchTerm: String(searchTerm),
+                            gaSearchType: String(decTypeMap[searchType]),
+                            gaSearchDeclension: isNaN(searchDeclension) ? -1 : parseInt(searchDeclension),
+                            gaSearchGender: searchGender === 's' ? -1 : genderMap[searchGender],
+                            gaSearchMutations: searchMutations,
+                            enGender: genderMap[gender],
+                            enMutations: mutations,
+                            signpost: String(signpost) === "" ? -1 : signpost,
+                            domains: domains
+                        });
+                    }
                 });
             });
         });
 
         callback((limit <= 0 || limit == undefined) ? data : data.splice(0, limit));
-    });
+    })
 }
 
-module.exports = scrapeData;
+function removeNumbers(input) {
+    return parseInt(input.replace(/[0-9]/g, ''));
+}
+
+function getNumbers(input) {
+    return String(input).replace(/[^a-zA-Z]+/g, '');
+}
+
+function cleanFormatting(input) {
+    return String(input).trim().replace(/\s\s+/g, " ").replace("¶", "");
+}
+
+module.exports = {
+    scrapeData: scrapeData
+};

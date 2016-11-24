@@ -4,10 +4,11 @@
 var express = require('express');
 var router = express.Router();
 
-var scrapeData = require('./Helpers.js');
+var ScrapeData = require('./Helpers.js');
 
 router.get('/', function (req, res) {
-    scrapeData(req.query, function (data) {
+    console.log(req.query);
+    ScrapeData.scrapeData(req.query, function (data) {
         console.log(data.length + " records returned");
         res.json(data);
     });
