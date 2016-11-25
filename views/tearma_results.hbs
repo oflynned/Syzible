@@ -1,7 +1,14 @@
 <div class="mdl-grid">
     <div class="mdl-layout-spacer"></div>
     <div class="mdl-cell" style="text-align: center">
-        <h3>Results for {{searchQuery}}</h3>
+        <h3>{{data.length}}
+            {{#compare data.length "===" 1}}
+                result
+            {{else}}
+                results
+            {{/compare}}
+            for {{searchQuery}}
+        </h3>
         <h4><a href="/tearma">Search again?</a></h4>
     </div>
     <div class="mdl-layout-spacer"></div>
