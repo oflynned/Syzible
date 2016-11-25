@@ -1,7 +1,8 @@
 <div class="mdl-grid">
     <div class="mdl-layout-spacer"></div>
-    <div class="mdl-cell">
-        <h3 class="" style="text-align: center">Results for {{searchQuery}}</h3>
+    <div class="mdl-cell" style="text-align: center">
+        <h3>Results for {{searchQuery}}</h3>
+        <h4><a href="/tearma">Search again?</a></h4>
     </div>
     <div class="mdl-layout-spacer"></div>
 </div>
@@ -61,7 +62,11 @@
                             <h2 class="mdl-card__title-text">{{root}}</h2>
                         {{/each}}
                         <h3 class="mdl-card__title-text">{{gaSearchTerm}}</h3>
-                        <div>{{gaSearchType}}</div>
+                        <div>{{gaSearchType}} {{#compare gaSearchType "==" "noun"}}
+                            / {{gaSearchDeclension}} / {{gaSearchGender}}
+                        {{else}}
+
+                        {{/compare}}</div>
                         <br>
                         {{#each domains}}
                             <div>{{en}}</div>

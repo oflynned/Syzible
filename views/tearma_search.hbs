@@ -1,5 +1,5 @@
-<form action="/tearma/results" method="get" class="search-box">
-    <div class="mdl-shadow--2dp">
+<form action="/tearma/results" method="get">
+    <div class="mdl-shadow--2dp search-box">
         <div class="search-area">
             <div class="mdl-textfield mdl-js-textfield">
                 <input class="mdl-textfield__input" type="text" id="term" name="term">
@@ -13,12 +13,14 @@
                            class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"/>
                 </a>
             </div>
-            <div class="mdl-cell">
-                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="lang">
-                    <input type="checkbox" id="lang" name="lang" class="mdl-switch__input" checked>
-                    <span class="mdl-switch__label">Search English?</span>
-                </label>
-            </div>
+        </div>
+    </div>
+    <div class="mdl-shadow--2dp options">
+        <div class="mdl-cell en-switch">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="lang">
+                <input type="checkbox" id="lang" name="lang" class="mdl-switch__input" checked>
+                <span class="mdl-switch__label">Search English?</span>
+            </label>
         </div>
     </div>
 </form>
