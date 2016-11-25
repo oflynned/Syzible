@@ -7,7 +7,7 @@ var router = express.Router();
 var ScrapeData = require('../Backend/Helpers');
 
 router.get('/', function (req, res) {
-    res.render('tearma_search');
+    res.render('tearma_search', {title: "Tearma.ie Web App"});
 });
 
 router.get('/results', function (req, res) {
@@ -18,8 +18,9 @@ router.get('/results', function (req, res) {
 
         console.log(data.length + " records returned");
         res.render('tearma_results', {
+            title: "Results for " + searchQuery,
             searchQuery: searchQuery,
-            lang_en: lang === "en" ? lang : undefined,
+            lang_en: lang === "en",
             data: data.splice(1, data.length)
         });
     });

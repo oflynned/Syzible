@@ -8,43 +8,79 @@
 
 <div class="mdl-grid load-animations">
     <!-- en search for a ga result -->
-    {{#if lang_en}}
-        {{#each data}}
-            <div class="mdl-cell">
-                <div class="mdl-card mdl-shadow--2dp result-card">
-                    {{#each gaMutations}}
-                        <h2 class="mdl-card__title-text">{{root}}</h2>
-                    {{/each}}
-                    <h3 class="mdl-card__title-text">{{enSearchTerm}}</h3>
-                    {{#each gaMutations}}
-                        <div>{{#if genSing}}gs: {{genSing}} {{/if}}{{#if nomPlu}} np: {{nomPlu}} {{/if}}{{#if genPlu}}
-                            np: {{nomPlu}}{{/if}}</div>
-                    {{/each}}
-                    <div>{{enSearchType}} / {{gaDeclension}} / {{gaGender}}</div>
-                    <br>
-                    {{#each domains}}
-                        <div>{{en}}</div>
-                        <div>{{ga}}</div>
-                    {{/each}}
+    {{#compare data.length ">" "0"}}
+        {{#if lang_en}}
+            {{#each data}}
+                <div class="mdl-cell">
+                    <div class="mdl-card mdl-shadow--2dp result-card">
+                        {{#each gaMutations}}
+                            <h2 class="mdl-card__title-text">{{root}}</h2>
+                        {{/each}}
+                        <h3 class="mdl-card__title-text">{{enSearchTerm}}</h3>
+                        {{#compare enSearchType "===" "noun"}}
+                            {{#each gaMutations}}
+                                <div>{{#if genSing}}gs: {{genSing}}{{/if}}
+                                    {{#if nomPlu}} np: {{nomPlu}}{{/if}}
+                                    {{#if genPlu}} gp: {{genPlu}}{{/if}}</div>
+                            {{/each}}
+                        {{else}}
+                            {{#compare enSearchType "===" "verb"}}
+                                {{#each gaMutations}}
+                                    <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
+                                        {{#if participle}} participle: {{participle}}{{/if}}</div>
+                                {{/each}}
+                            {{else}}
+                                <!-- else it's a phrase, adjective or abbreviation with no conjugation -->
+                            {{/compare}}
+                        {{/compare}}
+                        {{#compare enSearchType "===" "noun"}}
+                            <!-- check if declension exists given it's a noun -->
+                            <div>{{enSearchType}} /
+                                {{#compare gaDeclension "===" -1}}
+                                    {{gaGender}}
+                                {{else}}
+                                    {{gaDeclension}} / {{gaGender}}
+                                {{/compare}}</div>
+                        {{else}}
+                            <div>{{enSearchType}}</div>
+                        {{/compare}}
+                        <br>
+                        {{#each domains}}
+                            <div>{{en}}</div>
+                            <div>{{ga}}</div>
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
-        {{/each}}
+            {{/each}}
+        {{else}}
+            <!-- ga word looking for en result -->
+            {{#each data}}
+                <div class="mdl-cell">
+                    <div class="mdl-card mdl-shadow--2dp result-card">
+                        {{#each enMutations}}
+                            <h2 class="mdl-card__title-text">{{root}}</h2>
+                        {{/each}}
+                        <h3 class="mdl-card__title-text">{{gaSearchTerm}}</h3>
+                        <div>{{gaSearchType}}</div>
+                        <br>
+                        {{#each domains}}
+                            <div>{{en}}</div>
+                            <div>{{ga}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/each}}
+        {{/if}}
     {{else}}
-        {{#each data}}
-            <div class="mdl-cell">
-                <div class="mdl-card mdl-shadow--2dp result-card">
-                    {{#each enMutations}}
-                        <h2 class="mdl-card__title-text">{{root}}</h2>
-                    {{/each}}
-                    <h3 class="mdl-card__title-text">{{gaSearchTerm}}</h3>
-                    <div>{{gaSearchType}}</div>
-                    <br>
-                    {{#each domains}}
-                        <div>{{en}}</div>
-                        <div>{{ga}}</div>
-                    {{/each}}
+        <div class="mdl-cell">
+            <div class="mdl-card mdl-shadow--2dp result-card">
+                <h2 class="mdl-card__title-text">{{searchQuery}}</h2>
+                <h3>No results!</h3>
+                <br>
+                <div>Make sure the switch is on if searching for English words and that everything is spelled
+                    correctly
                 </div>
             </div>
-        {{/each}}
-    {{/if}}
+        </div>
+    {{/compare}}
 </div>

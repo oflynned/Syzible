@@ -7,7 +7,6 @@ var router = express.Router();
 var ScrapeData = require('./Helpers.js');
 
 router.get('/', function (req, res) {
-    console.log(req.query);
     ScrapeData.scrapeData(req.query, function (data) {
         console.log(data.length + " records returned");
         res.json(data);
