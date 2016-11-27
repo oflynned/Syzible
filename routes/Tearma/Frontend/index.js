@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/results', function (req, res) {
-    console.log(req.query);
+    req.query["limit"] = req.query["limit"] == undefined ? -1 : req.query["limit"];
     ScrapeData.scrapeData(req.query, function (data) {
         var lang = data[0]["searchLang"];
         var searchQuery = req.query["term"];

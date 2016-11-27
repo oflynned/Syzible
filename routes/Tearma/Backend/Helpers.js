@@ -35,7 +35,8 @@ var decTypeMap = {
     "v": "verb",
     "phr.": "phrase",
     "frása": "phrase",
-    "abbr": "abbreviation"
+    "abbr": "abbreviation",
+    "gior": "abbreviation"
 };
 
 function scrapeData(queries, callback) {
@@ -52,9 +53,9 @@ function scrapeData(queries, callback) {
 
     var langID;
 
-    if(queries["lang"] === "on")
+    if (queries["lang"] === "on")
         langID = "en";
-    else if(queries["lang"] === undefined)
+    else if (queries["lang"] === undefined)
         langID = "ga";
     else
         langID = queries["lang"];
@@ -81,7 +82,7 @@ function scrapeData(queries, callback) {
                 searchGender = searchType.replace(/[0-9]/g, '');
 
                 $(this).find('.dAnnotPOS').empty();
-                searchTerm = $(this).text().trim().replace(/\s\s+/g, " ").replace("¶", "");
+                searchTerm = cleanFormatting($(this).text().trim());
                 searchMutations.push({root: searchTerm.replace("¶", "")});
             });
 
@@ -201,7 +202,7 @@ function scrapeData(queries, callback) {
                             gaGender: genderMap[gender],
                             gaMutations: mutations,
                             signpost: signpost === "" ? -1 : signpost,
-                            domains: domains
+                            domains: cleanArrayDuplicates(domains)
                         });
                     } else if (langID === "ga") {
                         data.push({
@@ -213,14 +214,14 @@ function scrapeData(queries, callback) {
                             enGender: genderMap[gender],
                             enMutations: mutations,
                             signpost: String(signpost) === "" ? -1 : signpost,
-                            domains: domains
+                            domains: cleanArrayDuplicates(domains)
                         });
                     }
                 });
             });
         });
 
-        callback((limit <= 0 || limit == undefined) ? data : data.splice(0, limit));
+        callback((limit <= 0 || limit == undefined) ? data : data.splice(0, parseInt(limit) + 1));
     })
 }
 
@@ -233,7 +234,20 @@ function getNumbers(input) {
 }
 
 function cleanFormatting(input) {
-    return String(input).trim().replace(/\s\s+/g, " ").replace("¶", "");
+    return String(input).trim().replace(/\s\s+/g, " ").replace("¶", "").replace(" pl", "").replace(" iol", "");
+}
+
+function cleanArrayDuplicates(input) {
+    var cleaned = [];
+
+    input.forEach(function (itm) {
+        var unique = true;
+        cleaned.forEach(function (itm2) {
+            if (JSON.stringify(itm) === JSON.stringify(itm2)) unique = false;
+        });
+        if (unique) cleaned.push(itm);
+    });
+    return cleaned;
 }
 
 module.exports = {
