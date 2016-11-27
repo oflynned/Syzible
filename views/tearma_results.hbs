@@ -37,17 +37,15 @@
                                     <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
                                         {{#if participle}} participle: {{participle}}{{/if}}</div>
                                 {{/each}}
-                            {{else}}
-                                <!-- else it's a phrase, adjective or abbreviation with no conjugation -->
                             {{/compare}}
                         {{/compare}}
                         {{#compare enSearchType "===" "noun"}}
                             <!-- check if declension exists given it's a noun -->
-                            <div>{{enSearchType}} /
+                            <div>{{enSearchType}}
                                 {{#compare gaDeclension "===" -1}}
-                                    {{gaGender}}
+                                    / {{gaGender}}
                                 {{else}}
-                                    {{gaDeclension}} / {{gaGender}}
+                                    / declension {{gaDeclension}} / {{gaGender}}
                                 {{/compare}}</div>
                         {{else}}
                             <div>{{enSearchType}}</div>
@@ -69,11 +67,14 @@
                             <h2 class="mdl-card__title-text">{{root}}</h2>
                         {{/each}}
                         <h3 class="mdl-card__title-text">{{gaSearchTerm}}</h3>
-                        <div>{{gaSearchType}} {{#compare gaSearchType "==" "noun"}}
-                            / {{gaSearchDeclension}} / {{gaSearchGender}}
-                        {{else}}
-
-                        {{/compare}}</div>
+                        <div>{{gaSearchType}}
+                            {{#compare gaSearchType "==" "noun"}}
+                                {{#compare gaSearchDeclension "==" "-1"}}
+                                    / {{gaSearchGender}}
+                                {{else}}
+                                    / declension {{gaSearchDeclension}} / {{gaSearchGender}}
+                                {{/compare}}
+                            {{/compare}}</div>
                         <br>
                         {{#each domains}}
                             <div>{{en}}</div>
