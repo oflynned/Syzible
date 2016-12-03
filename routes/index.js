@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+"use strict";
+let express = require('express');
+let router = express.Router();
 
 router.get('/', function (req, res) {
     res.render('index', {
@@ -8,12 +9,12 @@ router.get('/', function (req, res) {
 });
 
 router.get('/work-experience', function (req, res) {
-    var jobs = [
+    const jobs = [
         {
             employer: "GlassByte Ltd",
             location: "Ballsbridge, Dublin, Ireland",
             title: "CTO/Developer",
-            period: "April 2015 - Present",
+            period: "April 2015 - February 2017",
             url: "http://www.glassbyte.com",
             image: "/images/glassbyte.png"
         },

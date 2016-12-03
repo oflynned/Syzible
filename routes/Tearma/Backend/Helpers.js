@@ -1,21 +1,23 @@
 /**
  * Created by ed on 15/11/2016.
  */
-var fs = require('fs');
-var request = require('request');
-var cheerio = require('cheerio');
+"use strict";
+
+let fs = require('fs');
+let request = require('request');
+let cheerio = require('cheerio');
 
 const BASE_URL = "http://www.tearma.ie/Search.aspx?term=";
 const GA_PARAM = "&lang=3116659";
 const EN_PARAM = "&lang=3116649";
 
 // maps
-var genderMap = {
+const genderMap = {
     fir: 'masculine',
     bain: 'feminine'
 };
 
-var decTypeMap = {
+const decTypeMap = {
     "fir": "noun",
     "fir1": "noun",
     "fir2": "noun",
@@ -40,18 +42,14 @@ var decTypeMap = {
 };
 
 function scrapeData(queries, callback) {
-    var searchTerm, searchType;
-    var signpost;
-    var declension;
-    var metaData;
+    // general
+    let searchTerm, searchType, signpost, declension, metaData;
+    let langID;
 
     // if noun
-    var gender;
-    var searchDeclension = 0, searchGender = null;
+    let gender, searchDeclension, searchGender;
 
-    var term = encodeURIComponent(queries['term']);
-
-    var langID;
+    const term = encodeURIComponent(queries['term']);
 
     if (queries["lang"] === "on")
         langID = "en";
@@ -60,22 +58,22 @@ function scrapeData(queries, callback) {
     else
         langID = queries["lang"];
 
-    var lang = langID === "en" ? EN_PARAM : GA_PARAM;
-    var limit = queries["limit"] = undefined ? -1 : queries["limit"];
-    var url = lang === undefined ? BASE_URL + term : BASE_URL + term + lang;
+    const lang = langID === "en" ? EN_PARAM : GA_PARAM;
+    const limit = queries["limit"] = undefined ? -1 : queries["limit"];
+    const url = lang === undefined ? BASE_URL + term : BASE_URL + term + lang;
 
     try {
         request(url, function (error, response, html) {
-            var data = [];
+            let data = [];
             data.push({
                 lang: langID
             });
 
-            var $ = cheerio.load(html);
+            let $ = cheerio.load(html);
 
             //first dArticle set is definitions, subsequent are related terms after result section div
             $('.dArticle').each(function () {
-                var searchMutations = [];
+                let searchMutations = [];
 
                 $(this).find('.dHeadTerm > .dTerm > .dTermHeadline > span > a > span').each(function () {
                     searchType = $(this).find('.dAnnotPOS').text();
@@ -88,8 +86,8 @@ function scrapeData(queries, callback) {
                 });
 
                 $(this).find('.dHeadTerm > .dTerm > .dTermSubline > .dInflect').each(function () {
-                    var label = $(this).find('.dLabel').text();
-                    var mutation = $(this).find('.dValue').text();
+                    let label = getLetters($(this).find('.dLabel').text());
+                    let mutation = $(this).find('.dValue').text();
 
                     if (label === "gu")
                         searchMutations[0]["genSing"] = mutation;
@@ -113,13 +111,13 @@ function scrapeData(queries, callback) {
                 $(this).find('.dSense').each(function () {
                     signpost = $(this).find('.dSignpost > .dIntro').text();
 
-                    var domains = [];
+                    let domains = [];
                     $(this).find('.dDomains > .dDomain').each(function () {
-                        var rawIrishDomain = $(this).find('.dIrish').text();
-                        var rawEnglishDomain = $(this).find('.dEnglish').text();
+                        let rawIrishDomain = $(this).find('.dIrish').text();
+                        let rawEnglishDomain = $(this).find('.dEnglish').text();
 
-                        var irishDomain = rawIrishDomain.split(" › ")[0];
-                        var englishDomain = rawEnglishDomain.split(" › ")[0];
+                        let irishDomain = rawIrishDomain.split(" › ")[0];
+                        let englishDomain = rawEnglishDomain.split(" › ")[0];
 
                         domains.push({
                             ga: irishDomain,
@@ -127,16 +125,16 @@ function scrapeData(queries, callback) {
                         });
                     });
 
-                    var synonyms = [];
+                    let synonyms = [];
                     // synonyms area below the search word
                     $(this).find('.dSynonyms > .dTerm').each(function () {
                         $(this).find('span > a > span > span').each(function () {
-                            var metaData = $(this).find('.dAnnotPOS').text();
-                            var type = metaData.replace(/[0-9]/g, '');
-                            var syn_declension = parseInt(metaData.match(/\d+/g, ''));
+                            let metaData = $(this).find('.dAnnotPOS').text();
+                            let type = metaData.replace(/[0-9]/g, '');
+                            let syn_declension = parseInt(metaData.match(/\d+/g, ''));
 
                             $(this).find('.dAnnotPOS').empty();
-                            var term = $(this).parent().text().trim();
+                            let term = $(this).parent().text().trim();
 
                             synonyms.push({
                                 synonym: term,
@@ -146,21 +144,8 @@ function scrapeData(queries, callback) {
                         });
                     });
 
-                    /*
-                     var examples = [];
-                     $(this).find('.dExamples > .dExample').each(function () {
-                     var source = $(this).find('.dSource').text();
-                     var target = $(this).find('.dTarget').text();
-
-                     examples.push({
-                     source: source,
-                     target: target
-                     });
-                     });
-                     */
-
                     $(this).find('.dTargetTerms > .dTerm').each(function () {
-                        var mutations = [];
+                        let mutations = [];
 
                         $(this).find('.dTermHeadline > span > a > .dWording > .dStretch').each(function () {
                             metaData = $(this).find('.dAnnotPOS').text();
@@ -168,13 +153,13 @@ function scrapeData(queries, callback) {
                             gender = metaData.replace(/[0-9]/g, '');
 
                             $(this).find('.dAnnotPOS').empty();
-                            var mutationRoot = $(this).parent().text();
+                            let mutationRoot = $(this).parent().text();
                             mutations.push({root: cleanFormatting(mutationRoot)});
                         });
 
                         $(this).find('.dTermSubline > .dInflect').each(function () {
-                            var label = $(this).find('.dLabel').text().replace(/[^a-zA-Z]+/g, '');
-                            var mutation = $(this).find('.dValue').text();
+                            let label = $(this).find('.dLabel').text().replace(/[^a-zA-Z]+/g, '');
+                            let mutation = $(this).find('.dValue').text();
 
                             if (label === "gu")
                                 mutations[0]["genSing"] = mutation;
@@ -209,10 +194,9 @@ function scrapeData(queries, callback) {
                             data.push({
                                 searchTerm: String(searchTerm),
                                 searchType: String(decTypeMap[searchType]),
-                                searchDeclension: isNaN(searchDeclension) ? -1 : parseInt(searchDeclension),
-                                searchGender: searchGender === 's' ? -1 : genderMap[searchGender],
+                                declension: isNaN(searchDeclension) ? -1 : parseInt(searchDeclension),
+                                gender: searchGender === 's' ? -1 : genderMap[searchGender],
                                 searchMutations: searchMutations,
-                                gender: genderMap[gender],
                                 mutations: mutations,
                                 signpost: String(signpost) === "" ? -1 : signpost,
                                 domains: cleanArrayDuplicates(domains)
@@ -222,7 +206,7 @@ function scrapeData(queries, callback) {
                 });
             });
 
-            callback((limit <= 0 || limit == undefined) ? data : data.splice(0, parseInt(limit) + 1));
+            callback((limit < 1 || limit == undefined) ? data : data.splice(0, parseInt(limit) + 1));
         })
     } catch (error) {
         callback({error: "error thrown"});
@@ -233,7 +217,7 @@ function removeNumbers(input) {
     return parseInt(input.replace(/[0-9]/g, ''));
 }
 
-function getNumbers(input) {
+function getLetters(input) {
     return String(input).replace(/[^a-zA-Z]+/g, '');
 }
 
@@ -242,10 +226,10 @@ function cleanFormatting(input) {
 }
 
 function cleanArrayDuplicates(input) {
-    var cleaned = [];
+    let cleaned = [];
 
     input.forEach(function (itm) {
-        var unique = true;
+        let unique = true;
         cleaned.forEach(function (itm2) {
             if (JSON.stringify(itm) === JSON.stringify(itm2)) unique = false;
         });

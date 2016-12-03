@@ -6,6 +6,7 @@ var router = express.Router();
 
 var ScrapeData = require('./Helpers.js');
 
+// API interface
 router.get('/', function (req, res) {
     ScrapeData.scrapeData(req.query, function (data) {
         console.log(data.length + " records returned");

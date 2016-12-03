@@ -1,26 +1,28 @@
-<form action="/tearma/results" method="get">
-    <div class="mdl-shadow--2dp search-box">
-        <div class="search-area">
-            <div class="mdl-textfield mdl-js-textfield" style="width: 100%">
-                <input class="mdl-textfield__input" type="text" id="term" name="term">
-                <label class="mdl-textfield__label" for="term">Enter query ...</label>
+<div>
+    <form action="/tearma/results" method="get">
+        <div class="mdl-shadow--2dp search-box">
+            <div class="search-area">
+                <div class="mdl-textfield mdl-js-textfield" style="width: 100%">
+                    <input class="mdl-textfield__input" type="text" id="term" name="term">
+                    <label class="mdl-textfield__label" for="term">Enter query ...</label>
+                </div>
             </div>
-        </div>
 
-        <div class="content-grid mdl-grid mdl-card__actions mdl-card--border">
-            <div class="mdl-cell">
-                <a> <input type="submit" value="Search"
-                           class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"/>
-                </a>
+            <div class="content-grid mdl-grid mdl-card__actions mdl-card--border">
+                <div class="mdl-cell">
+                    <a> <input type="submit" value="Search"
+                               class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"/>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="mdl-shadow--2dp options">
-        <div class="mdl-cell" style="width: 50%; margin: auto;">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="lang">
-                <input type="checkbox" id="lang" name="lang" class="mdl-switch__input" checked>
-                <span class="mdl-switch__label">Search English?</span>
-            </label>
+        <div class="mdl-shadow--2dp options">
+            <div class="mdl-cell" style="width: 50%; margin: auto;">
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="lang">
+                    <input type="checkbox" id="lang" name="lang" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Search English?</span>
+                </label>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
