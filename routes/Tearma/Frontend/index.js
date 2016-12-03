@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 var ScrapeData = require('../Backend/Helpers');
+var WordOfTheDay = require('../Backend/WordOfTheDay');
 
 router.get('/', function (req, res) {
     res.render('tearma_search', {title: "Tearma.ie Web App"});
@@ -23,6 +24,12 @@ router.get('/results', function (req, res) {
             lang_en: lang === "en",
             data: data.splice(1, data.length)
         });
+    });
+});
+
+router.get('/tod', function (req, res) {
+    WordOfTheDay.getWordOfDay(function (term) {
+        res.json({term: term});
     });
 });
 
