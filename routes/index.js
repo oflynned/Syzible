@@ -14,7 +14,7 @@ router.get('/work-experience', function (req, res) {
             employer: "GlassByte Ltd",
             location: "Ballsbridge, Dublin, Ireland",
             title: "CTO/Developer",
-            period: "April 2015 - February 2017",
+            period: "April 2015 - Present",
             url: "http://www.glassbyte.com",
             image: "/images/glassbyte.png"
         },

@@ -67,12 +67,26 @@
                             <h2 class="mdl-card__title-text">{{root}}</h2>
                         {{/each}}
                         <h3 class="mdl-card__title-text">{{searchTerm}}</h3>
+                        {{#compare searchType "===" "noun"}}
+                            {{#each searchMutations}}
+                                <div>{{#if genSing}}gs: {{genSing}}{{/if}}
+                                    {{#if nomPlu}} np: {{nomPlu}}{{/if}}
+                                    {{#if genPlu}} gp: {{genPlu}}{{/if}}</div>
+                            {{/each}}
+                        {{else}}
+                            {{#compare searchType "===" "verb"}}
+                                {{#each mutations}}
+                                    <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
+                                        {{#if participle}} participle: {{participle}}{{/if}}</div>
+                                {{/each}}
+                            {{/compare}}
+                        {{/compare}}
                         <div>{{searchType}}
                             {{#compare searchType "==" "noun"}}
-                                {{#compare searchDeclension "==" "-1"}}
-                                    / {{searchGender}}
+                                {{#compare declension "==" "-1"}}
+                                    / {{gender}}
                                 {{else}}
-                                    / declension {{searchDeclension}} / {{searchGender}}
+                                    / declension {{declension}} / {{gender}}
                                 {{/compare}}
                             {{/compare}}</div>
                         <br>
