@@ -12,6 +12,8 @@ var tearmaFrontend = require('./routes/Tearma/Frontend/index');
 var app = express();
 var hbs = require('hbs');
 
+var http = require("http");
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -59,7 +61,10 @@ app.use(function (err, req, res, next) {
     });
 });
 
-module.exports = app;
+//prevent heroku app from sleeping through pinging
+setInterval(function () {
+    http.get("http://syzible.herokuapp.com");
+}, 900000);
 
 hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
     var operators, result;
@@ -117,5 +122,7 @@ hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
     }
 
 });
+
+module.exports = app;
 
 

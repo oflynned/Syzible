@@ -8,7 +8,12 @@ var ScrapeData = require('../Backend/Helpers');
 var WordOfTheDay = require('../Backend/WordOfTheDay');
 
 router.get('/', function (req, res) {
-    res.render('tearma_search', {title: "Tearma.ie Web App"});
+    WordOfTheDay.getWordOfDay(function (wotd) {
+        res.render('tearma_search', {
+            title: "Tearma.ie Web App",
+            wotd: wotd
+        });
+    });
 });
 
 router.get('/results', function (req, res) {
