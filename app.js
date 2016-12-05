@@ -1,4 +1,6 @@
-var express = require('express');
+"use strict";
+
+let express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,6 +10,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var tearmaBackend = require('./routes/Tearma/Backend/index');
 var tearmaFrontend = require('./routes/Tearma/Frontend/index');
+let appStore = require('./routes/AppStore/Frontend/index');
 
 var app = express();
 var hbs = require('hbs');
@@ -29,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/tearma', tearmaFrontend);
 app.use('/tearma/backend', tearmaBackend);
+app.use('/appstore', appStore);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
