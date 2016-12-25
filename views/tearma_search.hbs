@@ -1,3 +1,5 @@
+<!-- fuck sake, encapsulate the elements with an outer margin -->
+<!-- TODO fix margins and shit in CSS -->
 <div>
     <form action="/tearma/results" method="get">
         <div class="mdl-shadow--2dp search-box">
@@ -17,12 +19,56 @@
             </div>
         </div>
         <div class="mdl-shadow--2dp options">
-            <div class="mdl-cell" style="width: 50%; margin: auto;">
+            <div class="mdl-cell search-area">
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="lang">
                     <input type="checkbox" id="lang" name="lang" class="mdl-switch__input" checked>
-                    <span class="mdl-switch__label">Search English?</span>
+                    <span class="mdl-switch__label">Search En?</span>
                 </label>
             </div>
         </div>
     </form>
+
+    <!-- word of the day -->
+    <div class="card">
+        {{#each data}}
+            <div class="mdl-cell">
+                <div class="mdl-card mdl-shadow--2dp result-card">
+                    {{#each mutations}}
+                        <h2 class="mdl-card__title-text">{{root}}</h2>
+                    {{/each}}
+                    <h3 class="mdl-card__title-text">{{searchTerm}}</h3>
+                    {{#compare searchType "===" "noun"}}
+                        {{#each mutations}}
+                            <div>{{#if genSing}}gs: {{genSing}}{{/if}}
+                                {{#if nomPlu}} np: {{nomPlu}}{{/if}}
+                                {{#if genPlu}} gp: {{genPlu}}{{/if}}</div>
+                        {{/each}}
+                    {{else}}
+                        {{#compare searchType "===" "verb"}}
+                            {{#each mutations}}
+                                <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
+                                    {{#if participle}} participle: {{participle}}{{/if}}</div>
+                            {{/each}}
+                        {{/compare}}
+                    {{/compare}}
+                    {{#compare searchType "===" "noun"}}
+                        <!-- check if declension exists given it's a noun -->
+                        <div>{{searchType}}
+                            {{#compare declension "===" -1}}
+                                {{gender}}
+                            {{else}}
+                                declension {{declension}} {{gender}}
+                            {{/compare}}</div>
+                    {{else}}
+                        <div>{{searchType}}</div>
+                    {{/compare}}
+                    <br>
+                    {{#each domains}}
+                        <div>{{en}}</div>
+                        <div>{{ga}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
 </div>

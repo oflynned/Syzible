@@ -1,15 +1,15 @@
 /**
  * Created by ed on 27/10/2016.
  */
-var express = require('express');
-var router = express.Router();
+"use strict";
 
-var ScrapeData = require('./Helpers.js');
+let express = require('express');
+let router = express.Router();
+let ScrapeData = require('./Helpers.js');
 
 // API interface
 router.get('/', function (req, res) {
     ScrapeData.scrapeData(req.query, function (data) {
-        console.log(data.length + " records returned");
         res.json(data);
     });
 });

@@ -1,18 +1,21 @@
 /**
  * Created by ed on 15/11/2016.
  */
-var express = require('express');
-var router = express.Router();
+"use strict";
+let express = require('express');
+let router = express.Router();
 
-var ScrapeData = require('../Backend/Helpers');
-var WordOfTheDay = require('../Backend/WordOfTheDay');
+let ScrapeData = require('../Backend/Helpers');
+let WordOfTheDay = require('../Backend/WordOfTheDay');
 
 router.get('/', function (req, res) {
     WordOfTheDay.getWordOfDay(function (wotd) {
-        res.render('tearma_search', {
-            title: "Tearma.ie Web App",
-            wotd: wotd
-        });
+        ScrapeData.scrapeData({term: wotd, lang: "ga"}, function (data) {
+            res.render('tearma_search', {
+                title: "Tearma.ie Web App",
+                data: data.splice(1, data.length)
+            });
+        })
     });
 });
 

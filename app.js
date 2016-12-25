@@ -36,7 +36,7 @@ app.use('/appstore', appStore);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
@@ -67,7 +67,7 @@ app.use(function (err, req, res, next) {
 
 //prevent heroku app from sleeping through pinging
 setInterval(function () {
-    http.get("http://syzible.herokuapp.com");
+    http.get("http://www.syzible.com");
 }, 900000);
 
 hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {

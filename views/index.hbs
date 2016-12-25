@@ -1,7 +1,8 @@
 <div class="mdl-grid">
-    <div class="mdl-layout-spacer"></div>
-    <div class="mdl-cell" style="text-align: center">
-        <h2>Placeholder</h2>
+    <div class="mdl-cell">
+        {{#each apps}}
+            <img src="{{image}}"/>
+            {{{badge}}}
+        {{/each}}
     </div>
-    <div class="mdl-layout-spacer"></div>
 </div>

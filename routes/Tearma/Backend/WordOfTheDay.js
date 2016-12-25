@@ -25,7 +25,7 @@ function getWordOfDay(callback) {
 }
 
 function replaceCarriages(input) {
-    return input.replace(/[\n\t\r]/g, "").replace(/\s\s+/g, " ");
+    return input.replace(/[\n\t\r]/g, "").replace(/\s\s+/g, " ").replace("¶", "").trim();
 }
 
 module.exports = {

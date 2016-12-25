@@ -6,40 +6,7 @@
 let fs = require('fs');
 let request = require('request');
 let cheerio = require('cheerio');
-
-const BASE_URL = "http://www.tearma.ie/Search.aspx?term=";
-const GA_PARAM = "&lang=3116659";
-const EN_PARAM = "&lang=3116649";
-
-// maps
-const genderMap = {
-    fir: 'masculine',
-    bain: 'feminine'
-};
-
-const decTypeMap = {
-    "fir": "noun",
-    "fir1": "noun",
-    "fir2": "noun",
-    "fir3": "noun",
-    "fir4": "noun",
-    "fir5": "noun",
-    "bain": "noun",
-    "bain1": "noun",
-    "bain2": "noun",
-    "bain3": "noun",
-    "bain4": "noun",
-    "bain5": "noun",
-    "s": 'noun',
-    "br": 'verb',
-    "a": 'adjective',
-    "réimír": 'prefix',
-    "v": "verb",
-    "phr.": "phrase",
-    "frása": "phrase",
-    "abbr": "abbreviation",
-    "gior": "abbreviation"
-};
+let identifiers = require('./Identifiers');
 
 function scrapeData(queries, callback) {
     // general
@@ -58,9 +25,9 @@ function scrapeData(queries, callback) {
     else
         langID = queries["lang"];
 
-    const lang = langID === "en" ? EN_PARAM : GA_PARAM;
+    const lang = langID === "en" ? identifiers.EN_PARAM : identifiers.GA_PARAM;
     const limit = queries["limit"] = undefined ? -1 : queries["limit"];
-    const url = lang === undefined ? BASE_URL + term : BASE_URL + term + lang;
+    const url = lang === undefined ? identifiers.BASE_URL + term : identifiers.BASE_URL + term + lang;
 
     try {
         request(url, function (error, response, html) {
@@ -138,7 +105,7 @@ function scrapeData(queries, callback) {
 
                             synonyms.push({
                                 synonym: term,
-                                type: genderMap[type],
+                                type: identifiers.genderMap[type],
                                 declension: syn_declension
                             });
                         });
@@ -182,10 +149,10 @@ function scrapeData(queries, callback) {
                         if (langID === "en") {
                             data.push({
                                 searchTerm: String(searchTerm),
-                                searchType: String(decTypeMap[searchType]),
+                                searchType: String(identifiers.decTypeMap[searchType]),
                                 searchMutations: searchMutations,
                                 declension: isNaN(declension) ? -1 : parseInt(declension),
-                                gender: genderMap[gender],
+                                gender: identifiers.genderMap[gender],
                                 mutations: mutations,
                                 signpost: signpost === "" ? -1 : signpost,
                                 domains: cleanArrayDuplicates(domains)
@@ -193,9 +160,9 @@ function scrapeData(queries, callback) {
                         } else if (langID === "ga") {
                             data.push({
                                 searchTerm: String(searchTerm),
-                                searchType: String(decTypeMap[searchType]),
+                                searchType: String(identifiers.decTypeMap[searchType]),
                                 declension: isNaN(searchDeclension) ? -1 : parseInt(searchDeclension),
-                                gender: searchGender === 's' ? -1 : genderMap[searchGender],
+                                gender: searchGender === 's' ? -1 : identifiers.genderMap[searchGender],
                                 searchMutations: searchMutations,
                                 mutations: mutations,
                                 signpost: String(signpost) === "" ? -1 : signpost,
@@ -205,7 +172,6 @@ function scrapeData(queries, callback) {
                     });
                 });
             });
-
             callback((limit < 1 || limit == undefined) ? data : data.splice(0, parseInt(limit) + 1));
         })
     } catch (error) {

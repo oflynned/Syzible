@@ -22,6 +22,7 @@
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="/">Home</a>
+                <a class="mdl-navigation__link" href="/developers">Developers</a>
                 <a class="mdl-navigation__link" href="/tearma">Tearma.ie</a>
             </nav>
         </div>
@@ -32,13 +33,13 @@
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Web Apps</span>
         <nav class="mdl-navigation">
-            <i></i><a class="mdl-navigation__link" href="/tearma">Tearma.ie</a>
+            <div class="mdl-navigation__link"><img src="../images/tearma_logo.png" width="32" height="32" style="display: inline"/>
+            <a href="/tearma" style="display: inline; color: inherit; text-decoration: inherit">Tearma.ie</a></div>
         </nav>
 
         <span class="mdl-layout-title">About</span>
         <nav class="mdl-navigation">
-            <i></i><a class="mdl-navigation__link" href="#">About</a>
-            <i></i><a class="mdl-navigation__link" href="/work-experience">Work Experience</a>
+            <a class="mdl-navigation__link" href="/work-experience">Work Experience</a>
         </nav>
     </div>
 
@@ -47,15 +48,13 @@
             {{{body}}}
         </div>
     </main>
-    <footer class="mdl-mini-footer">
+    <!--<footer class="mdl-mini-footer">
         <div class="mdl-mini-footer__right-section">
             <ul class="mdl-mini-footer__link-list">
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Privacy & Terms</a></li>
-                <li>Syzible &copy; <span id="year">2016</span></li>
+                <li>Syzible &copy; <span id="year"></span></li>
             </ul>
         </div>
-    </footer>
+    </footer>-->
 </div>
 
 </body>
