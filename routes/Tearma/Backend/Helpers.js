@@ -175,7 +175,7 @@ function scrapeData(queries, callback) {
             callback((limit < 1 || limit == undefined) ? data : data.splice(0, parseInt(limit) + 1));
         })
     } catch (error) {
-        callback({error: "error thrown"});
+        callback([{error: "error thrown"}]);
     }
 }
 

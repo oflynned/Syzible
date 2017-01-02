@@ -9,9 +9,10 @@ function generatePlaySticker(url) {
 
 const apps = [
     {
-        name: "Irish Dictionary",
+        name: "English-Irish Dictionary",
+        description: "Parser app and backend service for Téarma.ie",
         image: "/images/tearma_logo.png",
-        badge: generatePlaySticker("https://play.google.com/store/apps/details?id=com.syzible.tearma")
+        url: "https://play.google.com/store/apps/details?id=com.syzible.tearma"
     }
 ];
 

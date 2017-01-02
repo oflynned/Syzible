@@ -1,8 +1,23 @@
-<div class="mdl-grid">
-    <div class="mdl-cell">
-        {{#each apps}}
-            <img src="{{image}}"/>
-            {{{badge}}}
-        {{/each}}
-    </div>
+<div class="mdl-grid load-animations">
+    {{#each apps}}
+        <div class="mdl-cell">
+            <div class="mdl-card mdl-shadow--2dp" style="padding: 0.5em;">
+                <div style="text-align: center">
+                    <img style="width: 30%; display: inline-block" src="{{image}}"/>
+                </div>
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">{{name}}</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    {{description}}
+                </div>
+                <div class="mdl-card__actions mdl-card--border" style="text-align: center">
+                    <a href='{{url}}&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
+                       target='_blank'>
+                        <img style="width: 66%; display: inline-block" alt='Get it on Google Play'
+                             src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+                </div>
+            </div>
+        </div>
+    {{/each}}
 </div>
