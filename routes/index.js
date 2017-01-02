@@ -1,11 +1,7 @@
 "use strict";
 let express = require('express');
 let router = express.Router();
-
-function generatePlaySticker(url) {
-    return "<a href='" + url + "&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target='_blank'>" +
-        "<img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>";
-}
+let ScrapeData = require('./Tearma/Backend/Helpers.js');
 
 const apps = [
     {
@@ -66,9 +62,18 @@ router.get('/work-experience', function (req, res) {
 });
 
 router.get('/developers', function (req, res) {
-    res.render('developers', {
-        title: "Developers",
-        results: 10
+    let query = {term: "term", lang: "en", limit: 3};
+    ScrapeData.scrapeData(query, function (data) {
+        res.render('developers', {
+            title: "Developers",
+            term: query.term,
+            json_title: JSON.stringify({API: "Access"}),
+            query_json_0: JSON.stringify(data[0], null, 2),
+            query_json_1: JSON.stringify(data[1], null, 2),
+            query_json_2: JSON.stringify(data[2], null, 2),
+            query_json_3: JSON.stringify(data[3], null, 2),
+            data: data.splice(1, data.length)
+        })
     })
 });
 

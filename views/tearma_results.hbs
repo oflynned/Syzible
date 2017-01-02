@@ -1,15 +1,18 @@
 <div class="mdl-grid">
     <div class="mdl-layout-spacer"></div>
     <div class="mdl-cell" style="text-align: center">
-        <h3>{{data.length}}
-            {{#compare data.length "===" 1}}
-                result
-            {{else}}
-                results
-            {{/compare}}
-            for {{searchQuery}}
-        </h3>
-        <h4><a href="/tearma">Search again?</a></h4>
+        <div>
+            <div class="mdl-card__title-text" style="display: inline-block">
+                {{data.length}}
+                {{#compare data.length "===" 1}}result{{else}}results{{/compare}}
+                for {{searchQuery}}
+            </div>
+        </div>
+        <div>
+            <div class="mdl-card__title-text" style="display: inline-block">
+                <a class="mdl-card__title-text" style="color: #FF5252" href="/tearma">Search again?</a>
+            </div>
+        </div>
     </div>
     <div class="mdl-layout-spacer"></div>
 </div>
@@ -43,9 +46,9 @@
                             <!-- check if declension exists given it's a noun -->
                             <div>{{searchType}}
                                 {{#compare declension "===" -1}}
-                                    / {{gender}}
+                                     {{gender}}
                                 {{else}}
-                                    / declension {{declension}} / {{gender}}
+                                     declension {{declension}} {{gender}}
                                 {{/compare}}</div>
                         {{else}}
                             <div>{{searchType}}</div>
@@ -84,9 +87,9 @@
                         <div>{{searchType}}
                             {{#compare searchType "==" "noun"}}
                                 {{#compare declension "==" "-1"}}
-                                    / {{gender}}
+                                    {{gender}}
                                 {{else}}
-                                    / declension {{declension}} / {{gender}}
+                                    declension {{declension}} {{gender}}
                                 {{/compare}}
                             {{/compare}}</div>
                         <br>

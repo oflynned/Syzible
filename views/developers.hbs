@@ -1,3 +1,89 @@
+<div style="text-align: center">
+    <div class="mdl-grid" style="display: inline-block">
+        <h2 class="mdl-card__title-text" style="display: inline-block; text-align: center">
+            API Access for Developers
+        </h2>
+        <pre>{{json_title}}</pre>
+    </div>
+</div>
+
 <div class="mdl-grid">
-    <div>API Access</div>
+    <div class="mdl-cell">
+        <div class="mdl-card mdl-shadow--2dp result-card">
+            <h2 class="mdl-card__title-text" style="display: inline-block; text-align: center">
+                Téarma Parameters
+            </h2>
+            <div style="margin: 0.5em">
+                <div class="mdl-card__actions mdl-card--border">
+                    term={term}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    lang={en/ga}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    limit={-1 | >0} {optional}
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2><a class="mdl-card__title-text" href="http://www.syzible.com/tearma/backend?term=api&lang=en&limit=3"
+           target="_blank">
+        .../tearma/backend?term={{term}}&lang=en&limit=3
+    </a></h2>
+</div>
+
+<div class="mdl-grid">
+    <div class="mdl-cell" style="padding-left: 3em;">
+        <pre>{{query_json_1}}</pre>
+    </div>
+    <div class="mdl-cell" style="padding-left: 3em;">
+        <pre>{{query_json_2}}</pre>
+    </div>
+    <div class="mdl-cell" style="padding-left: 3em;">
+        <pre>{{query_json_3}}</pre>
+    </div>
+</div>
+
+<div class="mdl-grid">
+    {{#each data}}
+        <div class="mdl-cell">
+            <div class="mdl-card mdl-shadow--2dp result-card">
+                {{#each mutations}}
+                    <h2 class="mdl-card__title-text">{{root}}</h2>
+                {{/each}}
+                <h3 class="mdl-card__title-text">{{searchTerm}}</h3>
+                <div>{{signpost}}</div>
+                {{#compare searchType "===" "noun"}}
+                    {{#each mutations}}
+                        <div>{{#if genSing}}gs: {{genSing}}{{/if}}
+                            {{#if nomPlu}} np: {{nomPlu}}{{/if}}
+                            {{#if genPlu}} gp: {{genPlu}}{{/if}}</div>
+                    {{/each}}
+                {{else}}
+                    {{#compare searchType "===" "verb"}}
+                        {{#each mutations}}
+                            <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
+                                {{#if participle}} participle: {{participle}}{{/if}}</div>
+                        {{/each}}
+                    {{/compare}}
+                {{/compare}}
+                {{#compare searchType "===" "noun"}}
+                    <!-- check if declension exists given it's a noun -->
+                    <div>{{searchType}}
+                        {{#compare declension "===" -1}}
+                            {{gender}}
+                        {{else}}
+                            declension {{declension}} {{gender}}
+                        {{/compare}}</div>
+                {{else}}
+                    <div>{{searchType}}</div>
+                {{/compare}}
+                <br>
+                {{#each domains}}
+                    <div>{{en}}</div>
+                    <div>{{ga}}</div>
+                {{/each}}
+            </div>
+        </div>
+    {{/each}}
 </div>
