@@ -143,11 +143,11 @@
         {{/each}}
     {{/if}}
 {{else}}
-    <div class="mdl-cell">
-        <div class="mdl-card mdl-shadow--2dp result-card">
-            <h2 class="mdl-card__title-text">{{searchQuery}}</h2>
-            <h3>No results!</h3>
-            <br>
+    <div class="column">
+        <div class="card">
+            <div class="card-content">
+            <p class="title is-3">{{searchQuery}}</p>
+            <p class="subtitle is-5">No results!</p>
             <div>Make sure the switch is on if searching for English words and that everything is spelled
                 correctly
             </div>
