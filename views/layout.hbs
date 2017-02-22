@@ -7,67 +7,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-red.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.css"/>
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </head>
 <body>
-<!-- top nav bar -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">
-                <a href="/" style="color: inherit; text-decoration: inherit">Syzible</a>
-            </span>
-            <!-- Add spacer, to align navigation to the right -->
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="/">Home</a>
-                <a class="mdl-navigation__link" href="/developers">Developers</a>
-                <a class="mdl-navigation__link" href="/tearma">Tearma.ie</a>
-            </nav>
-        </div>
-    </header>
-
-    <div class="mdl-card__actions mdl-card--border"></div>
-
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Web Apps</span>
-        <nav class="mdl-navigation">
-            <div class="mdl-navigation__link"><img src="../images/tearma_logo.png" width="32" height="32" style="display: inline"/>
-            <a href="/tearma" style="display: inline; color: inherit; text-decoration: inherit">Tearma.ie</a></div>
-        </nav>
-
-        <span class="mdl-layout-title">About</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="/developers">Developers</a>
-            <a class="mdl-navigation__link" href="/work-experience">Work Experience</a>
-        </nav>
-    </div>
-
-    <main class="mdl-layout__content" style="flex: 1 0 auto;">
-        <div class="page-content">
-            {{{body}}}
-        </div>
-    </main>
-    <!--<footer class="mdl-mini-footer">
-        <div class="mdl-mini-footer__right-section">
-            <ul class="mdl-mini-footer__link-list">
-                <li>Syzible &copy; <span id="year"></span></li>
-            </ul>
-        </div>
-    </footer>-->
-</div>
-
+<main class="site-content">
+    {{{body}}}
+</main>
 </body>
-
-<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-<script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-<script>
-    var dateId = document.getElementById("year");
-    var currentYear = new Date().getFullYear();
-    dateId.innerHTML = currentYear;
-</script>
 </html>

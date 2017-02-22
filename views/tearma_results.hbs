@@ -1,13 +1,42 @@
+<nav class="nav">
+    <div class="nav-left">
+        <a class="nav-item is-tab">Syzible</a>
+    </div>
+    <div class="nav-right">
+        <a class="nav-item is-tab" href="/">Home</a>
+        <a class="nav-item is-tab" href="/work-experience">Work Experience</a>
+        <a class="nav-item is-tab" href="/developers">Developers</a>
+        <a class="nav-item is-tab is-active" href="/tearma">Téarma.ie</a>
+    </div>
+</nav>
+
+<div class="is-fluid is-marginless">
+    <section class="hero is-medium front-has-image-background" style="background-color: #FF5252">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title text-is-white" style="color: white;">
+                    {{#compare data.length ">" 0}}
+                        This is what I found for "{{searchQuery}}"
+                    {{else}}
+                        No results for "{{searchQuery}}" :(
+                    {{/compare}}
+                </h1>
+
+                <h2 class="subtitle color-is-white" style="color: white">
+                    {{#compare data.length "==" 1}}
+                        {{data.length}} result
+                    {{else}}
+                        {{data.length}} results
+                    {{/compare}}
+                </h2>
+            </div>
+        </div>
+    </section>
+</div>
+
 <div class="mdl-grid">
     <div class="mdl-layout-spacer"></div>
     <div class="mdl-cell" style="text-align: center">
-        <div>
-            <div class="mdl-card__title-text" style="display: inline-block">
-                {{data.length}}
-                {{#compare data.length "===" 1}}result{{else}}results{{/compare}}
-                for {{searchQuery}}
-            </div>
-        </div>
         <div>
             <div class="mdl-card__title-text" style="display: inline-block">
                 <a class="mdl-card__title-text" style="color: #FF5252" href="/tearma">Search again?</a>
@@ -17,17 +46,22 @@
     <div class="mdl-layout-spacer"></div>
 </div>
 
-<div class="mdl-grid load-animations">
-    <!-- en search for a ga result -->
-    {{#compare data.length ">" "0"}}
-        {{#if lang_en}}
-            {{#each data}}
-                <div class="mdl-cell">
-                    <div class="mdl-card mdl-shadow--2dp result-card">
+<!-- en search for a ga result -->
+{{#compare data.length ">" "0"}}
+    {{#if lang_en}}
+        {{#each data}}
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
                         {{#each mutations}}
-                            <h2 class="mdl-card__title-text">{{root}}</h2>
+                            <p class="title is-3">{{root}}</p>
                         {{/each}}
-                        <h3 class="mdl-card__title-text">{{searchTerm}}</h3>
+                        <p class="subtitle is-5">{{searchTerm}}</p>
+
+                        {{#compare signpost "!=" "-1"}}
+                            <div>{{signpost}}</div>
+                        {{/compare}}
+
                         {{#compare searchType "===" "noun"}}
                             {{#each mutations}}
                                 <div>{{#if genSing}}gs: {{genSing}}{{/if}}
@@ -46,9 +80,9 @@
                             <!-- check if declension exists given it's a noun -->
                             <div>{{searchType}}
                                 {{#compare declension "===" -1}}
-                                     {{gender}}
+                                    {{gender}}
                                 {{else}}
-                                     declension {{declension}} {{gender}}
+                                    declension {{declension}} {{gender}}
                                 {{/compare}}</div>
                         {{else}}
                             <div>{{searchType}}</div>
@@ -60,16 +94,22 @@
                         {{/each}}
                     </div>
                 </div>
-            {{/each}}
-        {{else}}
-            <!-- ga word looking for en result -->
-            {{#each data}}
-                <div class="mdl-cell">
-                    <div class="mdl-card mdl-shadow--2dp result-card">
+            </div>
+        {{/each}}
+    {{else}}
+        <!-- ga word looking for en result -->
+        {{#each data}}
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
                         {{#each mutations}}
-                            <h2 class="mdl-card__title-text">{{root}}</h2>
+                            <p class="title is-3">{{root}}</p>
                         {{/each}}
-                        <h3 class="mdl-card__title-text">{{searchTerm}}</h3>
+                        <p class="subtitle is-5">{{searchTerm}}</p>
+
+                        {{#compare signpost "!=" "-1"}}
+                            <div>{{signpost}}</div>
+                        {{/compare}}
                         {{#compare searchType "===" "noun"}}
                             {{#each searchMutations}}
                                 <div>{{#if genSing}}gs: {{genSing}}{{/if}}
@@ -99,18 +139,18 @@
                         {{/each}}
                     </div>
                 </div>
-            {{/each}}
-        {{/if}}
-    {{else}}
-        <div class="mdl-cell">
-            <div class="mdl-card mdl-shadow--2dp result-card">
-                <h2 class="mdl-card__title-text">{{searchQuery}}</h2>
-                <h3>No results!</h3>
-                <br>
-                <div>Make sure the switch is on if searching for English words and that everything is spelled
-                    correctly
-                </div>
+            </div>
+        {{/each}}
+    {{/if}}
+{{else}}
+    <div class="mdl-cell">
+        <div class="mdl-card mdl-shadow--2dp result-card">
+            <h2 class="mdl-card__title-text">{{searchQuery}}</h2>
+            <h3>No results!</h3>
+            <br>
+            <div>Make sure the switch is on if searching for English words and that everything is spelled
+                correctly
             </div>
         </div>
-    {{/compare}}
-</div>
+    </div>
+{{/compare}}

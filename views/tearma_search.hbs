@@ -1,8 +1,36 @@
-<!-- fuck sake, encapsulate the elements with an outer margin -->
-<!-- TODO fix margins and shit in CSS -->
+<nav class="nav">
+    <div class="nav-left">
+        <a class="nav-item is-tab">Syzible</a>
+    </div>
+    <div class="nav-right">
+        <a class="nav-item is-tab" href="/">Home</a>
+        <a class="nav-item is-tab" href="/work-experience">Work Experience</a>
+        <a class="nav-item is-tab" href="/developers">Developers</a>
+        <a class="nav-item is-tab is-active" href="/tearma">Téarma.ie</a>
+    </div>
+</nav>
+
+<div class="is-fluid is-marginless">
+    <section class="hero is-medium front-has-image-background" style="background-color: #FF5252">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title text-is-white" style="color: white;">
+                    Téarma.ie Web Search
+                </h1>
+
+                <h2 class="subtitle color-is-white" style="color: white">
+                    Elegant and modern
+                </h2>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- TODO let the purge commence -->
 <div>
     <form action="/tearma/results" method="get">
-        <div class="mdl-shadow--2dp search-box">
+        <div class="card">
             <div class="search-area">
                 <div class="mdl-textfield mdl-js-textfield" style="width: 100%">
                     <input class="mdl-textfield__input" type="text" id="term" name="term">
@@ -11,15 +39,13 @@
             </div>
 
             <div class="content-grid mdl-grid mdl-card__actions mdl-card--border">
-                <div class="mdl-cell">
-                    <a> <input type="submit" value="Search"
-                               class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"/>
-                    </a>
-                </div>
+                <a> <input type="submit" value="Search"
+                           class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"/>
+                </a>
             </div>
         </div>
         <div class="mdl-shadow--2dp options">
-            <div class="mdl-cell search-area">
+            <div class="card search-area">
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="lang">
                     <input type="checkbox" id="lang" name="lang" class="mdl-switch__input" checked>
                     <span class="mdl-switch__label">Search En?</span>
@@ -29,46 +55,47 @@
     </form>
 
     <!-- word of the day -->
-    <div class="card">
-        {{#each data}}
-            <div class="mdl-cell">
-                <div class="mdl-card mdl-shadow--2dp result-card">
+    {{#each data}}
+        <div class="card">
+            <div class="card-content">
+                {{#each mutations}}
+                    <p class="title is-3">{{root}}</p>
+                {{/each}}
+                <p class="subtitle is-5">{{searchTerm}}</p>
+                {{#compare signpost "!=" "-1"}}
+                    <div>{{signpost}}</div>
+                {{/compare}}
+                {{#compare searchType "===" "noun"}}
                     {{#each mutations}}
-                        <h2 class="mdl-card__title-text">{{root}}</h2>
+                        <div>{{#if genSing}}gs: {{genSing}}{{/if}}
+                            {{#if nomPlu}} np: {{nomPlu}}{{/if}}
+                            {{#if genPlu}} gp: {{genPlu}}{{/if}}</div>
                     {{/each}}
-                    <h3 class="mdl-card__title-text">{{searchTerm}}</h3>
-                    {{#compare searchType "===" "noun"}}
+                {{else}}
+                    {{#compare searchType "===" "verb"}}
                         {{#each mutations}}
-                            <div>{{#if genSing}}gs: {{genSing}}{{/if}}
-                                {{#if nomPlu}} np: {{nomPlu}}{{/if}}
-                                {{#if genPlu}} gp: {{genPlu}}{{/if}}</div>
+                            <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
+                                {{#if participle}} participle: {{participle}}{{/if}}</div>
                         {{/each}}
-                    {{else}}
-                        {{#compare searchType "===" "verb"}}
-                            {{#each mutations}}
-                                <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
-                                    {{#if participle}} participle: {{participle}}{{/if}}</div>
-                            {{/each}}
-                        {{/compare}}
                     {{/compare}}
-                    {{#compare searchType "===" "noun"}}
-                        <!-- check if declension exists given it's a noun -->
-                        <div>{{searchType}}
-                            {{#compare declension "===" -1}}
-                                {{gender}}
-                            {{else}}
-                                declension {{declension}} {{gender}}
-                            {{/compare}}</div>
-                    {{else}}
-                        <div>{{searchType}}</div>
-                    {{/compare}}
-                    <br>
-                    {{#each domains}}
-                        <div>{{en}}</div>
-                        <div>{{ga}}</div>
-                    {{/each}}
-                </div>
+                {{/compare}}
+                {{#compare searchType "===" "noun"}}
+                    <!-- check if declension exists given it's a noun -->
+                    <div>{{searchType}}
+                        {{#compare declension "===" -1}}
+                            {{gender}}
+                        {{else}}
+                            declension {{declension}} {{gender}}
+                        {{/compare}}</div>
+                {{else}}
+                    <div>{{searchType}}</div>
+                {{/compare}}
+                <br>
+                {{#each domains}}
+                    <div>{{en}}</div>
+                    <div>{{ga}}</div>
+                {{/each}}
             </div>
-        {{/each}}
-    </div>
+        </div>
+    {{/each}}
 </div>

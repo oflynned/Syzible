@@ -1,6 +1,9 @@
-#page-content {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.background-nav {
+    background-color: #FF5252;
+}
+
+.text-is-white {
+    color: white;
 }
 
 @-webkit-keyframes loadAnimations {

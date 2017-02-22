@@ -1,10 +1,12 @@
 /**
  * Created by ed on 21/11/2016.
  */
-var chai = require('chai');
-var expect = chai.expect;
-var Scraper = require('../../routes/Tearma/Backend/Helpers.js');
-var queries = {
+"use strict";
+
+let chai = require('chai');
+let expect = chai.expect;
+let Scraper = require('../../routes/Tearma/Backend/Helpers.js');
+let queries = {
     lang: 'en',
     term: 'test'
 };

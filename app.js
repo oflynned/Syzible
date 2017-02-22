@@ -108,6 +108,10 @@ hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
         '>=': function (l, r) {
             return l >= r;
         },
+        '%': function (l, r) {
+            console.log(l + " " + r + " " + (l%r));
+            return (l % r == 0)
+        },
         'typeof': function (l, r) {
             return typeof l == r;
         }
