@@ -71,3 +71,18 @@
     max-height: 200px;
     min-height: 200px;
 }
+
+img.image-headline {
+    height: auto;
+    width: auto;
+    max-height: 25vh;
+    max-width: 25vw;
+    margin: 0 auto 0;
+}
+
+img.google-play-icon {
+    height: auto;;
+    width: auto;
+    max-height: 10vh;
+    max-width: 10vw;
+}
