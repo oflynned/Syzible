@@ -1,61 +1,92 @@
-<nav class="nav">
-    <div class="nav-left">
-        <a class="nav-item is-tab">Syzible</a>
-    </div>
-    <div class="nav-right">
-        <a class="nav-item is-tab is-active" href="/">Home</a>
-        <a class="nav-item is-tab" href="/work-experience">Work Experience</a>
-        <a class="nav-item is-tab" href="/developers">Developers</a>
-        <a class="nav-item is-tab" href="/tearma">Téarma.ie</a>
-    </div>
-</nav>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Syzible | Think. Design. Make.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<div class="is-fluid is-marginless">
-    <section class="hero is-medium front-has-image-background" style="background-color: #FF5252">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <figure class="image animated rubberBand">
-                    <img src="/images/syzible_header.png" class="image-headline">
-                </figure>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link type="text/css" rel="stylesheet" href="css/froala_blocks.css">
+</head>
+
+<body>
+<section class="fdb-block pb-0" style="background-image: url(imgs/bg_3.svg); height: 100vh">
+    <div class="container" style="background-color: transparent">
+        <nav class="navbar navbar-expand-md">
+            <a class="navbar-brand" href="/">
+                Syzible
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main"
+                    aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-main">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/apps">Apps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Showcase</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Developers</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container align-items-end justify-content-center d-flex fdb-padding">
+        <div class="row align-items-top text-left">
+            <div class="col-12 col-md-6 col-lg-5">
+                <p class="mb-5 mt-5"><img alt="image" height="192" src="images/syzible_header.png"></p>
+                <p class="text-h2 white-text">Software is our passion.</p>
+                <p class="text-h2 white-text">Quality is our driving force.</p>
+            </div>
+
+            <div class="col-12 col-sm-4 col-md-6 col-lg-4 m-auto pt-5">
+                <img alt="image" class="img-fluid br-0" src="imgs/img_tall.png">
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 
-<!-- projects -->
-<div class="is-fluid is-marginless" style="padding-bottom: 1em">
-    {{#each apps}}
-        <div class="card">
-            <div class="card-image" style="padding-top: 1em;">
-                <figure class="image is-128x128" style="margin: auto">
-                    <img src="{{image}}" alt="Image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content">
-                        <p class="title is-4 has-text-centered">{{name}}</p>
+<section class="fdb-block fdb-padding" style="background-image: url(imgs/bg_1.svg);">
+    <div class="container">
+        <div class="justify-content-center">
+            <div class="row text-center">
+                <div class="col-12 col-md-8 m-auto col-lg-4">
+                    <div class="fdb-box fdb-touch">
+                        <img alt="image" class="fdb-icon" src="imgs/img_round.svg">
+                        <h2>Mobile</h2>
+                        <p>Consistent quality across native Android and iOS apps.</p>
                     </div>
                 </div>
 
-                <div class="content has-text-centered">
-                    {{description}}
+                <div class="col-12 col-md-8 m-auto col-lg-4 pt-5 pt-lg-0">
+                    <div class="fdb-box fdb-touch">
+                        <img alt="image" class="fdb-icon" src="imgs/img_round.svg">
+                        <h2>Web</h2>
+                        <p>SEO, responsive, and optimized web pages.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-8 m-auto col-lg-4 pt-5 pt-lg-0">
+                    <div class="fdb-box fdb-touch">
+                        <img alt="image" class="fdb-icon" src="imgs/img_round.svg">
+                        <h2>Server</h2>
+                        <p>Number crunching and user load are our bread and butter.</p>
+                    </div>
                 </div>
             </div>
-
-            <footer class="card-footer">
-                {{#if url}}
-                    <a class="card-footer-item"
-                       href='{{url}}{{badge_res}}'
-                       target='_blank'>
-                        <img alt='Get it on Google Play' class="google-play-icon"
-                             src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
-                    <a class="card-footer-item">Coming soon to iOS!</a>
-                {{else}}
-                    <a class="card-footer-item">Coming soon to Android!</a>
-                    <a class="card-footer-item">Coming soon to iOS!</a>
-                {{/if}}
-            </footer>
         </div>
-    {{/each}}
-</div>
+    </div>
+</section>
+</body>
