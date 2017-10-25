@@ -17,8 +17,8 @@ router.get('/apps', function (req, res) {
 });
 
 
-router.get('/showcase', function (req, res) {
-    res.render('showcase', {
+router.get('/enquiries', function (req, res) {
+    res.render('enquiries', {
         year: new Date().getFullYear()
     });
 });
