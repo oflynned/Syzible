@@ -4,6 +4,8 @@
 .idea/
 node_modules/
 
+.env
+
 ## File-based project format:
 *.iws
 
