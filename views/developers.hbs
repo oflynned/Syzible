@@ -79,6 +79,9 @@
                     submitted.</h3>
                 <h3>http://www.syzible.com/tearma/backend?term=<strong>{term}</strong>&lang=<strong>{lang}</strong>&limit=<strong>{*limit}</strong>
                 </h3>
+                <h2>Examples</h2>
+                <h3><a href="http://www.syzible.com/tearma/backend?term=query&lang=en" target="_blank">http://www.syzible.com/tearma/backend?term=query&lang=en</a></h3>
+                <h3><a href="http://www.syzible.com/tearma/backend?term=ceist&lang=ga" target="_blank">http://www.syzible.com/tearma/backend?term=ceist&lang=ga</a></h3>
             </div>
         </div>
 
@@ -86,10 +89,7 @@
             <div class="col-md-8 col-lg-4">
                 <div class="fdb-box">
                     <div class="row no-gutters align-items-center">
-                        <div class="col-3">
-                            <img alt="image" class="img-fluid" src="../imgs/img_round.svg">
-                        </div>
-                        <div class="col-8 ml-auto">
+                        <div class="col-12 ml-auto">
                             <p>
                                 <strong>term={term}</strong><br>
                                 <em>URL encoded value</em>
@@ -98,10 +98,8 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <p class="text-h3">
-                                "Even the all-powerful Pointing has no control about the blind texts it is an
-                                unorthographic life. One day however a small line of blind text by the name of Lorem
-                                Ipsum decided to leave for the far World of Grammar."
+                            <p class="text-h3" style="text-align: justify">
+                                Provide a term here that the user wishes to search for in a URL encoded string.
                             </p>
                         </div>
                     </div>
@@ -111,22 +109,17 @@
             <div class="col-md-8 col-lg-4 mt-4 mt-lg-0">
                 <div class="fdb-box">
                     <div class="row no-gutters align-items-center">
-                        <div class="col-3">
-                            <img alt="image" class="img-fluid" src="../imgs/img_round.svg">
-                        </div>
-                        <div class="col-8 ml-auto">
+                        <div class="col-12 ml-auto">
                             <p>
                                 <strong>lang={lang}</strong><br>
-                                <em>en | ga</em>
+                                <em>Enum [en, ga]</em>
                             </p>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <p class="text-h3">
-                                "Far far away, behind the word mountains, far from the countries Vokalia and
-                                Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at
-                                the coast of the Semantics, a large language ocean."
+                            <p class="text-h3" style="text-align: justify">
+                                Provide a selection of what language the user is searching in (English or Irish).
                             </p>
                         </div>
                     </div>
@@ -136,10 +129,7 @@
             <div class="col-md-8 col-lg-4 mt-4 mt-lg-0">
                 <div class="fdb-box">
                     <div class="row no-gutters align-items-center">
-                        <div class="col-3">
-                            <img alt="image" class="img-fluid" src="../imgs/img_round.svg">
-                        </div>
-                        <div class="col-8 ml-auto">
+                        <div class="col-12 ml-auto">
                             <p>
                                 <strong>limit={*limit}</strong><br>
                                 <em>Integer, defaults at -1</em>
@@ -148,10 +138,8 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <p class="text-h3">
-                                "Separated they live in Bookmarksgrove right at the coast of the Semantics, far far
-                                away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                                live the blind texts."
+                            <p class="text-h3" style="text-align: justify">
+                                Limit is optional and defaults to -1 (unrestricted) if not appended.
                             </p>
                         </div>
                     </div>
@@ -160,178 +148,6 @@
         </div>
     </div>
 </section>
-
-<!--
-
-<div class="columns">
-    <div class="column is-one-third">
-        <div class="card">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content">
-                        <p class="title is-4 has-text-centered">Téarma Parameters</p>
-                        <p class="subtitle is-6 has-text-centered">{term}</p>
-                    </div>
-                </div>
-
-                <div class="content has-text-centered">
-                    term={term}
-                </div>
-                <div class="content has-text-centered">
-                    Query term for search
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="column is-one-third">
-        <div class="card">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content">
-                        <p class="title is-4 has-text-centered">Téarma Parameters</p>
-                        <p class="subtitle is-6 has-text-centered">{lang}</p>
-                    </div>
-                </div>
-
-                <div class="content has-text-centered">
-                    term={lang}
-                </div>
-                <div class="content has-text-centered">
-                    Original language of query term
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="column is-one-third">
-        <div class="card">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content">
-                        <p class="title is-4 has-text-centered">Téarma Parameters</p>
-                        <p class="subtitle is-6 has-text-centered">{limit}</p>
-                    </div>
-                </div>
-
-                <div class="content has-text-centered">
-                    limit={limit} {optional}
-                </div>
-                <div class="content has-text-centered">
-                    Optional imposing of limit for queries returned
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="columns">
-    <div class="column is-half">
-        <div class="card">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content has-text-centered">
-                        <p class="title is-4 has-text-centered">Example Query</p>
-                        <p class="title is-4 has-text-centered">Search for "{{term}}" in English and restrict the
-                            results to
-                            3</p>
-                        <p class="subtitle is-6 has-text-centered">
-                            <a target="_blank"
-                               href="http://www.syzible.com/tearma/backend?term={{term}}&lang=en&limit=3">
-                                http://www.syzible.com/tearma/backend?term={{term}}&lang=en&limit=3</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="column is-half">
-        <div class="card" style="min-height: 100%">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content has-text-centered">
-                        <p class="title is-4 has-text-centered">Example Query</p>
-                        <p class="title is-4 has-text-centered">Get term of the day</p>
-                        <p class="subtitle is-6 has-text-centered">
-                            <a target="_blank" href="http://www.syzible.com/tearma/tod">http://www.syzible.com/tearma/tod</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="columns">
-    <div class="column is-one-third">
-        <div class="card">
-            <div class="card-content">
-                <pre style="background-color: white">{{query_json_1}}</pre>
-            </div>
-        </div>
-    </div>
-    <div class="column is-one-third">
-        <div class="card" style="min-height: 100%">
-            <div class="card-content">
-                <pre style="background-color: white">{{query_json_2}}</pre>
-            </div>
-        </div>
-    </div>
-    <div class="column is-one-third">
-        <div class="card" style="min-height: 100%">
-            <div class="card-content">
-                <pre style="background-color: white">{{query_json_3}}</pre>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
-{{#each data}}
-    <div class="column">
-        <div class="card" style="min-height: 100%">
-            <div class="card-content">
-                {{#each mutations}}
-                    <p class="title is-3">{{root}}</p>
-                {{/each}}
-                <p class="subtitle is-5">{{searchTerm}}</p>
-                {{#compare signpost "!=" "-1"}}
-                    <div>{{signpost}}</div>
-                {{/compare}}
-                {{#compare searchType "===" "noun"}}
-                    {{#each mutations}}
-                        <div>{{#if genSing}}gs: {{genSing}}{{/if}}
-                            {{#if nomPlu}} np: {{nomPlu}}{{/if}}
-                            {{#if genPlu}} gp: {{genPlu}}{{/if}}</div>
-                    {{/each}}
-                {{else}}
-                    {{#compare searchType "===" "verb"}}
-                        {{#each mutations}}
-                            <div>{{#if gerund}}gerund: {{gerund}}{{/if}}
-                                {{#if participle}} participle: {{participle}}{{/if}}</div>
-                        {{/each}}
-                    {{/compare}}
-                {{/compare}}
-                {{#compare searchType "===" "noun"}}
-                    <!-- check if declension exists given it's a noun -->
-                    <div>{{searchType}}
-                        {{#compare declension "===" -1}}
-                            {{gender}}
-                        {{else}}
-                            declension {{declension}} {{gender}}
-                        {{/compare}}</div>
-                {{else}}
-                    <div>{{searchType}}</div>
-                {{/compare}}
-                <br>
-                {{#each domains}}
-                    <div>{{en}}</div>
-                    <div>{{ga}}</div>
-                {{/each}}
-            </div>
-        </div>
-    </div>
-{{/each}}
-
 
 <script>
     console.log(document.getElementById("#btn-tearma-scroll"));
