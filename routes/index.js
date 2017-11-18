@@ -2,6 +2,7 @@
 let express = require('express');
 let router = express.Router();
 
+const axios = require("axios");
 let fs = require("fs");
 
 let ScrapeData = require('./Tearma/Backend/Helpers.js');
@@ -21,32 +22,33 @@ router.get('/apps', function (req, res) {
 
 
 router.get('/enquiries', function (req, res) {
+    let ip = req.ip.split(":").pop();
+
     res.render('enquiries', {
-        year: new Date().getFullYear()
+        year: new Date().getFullYear(),
+        user_ip: String(ip)
     });
+});
+
+router.post("/submit-enquiry", function (req, res) {
+    let userIP = req["user_ip"];
+    let gCaptchaRes = req["g-captcha-response"];
+    let secretKey = process.env["SECRET_KEY"];
+
+    axios.post("https://www.google.com/recaptcha/api/siteverify", {
+        secret: secretKey,
+        response: gCaptchaRes,
+        remoteip: userIP
+    }).then(response => {
+        console.log(response);
+        res.json(response);
+    })
 });
 
 router.get('/developers', function (req, res) {
     res.render("developers", {
         year: new Date().getFullYear()
     });
-
-    /*
-    let query = {term: "term", lang: "en", limit: 3};
-    WordOfTheDay.getWordOfDay(function (wotd) {
-        ScrapeData.scrapeData(query, function (data) {
-            res.render('developers', {
-                title: "Developers",
-                term: query.term,
-                query_json_0: JSON.stringify(data[0], null, 2),
-                query_json_1: JSON.stringify(data[1], null, 2),
-                query_json_2: JSON.stringify(data[2], null, 2),
-                query_json_3: JSON.stringify(data[3], null, 2),
-                tod: JSON.stringify(wotd, null, 2),
-                data: data.splice(1, data.length)
-            })
-        })
-    })*/
 });
 
 router.get("/thesis", function (req, res) {

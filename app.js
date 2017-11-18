@@ -66,9 +66,11 @@ app.use(function (err, req, res, next) {
 });
 
 //prevent heroku app from sleeping through pinging
-setInterval(function () {
-    http.get("http://www.syzible.com");
-}, 900000);
+if (process.env["NO_SLEEPING"] === 1) {
+    setInterval(function () {
+        http.get("http://www.syzible.com");
+    }, 900000);
+}
 
 hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
     var operators, result;
