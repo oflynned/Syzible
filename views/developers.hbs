@@ -1,30 +1,167 @@
-<nav class="nav">
-    <div class="nav-left">
-        <a class="nav-item is-tab">Syzible</a>
-    </div>
-    <div class="nav-right">
-        <a class="nav-item is-tab" href="/">Home</a>
-        <a class="nav-item is-tab" href="/work-experience">Work Experience</a>
-        <a class="nav-item is-tab is-active" href="/developers">Developers</a>
-        <a class="nav-item is-tab" href="/tearma">Téarma.ie</a>
-    </div>
-</nav>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+</head>
 
-<div class="is-fluid is-marginless">
-    <section class="hero is-medium front-has-image-background" style="background-color: #FF5252">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <h1 class="title text-is-white" style="color: white;">
-                    Developer Resources
-                </h1>
+<style>
+    .fdb-block {
+        border-bottom: solid 1px #EEE;
+    }
+</style>
 
-                <h2 class="subtitle color-is-white" style="color: white">
-                    { "API": "Access" }
-                </h2>
+<section class="fdb-block pb-0" style="background-image: url(imgs/bg_c_1.svg);">
+    <div class="container animated bounceInDown" style="background-color: transparent">
+        <nav class="navbar navbar-expand-md">
+            <a class="navbar-brand" href="/">
+                Syzible
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main"
+                    aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-main">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/apps">Apps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/enquiries">Enquiries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/developers">Developers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/thesis">Thesis</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="row justify-content-center" style="margin-top: 150px; margin-bottom: 150px">
+        <div class="col-12 col-md-10 col-lg-8 text-center" style="max-width: 1000px">
+            <div class="fdb-box">
+                <h1>{ API Access }</h1>
+                <p class="text-h3">
+                    Access open and public APIs provided to run services over REST. More information about accessing
+                    these endpoints below.
+                </p>
+                <p class="mt-5">
+                    <a href="#developer-section-tearma" class="btn btn-shadow" id="#btn-tearma-scroll">Tearma.ie</a>
+                </p>
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
+
+<section class="fdb-block fdb-padding fdb-image-bg" style="background: url(imgs/img_bg.jpg)"
+         id="#developer-section-tearma">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-12">
+                <h1>Téarma.ie</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="fdb-block fdb-padding " style="">
+    <div class="container">
+        <div class="row text-center justify-content-center">
+            <div class="col-md-10 col-lg-10 col-xl-10">
+                <h2>Parameters</h2>
+                <h3>Returns back data in JSON format with the first object being information about the query
+                    submitted.</h3>
+                <h3>http://www.syzible.com/tearma/backend?term=<strong>{term}</strong>&lang=<strong>{lang}</strong>&limit=<strong>{*limit}</strong>
+                </h3>
+            </div>
+        </div>
+
+        <div class="row mt-5 align-items-center justify-content-center">
+            <div class="col-md-8 col-lg-4">
+                <div class="fdb-box">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-3">
+                            <img alt="image" class="img-fluid" src="../imgs/img_round.svg">
+                        </div>
+                        <div class="col-8 ml-auto">
+                            <p>
+                                <strong>term={term}</strong><br>
+                                <em>URL encoded value</em>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <p class="text-h3">
+                                "Even the all-powerful Pointing has no control about the blind texts it is an
+                                unorthographic life. One day however a small line of blind text by the name of Lorem
+                                Ipsum decided to leave for the far World of Grammar."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-lg-4 mt-4 mt-lg-0">
+                <div class="fdb-box">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-3">
+                            <img alt="image" class="img-fluid" src="../imgs/img_round.svg">
+                        </div>
+                        <div class="col-8 ml-auto">
+                            <p>
+                                <strong>lang={lang}</strong><br>
+                                <em>en | ga</em>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <p class="text-h3">
+                                "Far far away, behind the word mountains, far from the countries Vokalia and
+                                Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at
+                                the coast of the Semantics, a large language ocean."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-lg-4 mt-4 mt-lg-0">
+                <div class="fdb-box">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-3">
+                            <img alt="image" class="img-fluid" src="../imgs/img_round.svg">
+                        </div>
+                        <div class="col-8 ml-auto">
+                            <p>
+                                <strong>limit={*limit}</strong><br>
+                                <em>Integer, defaults at -1</em>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <p class="text-h3">
+                                "Separated they live in Bookmarksgrove right at the coast of the Semantics, far far
+                                away, behind the word mountains, far from the countries Vokalia and Consonantia, there
+                                live the blind texts."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--
 
 <div class="columns">
     <div class="column is-one-third">
@@ -147,6 +284,7 @@
         </div>
     </div>
 </div>
+-->
 
 {{#each data}}
     <div class="column">
@@ -193,3 +331,19 @@
         </div>
     </div>
 {{/each}}
+
+
+<script>
+    console.log(document.getElementById("#btn-tearma-scroll"));
+    console.log(document.getElementById("#developer-section-tearma"));
+
+    function scrollToId(id) {
+        let offset = document.getElementById(id).offsetTop;
+        $('html, body').animate({scrollTop: offset}, "slow");
+    }
+
+    document.getElementById("#btn-tearma-scroll")
+            .addEventListener("click", function () {
+                scrollToId("#developer-section-tearma")
+            });
+</script>

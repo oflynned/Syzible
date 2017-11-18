@@ -1,6 +1,9 @@
 "use strict";
 let express = require('express');
 let router = express.Router();
+
+let fs = require("fs");
+
 let ScrapeData = require('./Tearma/Backend/Helpers.js');
 let WordOfTheDay = require('./Tearma/Backend/WordOfTheDay');
 
@@ -24,6 +27,11 @@ router.get('/enquiries', function (req, res) {
 });
 
 router.get('/developers', function (req, res) {
+    res.render("developers", {
+        year: new Date().getFullYear()
+    });
+
+    /*
     let query = {term: "term", lang: "en", limit: 3};
     WordOfTheDay.getWordOfDay(function (wotd) {
         ScrapeData.scrapeData(query, function (data) {
@@ -38,7 +46,15 @@ router.get('/developers', function (req, res) {
                 data: data.splice(1, data.length)
             })
         })
-    })
+    })*/
+});
+
+router.get("/thesis", function (req, res) {
+    const filePath = __dirname + "/../public/media/Thesis.pdf";
+    fs.readFile(filePath, function (err, data) {
+        res.contentType("application/pdf");
+        res.send(data);
+    });
 });
 
 module.exports = router;
