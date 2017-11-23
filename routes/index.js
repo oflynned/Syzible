@@ -22,19 +22,21 @@ router.get('/apps', function (req, res) {
 
 
 router.get('/enquiries', function (req, res) {
-    let ip = req.ip.split(":").pop();
-
     res.render('enquiries', {
-        year: new Date().getFullYear(),
-        user_ip: String(ip)
+        year: new Date().getFullYear()
     });
 });
 
 router.post("/submit-enquiry", function (req, res) {
-    let userIP = req["user_ip"];
-    let gCaptchaRes = req["g-captcha-response"];
+
+    let gCaptchaRes = req["g_captcha_response"];
     let secretKey = process.env["SECRET_KEY"];
 
+    let email = req["email"];
+    let subject = req["subject"];
+    let message = req["message"];
+
+    /*
     axios.post("https://www.google.com/recaptcha/api/siteverify", {
         secret: secretKey,
         response: gCaptchaRes,
@@ -42,7 +44,7 @@ router.post("/submit-enquiry", function (req, res) {
     }).then(response => {
         console.log(response);
         res.json(response);
-    })
+    })*/
 });
 
 router.get('/developers', function (req, res) {

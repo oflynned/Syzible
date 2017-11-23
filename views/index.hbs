@@ -10,10 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
     <link type="text/css" rel="stylesheet" href="css/froala_blocks.css">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
-<section class="fdb-block pb-0" style="background-image: url(imgs/bg_3.svg);">
+<section class="fdb-block pb-0" style="background-image: url(imgs/bg_1.svg);
+background-position: center bottom;background-size: cover;background-repeat: repeat-x;">
     <div class="container animated bounceInDown" style="background-color: transparent">
         <nav class="navbar navbar-expand-md">
             <a class="navbar-brand" href="/">
@@ -39,23 +44,24 @@
                         <a class="nav-link" href="/developers">Developers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/thesis">Thesis</a>
+                        <a class="nav-link" href="/thesis" target="_blank">Thesis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://www.github.com/oflynned" target="_blank">GitHub</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
 
-    <div class="container align-items-center justify-content-center d-flex" style="">
-        <div class="row text-left">
-            <div class="col-12 col-md-6 col-lg-5">
+    <div class="align-items-center justify-content-center d-flex"
+         style="background-image: url(https://bitbucket-marketing-cdn.atlassian.com/dam/jcr:f18a6552-be0b-4222-9597-cc710097fb10/bitbucket-hero-image.png?cdnVersion=if);
+         background-position: center bottom;background-size: cover;background-repeat: repeat-x;height: 92vh">
+        <div class="row text-center">
+            <div class="col-12 col-md-12 col-lg-12">
                 <p class="mb-5 mt-5"><img alt="image" height="192" src="images/syzible_header.png"></p>
-                <p class="text-h2 white-text">Software is our passion.</p>
-                <p class="text-h2 white-text">Quality is our driving force.</p>
-            </div>
-
-            <div class="col-12 col-sm-4 col-md-6 col-lg-4 m-auto pt-5 align-items-end">
-                <img alt="image" class="img-fluid br-0 animated bounceInRight" src="imgs/img_tall.png">
+                <p class="text-h2 white-text">Software quality is our</p>
+                <p id="tag-word" class="text-h2 white-text">passion.</p>
             </div>
         </div>
     </div>
@@ -76,7 +82,8 @@
         <div class="row text-center justify-content-center">
             <div class="col-8">
                 <h1>Tools of the Trade</h1>
-                <p class="text-h3">Our expertise ranges across a wide array of tools and services for providing the best possible rendition of your next big idea.</p>
+                <p class="text-h3">Our expertise ranges across a wide array of tools and services for providing the best
+                    possible rendition of your next big idea.</p>
             </div>
         </div>
 
@@ -92,7 +99,8 @@
                     <div class="col-8">
                         <h3><strong>Mobile</strong></h3>
                         <p>#android #ios</p>
-                        <p class="text-h3 text-justified">Mobile devices are invaluable to a person's life - providing a world of apps to connect users and become a daily service of apps.</p>
+                        <p class="text-h3 text-justified">Mobile devices are invaluable to a person's life - providing a
+                            world of apps to connect users and become a daily service of apps.</p>
                     </div>
                 </div>
             </div>
@@ -106,7 +114,8 @@
                     <div class="col-8">
                         <h3><strong>Backend</strong></h3>
                         <p>#python #javascript #java #ruby</p>
-                        <p class="text-h3 text-justified">Backend encompasses the storage of data in the cloud and the logic behind how devices communicate with each other.</p>
+                        <p class="text-h3 text-justified">Backend encompasses the storage of data in the cloud and the
+                            logic behind how devices communicate with each other.</p>
                     </div>
                 </div>
             </div>
@@ -124,7 +133,8 @@
                     <div class="col-8">
                         <h3><strong>Frontend</strong></h3>
                         <p>#html #css #sass #javascript</p>
-                        <p class="text-h3 text-justified">Frontend encompasses what you see in your web browser and is comprised of three main building blocks - HTML, CSS, and JavaScript.</p>
+                        <p class="text-h3 text-justified">Frontend encompasses what you see in your web browser and is
+                            comprised of three main building blocks - HTML, CSS, and JavaScript.</p>
                     </div>
                 </div>
             </div>
@@ -138,7 +148,8 @@
                     <div class="col-8">
                         <h3><strong>Design</strong></h3>
                         <p>#gimp #ux #svg</p>
-                        <p class="text-h3 text-justified">Design encompasses the layout and user experience of a website or app. Image editing tools and diagrams are key to a good UX.</p>
+                        <p class="text-h3 text-justified">Design encompasses the layout and user experience of a website
+                            or app. Image editing tools and diagrams are key to a good UX.</p>
                     </div>
                 </div>
             </div>
@@ -147,3 +158,39 @@
 </section>
 
 </body>
+
+<script>
+    let wordStore = ["passion.", "driving force.", "goal.", "exuberance.", "guarantee."];
+    let i = 0;
+
+    let item = $("#tag-word");
+
+    function setAdjective() {
+        item.text(wordStore[i]);
+        i = i === wordStore.length - 1 ? 0 : i + 1;
+        setTimeout(fadeIn, 0);
+    }
+
+    function fadeIn() {
+        stripAnimations();
+        item.addClass("fadeIn");
+        setTimeout(fadeOut, 2000);
+    }
+
+    function fadeOut() {
+        stripAnimations();
+        item.addClass("fadeOut");
+        setTimeout(setAdjective, 500);
+    }
+
+    function stripAnimations() {
+        item.removeClass("animated");
+        item.removeClass("fadeIn");
+        item.removeClass("fadeOut");
+
+        item.offsetWidth = item.offsetWidth;
+        item.addClass("animated");
+    }
+
+    setAdjective();
+</script>
