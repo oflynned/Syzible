@@ -5,8 +5,8 @@ let router = express.Router();
 const axios = require("axios");
 let fs = require("fs");
 
-let ScrapeData = require('./Tearma/Backend/Helpers.js');
-let WordOfTheDay = require('./Tearma/Backend/WordOfTheDay');
+let ScrapeData = require('./Tearma/Backend/helpers.js');
+let WordOfTheDay = require('./Tearma/Backend/wordOfTheDay');
 
 router.get('/', function (req, res) {
     res.render('index', {

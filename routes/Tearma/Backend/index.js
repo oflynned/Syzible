@@ -5,7 +5,7 @@
 
 let express = require('express');
 let router = express.Router();
-let ScrapeData = require('./Helpers.js');
+let ScrapeData = require('./helpers.js');
 
 // API interface
 router.get('/', function (req, res) {
