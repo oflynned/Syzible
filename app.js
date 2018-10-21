@@ -1,21 +1,17 @@
 "use strict";
 
 let express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var tearmaBackend = require('./routes/Tearma/Backend/index');
-var tearmaFrontend = require('./routes/Tearma/Frontend/index');
-let appStore = require('./routes/AppStore/Frontend/index');
+let routes = require('./routes/index');
+let tearmaBackend = require('./routes/tearma/backend/index');
 
-var app = express();
-var hbs = require('hbs');
-
-var http = require("http");
+let app = express();
+let hbs = require('hbs');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,106 +26,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/tearma', tearmaFrontend);
 app.use('/tearma/backend', tearmaBackend);
-app.use('/appstore', appStore);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     let err = new Error('Not Found');
     err.status = 404;
     next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
-//prevent heroku app from sleeping through pinging
-if (process.env["NO_SLEEPING"] === 1) {
-    setInterval(function () {
-        http.get("http://www.syzible.com");
-    }, 900000);
-}
-
-hbs.registerHelper('compare', function (lvalue, operator, rvalue, options) {
-    var operators, result;
-
-    if (arguments.length < 3) {
-        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
-    }
-
-    if (options === undefined) {
-        options = rvalue;
-        rvalue = operator;
-        operator = "===";
-    }
-
-    operators = {
-        '==': function (l, r) {
-            return l == r;
-        },
-        '===': function (l, r) {
-            return l === r;
-        },
-        '!=': function (l, r) {
-            return l != r;
-        },
-        '!==': function (l, r) {
-            return l !== r;
-        },
-        '<': function (l, r) {
-            return l < r;
-        },
-        '>': function (l, r) {
-            return l > r;
-        },
-        '<=': function (l, r) {
-            return l <= r;
-        },
-        '>=': function (l, r) {
-            return l >= r;
-        },
-        '%': function (l, r) {
-            return (l % r == 0)
-        },
-        'typeof': function (l, r) {
-            return typeof l == r;
-        }
-    };
-
-    if (!operators[operator]) {
-        throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
-    }
-
-    result = operators[operator](lvalue, rvalue);
-
-    if (result) {
-        return options.fn(this);
-    } else {
-        return options.inverse(this);
-    }
-
 });
 
 module.exports = app;

@@ -1,12 +1,8 @@
 "use strict";
+
 let express = require('express');
 let router = express.Router();
-
-const axios = require("axios");
 let fs = require("fs");
-
-let ScrapeData = require('./Tearma/Backend/Helpers.js');
-let WordOfTheDay = require('./Tearma/Backend/WordOfTheDay');
 
 router.get('/', function (req, res) {
     res.render('index', {

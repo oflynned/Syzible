@@ -3,7 +3,6 @@
  */
 "use strict";
 
-let fs = require('fs');
 let request = require('request');
 let cheerio = require('cheerio');
 const url = "http://www.tearma.ie/TOD.aspx";
