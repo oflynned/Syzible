@@ -8,7 +8,7 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 let routes = require('./routes/index');
-let tearmaBackend = require('./routes/tearma/backend/index');
+let tearmaV1 = require('./routes/tearma/v1/index');
 
 let app = express();
 let hbs = require('hbs');
@@ -26,7 +26,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/tearma/backend', tearmaBackend);
+
+// TODO deprecate route
+app.use('/tearma/backend', tearmaV1);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
