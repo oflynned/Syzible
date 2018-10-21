@@ -7,7 +7,7 @@ let request = require('request');
 let cheerio = require('cheerio');
 let identifiers = require('./identifiers');
 
-export default function scrapeData(queries, callback) {
+function scrapeData(queries, callback) {
     // general
     let searchTerm, searchType, signpost, declension, metaData;
     let langID;
@@ -171,7 +171,7 @@ export default function scrapeData(queries, callback) {
                     });
                 });
             });
-            callback((limit < 1 || limit == undefined) ? data : data.splice(0, parseInt(limit) + 1));
+            callback((limit < 1 || limit === undefined) ? data : data.splice(0, parseInt(limit) + 1));
         })
     } catch (error) {
         callback([{error: "error thrown"}]);

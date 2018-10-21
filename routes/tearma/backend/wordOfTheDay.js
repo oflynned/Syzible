@@ -7,7 +7,7 @@ let request = require('request');
 let cheerio = require('cheerio');
 const url = "http://www.tearma.ie/TOD.aspx";
 
-export default function getWordOfDay(callback) {
+function getWordOfDay(callback) {
     request(url, function (error, response, html) {
         if (error) throw error;
 
@@ -26,3 +26,7 @@ export default function getWordOfDay(callback) {
 function replaceCarriages(input) {
     return input.replace(/[\n\t\r]/g, "").replace(/\s\s+/g, " ").replace("¶", "").trim();
 }
+
+module.exports = {
+    getWordOfDay: getWordOfDay
+};
