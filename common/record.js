@@ -5,6 +5,9 @@ let ObjectId = require("mongodb").ObjectId;
 module.exports = {
     createRecord: function (collection, data) {
         return new Promise((res, rej) => {
+            if (!collection) rej(new Error("empty_collection"));
+            if (!data) rej(new Error("empty_data"));
+
             db.get(collection)
                 .insert(data)
                 .then((record) => res(record))
