@@ -5,12 +5,7 @@
  */
 
 require('dotenv').load();
-const getEnvironment = () => {
-    const environments = require("../config/environments");
-    const providedEnvironment = process.env.ENVIRONMENT.toLowerCase();
-    return (providedEnvironment in environments) ? providedEnvironment : "development";
-};
-const getCollection = () => require("../config/collections")(getEnvironment());
+const {getEnvironment, getCollection} = require("../config/collections");
 
 let app = require('../app')(getCollection());
 let debug = require('debug')('syzible:server');
