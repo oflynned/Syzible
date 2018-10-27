@@ -1,42 +1,33 @@
 "use strict";
 
-let express = require('express');
-let path = require('path');
-let favicon = require('serve-favicon');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
+module.exports = (env) => {
+    let express = require('express');
+    let path = require('path');
+    let favicon = require('serve-favicon');
+    let logger = require('morgan');
+    let cookieParser = require('cookie-parser');
+    let bodyParser = require('body-parser');
 
-let routes = require('./routes/index');
-let tearmaV1 = require('./routes/tearma/v1/index');
+    let app = express();
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'hbs');
 
-let app = express();
-let hbs = require('hbs');
+    app.use(logger('dev'));
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(cookieParser());
+    app.use(express.static(path.join(__dirname, 'public')));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+    let root = require('./routes/index');
+    let tearmaV1 = require('./routes/tearma/v1/index');
+    let tearmaV2 = require('./routes/tearma/v2/index')(env);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+    // routes
+    app.use('/', root);
 
-app.use('/', routes);
+    // TODO deprecate route
+    app.use('/tearma/backend', tearmaV1);
+    app.use('/tearma/v2', tearmaV2);
 
-// TODO deprecate route
-app.use('/tearma/backend', tearmaV1);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    let err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-module.exports = app;
-
-
+    return app;
+};
