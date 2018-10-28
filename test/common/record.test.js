@@ -14,7 +14,7 @@ describe("db operations", () => {
         return db.get(collection).drop();
     }
 
-    describe("create", () => {
+    describe("#createRecord", () => {
         [undefined, null, ""].forEach((fixture) => {
             it(`should not allow ${fixture} as a collection name`, (done) => {
                 record.createRecord(fixture, {test: 123})
@@ -50,7 +50,7 @@ describe("db operations", () => {
         });
     });
 
-    describe("get", () => {
+    describe("#getRecords", () => {
         beforeEach((done) => {
             record.createRecord(collection, {test: 123})
                 .then(() => done())
@@ -82,7 +82,7 @@ describe("db operations", () => {
         });
     });
 
-    describe("modify", () => {
+    describe("#modifyRecord", () => {
         let data;
 
         beforeEach((done) => {
@@ -105,7 +105,7 @@ describe("db operations", () => {
         });
     });
 
-    describe("delete", () => {
+    describe("#deleteRecord", () => {
         let id;
 
         beforeEach((done) => {
