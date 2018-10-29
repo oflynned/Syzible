@@ -1,53 +1,15 @@
-const fetch = require('node-fetch');
-const cheerio = require('cheerio');
-const fs = require('fs');
-
-let AdmZip = require('adm-zip');
-
-fetch.Promise = global.Promise;
-
-const baseEndpoint = "http://www.tearma.ie/Liostai.aspx";
-
-function fetchEndpointName() {
-    return fetch(baseEndpoint)
-        .then((response) => response.text())
-        .then((html) => {
-            let $ = cheerio.load(html);
-            let filename = $('#download-TBX-list').attr('href');
-            return {
-                filename: filename.replace("Liostai/", ""),
-                endpoint: baseEndpoint.replace("Liostai.aspx", "") + filename
-            };
-        })
-}
-
-function fetchTbxFile(filename, endpoint) {
-    return Promise.all([fetch(endpoint), filename])
-        .then((promises) => {
-            let response = promises[0];
-            let filename = promises[1];
-            return new Promise((res, rej) => {
-                const destinationName = fs.createWriteStream(`./routes/tearma/v2/datasets/${filename}`);
-                response.body.pipe(destinationName);
-                response.body.on('error', err => rej(err));
-                destinationName.on('finish', () => res(filename));
-                destinationName.on('error', err => rej(err));
-            });
-        })
-}
-
-function unzipFile(filename) {
-    return new Promise((res) => {
-        const folder = `./routes/tearma/v2/datasets/`;
-        const path = `./routes/tearma/v2/datasets/${filename}`;
-        let zip = new AdmZip(path);
-        return zip.extractAllToAsync(folder, folder, false, true)
-            .then(() => res());
-    });
-}
+const {fetchTbxFile, fetchEndpointName, unzipFile} = require("../helpers/dataFetcher");
+const nounParser = require("../helpers/nounParser");
 
 module.exports.fetchTbxFile = () => {
-    return fetchEndpointName(baseEndpoint)
+    return fetchEndpointName()
         .then(({filename, endpoint}) => fetchTbxFile(filename, endpoint))
-        .then(({filename}) => unzipFile(filename));
+        .then((filename) => unzipFile(filename));
+};
+
+module.exports.parseTbxFile = (model) => {
+    switch (model.toLowerCase()) {
+        case "noun":
+            return nounParser.parseNouns()
+    }
 };
