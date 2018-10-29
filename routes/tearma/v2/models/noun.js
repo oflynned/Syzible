@@ -4,8 +4,8 @@ const Joi = require("joi");
 const collection = "nouns";
 const exampleSchema = Joi.object().keys(
     {
-        ga: Joi.string().required(),
-        en: Joi.string().required()
+        ga: Joi.string(),
+        en: Joi.string()
     }
 );
 const schema = Joi.object().keys({
@@ -23,7 +23,7 @@ const schema = Joi.object().keys({
     en: {
         term: Joi.string().required()
     },
-    domain: Joi.array().items(exampleSchema).required(),
+    domains: Joi.array().items(exampleSchema).required(),
     examples: Joi.array().items(exampleSchema).required()
 });
 

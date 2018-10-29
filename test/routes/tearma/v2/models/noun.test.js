@@ -31,7 +31,7 @@ describe("noun model", () => {
         en: {
             term: "term"
         },
-        domain: [
+        domains: [
             {
                 ga: "ga",
                 en: "en"
@@ -81,12 +81,12 @@ describe("noun model", () => {
                     expect(data.en).to.have.property("term");
                     expect(data.en.term).to.equal("term");
 
-                    expect(data).to.have.property("domain");
-                    expect(data.domain).to.be.an("array");
-                    expect(data.domain[0]).to.have.property("en");
-                    expect(data.domain[0].en).to.equal("en");
-                    expect(data.domain[0]).to.have.property("ga");
-                    expect(data.domain[0].ga).to.equal("ga");
+                    expect(data).to.have.property("domains");
+                    expect(data.domains).to.be.an("array");
+                    expect(data.domains[0]).to.have.property("en");
+                    expect(data.domains[0].en).to.equal("en");
+                    expect(data.domains[0]).to.have.property("ga");
+                    expect(data.domains[0].ga).to.equal("ga");
 
                     expect(data).to.have.property("examples");
                     expect(data.examples).to.be.an("array");
@@ -103,7 +103,7 @@ describe("noun model", () => {
                 delete fixture["ga"]["term"];
 
                 return nounModel.create(fixture)
-                    .then(() => assert.fail(false, "should not have succeeded"))
+                    .then(() => assert.fail("should not have succeeded"))
                     .catch((err) => expect(err).to.not.equal(null))
             });
 
@@ -113,7 +113,7 @@ describe("noun model", () => {
                     delete fixture["ga"]["mutations"]["nominativeSingular"];
 
                     return nounModel.create(fixture)
-                        .then(() => assert.fail(false, "should not have succeeded"))
+                        .then(() => assert.fail("should not have succeeded"))
                         .catch((err) => expect(err).to.not.equal(null))
                 });
 
@@ -143,6 +143,57 @@ describe("noun model", () => {
                         .then((data) => expect(data.ga.mutations).to.not.have.property("genitivePlural"))
                         .catch((err) => assert.fail(err))
                 });
+            });
+
+            it("should require gender", () => {
+                let fixture = deepClone(noun);
+                delete fixture["ga"]["gender"];
+
+                return nounModel.create(fixture)
+                    .then(() => assert.fail("should not have succeeded"))
+                    .catch((err) => expect(err).to.not.equal(null))
+            });
+
+            it("should require declension", () => {
+                let fixture = deepClone(noun);
+                delete fixture["ga"]["declension"];
+
+                return nounModel.create(fixture)
+                    .then(() => assert.fail("should not have succeeded"))
+                    .catch((err) => expect(err).to.not.equal(null))
+            });
+        });
+
+        describe(".en", () => {
+            it('should require term', () => {
+                let fixture = deepClone(noun);
+                delete fixture["en"]["term"];
+
+                return nounModel.create(fixture)
+                    .then(() => assert.fail("should not have succeeded"))
+                    .catch((err) => expect(err).to.not.equal(null))
+            });
+        });
+
+        describe(".domains", () => {
+            it('should allow empty domains property', function () {
+                let fixture = deepClone(noun);
+                fixture["domains"] = [];
+
+                return nounModel.create(fixture)
+                    .then((data) => expect(data).to.have.property("domains"))
+                    .catch((err) => assert.fail(err))
+            });
+        });
+
+        describe(".examples", () => {
+            it('should allow empty examples property', function () {
+                let fixture = deepClone(noun);
+                fixture["examples"] = [];
+
+                return nounModel.create(fixture)
+                    .then((data) => expect(data).to.have.property("examples"))
+                    .catch((err) => assert.fail(err))
             });
         });
     });
