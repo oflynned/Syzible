@@ -11,7 +11,7 @@ describe("collection categorisation", () => {
     });
 
     function dropDb() {
-        return db.get("tearma").drop();
+        return db.get(collections.getEnvironment()).drop();
     }
 
     describe("#getEnvironment", () => {
