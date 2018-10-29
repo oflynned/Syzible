@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 const environments = require("./environments");
 
 function classifyEnvironment(env) {
