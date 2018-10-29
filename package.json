@@ -7,6 +7,7 @@
     "test": "mocha test './test/**/*.test.js' --exit"
   },
   "dependencies": {
+    "@rgrove/parse-xml": "^1.1.1",
     "adm-zip": "^0.4.11",
     "animate.css": "^3.5.2",
     "axios": "^0.17.1",
