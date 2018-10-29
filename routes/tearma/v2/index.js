@@ -4,11 +4,7 @@ let router = express.Router();
 const datastoreController = require("./controllers/datastoreController");
 
 module.exports = ({dbName}) => {
-    router.get('/', (req, res) => {
-        return datastoreController.fetchTbxFile()
-            .then((data) => res.send(""))
-            .catch((err) => res.send(err))
-    });
+    router.get('/', (req, res) => res.json({db: dbName}));
 
     return router;
 };
