@@ -1,4 +1,6 @@
 let chai = require('chai'), expect = chai.expect;
+let assert = require("assert");
+
 const collections = require("../../../../../config/collections");
 const config = require('../../../../../config/db');
 const db = require('monk')(config.mongoUrl);
@@ -14,37 +16,42 @@ describe("noun model", () => {
         return db.get(collections.getEnvironment()).drop();
     }
 
+    let noun = {
+        ga: {
+            term: "term",
+            mutations: {
+                nominativeSingular: "ns",
+                genitiveSingular: "gs",
+                nominativePlural: "np",
+                genitivePlural: "gp"
+            },
+            gender: "masculine",
+            declension: 1
+        },
+        en: {
+            term: "term"
+        },
+        domain: [
+            {
+                ga: "ga",
+                en: "en"
+            }
+        ],
+        examples: [
+            {
+                ga: "ga",
+                en: "en"
+            }
+        ]
+    };
+
+    function deepClone(original) {
+        return JSON.parse(JSON.stringify(original));
+    }
+
     describe("#create", () => {
         it('should follow noun schema successfully', () => {
-            let fixture = {
-                ga: {
-                    term: "term",
-                    mutations: {
-                        nominativeSingular: "ns",
-                        genitiveSingular: "gs",
-                        nominativePlural: "np",
-                        genitivePlural: "gp"
-                    },
-                    gender: "masculine",
-                    declension: 1
-                },
-                en: {
-                    term: "term"
-                },
-                domain: [
-                    {
-                        ga: "ga",
-                        en: "en"
-                    }
-                ],
-                examples: [
-                    {
-                        ga: "ga",
-                        en: "en"
-                    }
-                ]
-            };
-
+            let fixture = deepClone(noun);
             return nounModel.create(fixture)
                 .then((data) => {
                     expect(data).to.be.an('object');
@@ -88,6 +95,55 @@ describe("noun model", () => {
                     expect(data.examples[0]).to.have.property("ga");
                     expect(data.examples[0].ga).to.equal("ga");
                 })
+        });
+
+        describe(".ga", () => {
+            it('should require term', () => {
+                let fixture = deepClone(noun);
+                delete fixture["ga"]["term"];
+
+                return nounModel.create(fixture)
+                    .then(() => assert.fail(false, "should not have succeeded"))
+                    .catch((err) => expect(err).to.not.equal(null))
+            });
+
+            describe(".mutations", () => {
+                it('should require nominative singular', () => {
+                    let fixture = deepClone(noun);
+                    delete fixture["ga"]["mutations"]["nominativeSingular"];
+
+                    return nounModel.create(fixture)
+                        .then(() => assert.fail(false, "should not have succeeded"))
+                        .catch((err) => expect(err).to.not.equal(null))
+                });
+
+                it('should require genitive singular', () => {
+                    let fixture = deepClone(noun);
+                    delete fixture["ga"]["mutations"]["genitiveSingular"];
+
+                    return nounModel.create(fixture)
+                        .then(() => assert.fail("should not have succeeded"))
+                        .catch((err) => expect(err).to.not.equal(null))
+                });
+
+                it('should not require nominative plural', () => {
+                    let fixture = deepClone(noun);
+                    delete fixture["ga"]["mutations"]["nominativePlural"];
+
+                    return nounModel.create(fixture)
+                        .then((data) => expect(data.ga.mutations).to.not.have.property("nominativePlural"))
+                        .catch((err) => assert.fail(err))
+                });
+
+                it('should not require genitive plural', () => {
+                    let fixture = deepClone(noun);
+                    delete fixture["ga"]["mutations"]["genitivePlural"];
+
+                    return nounModel.create(fixture)
+                        .then((data) => expect(data.ga.mutations).to.not.have.property("genitivePlural"))
+                        .catch((err) => assert.fail(err))
+                });
+            });
         });
     });
 });
