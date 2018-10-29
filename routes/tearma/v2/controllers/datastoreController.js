@@ -10,6 +10,7 @@ module.exports.fetchTbxFile = () => {
 module.exports.parseTbxFile = (model) => {
     switch (model.toLowerCase()) {
         case "noun":
-            return nounParser.parseNouns()
+            const path = __dirname + "/../datasets/18.10.01-tearma.ie-concepts.tbx";
+            return nounParser.parseNouns(path);
     }
 };
