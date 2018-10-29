@@ -1,13 +1,14 @@
-const DB_NAME = "tearma";
+const collections = require("./collections");
+const dbName = collections.getCollection()["dbName"];
 
 module.exports = {
     get dbName() {
-        return DB_NAME;
+        return dbName;
     },
 
     get mongoUrl() {
-        let developmentUrl = `mongodb://localhost:27017/${DB_NAME}`;
+        let developmentUrl = `mongodb://localhost:27017/${dbName}`;
         let productionUrl = process.env.MONGODB_URL;
-        return process.env.ENVIRONMENT === "production" ? productionUrl : developmentUrl;
+        return collections.getEnvironment() === "production" ? productionUrl : developmentUrl;
     }
 };

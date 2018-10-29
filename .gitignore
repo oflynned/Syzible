@@ -27,3 +27,6 @@ crashlytics-build.properties
 fabric.properties
 
 .DS_STORE
+
+## omit any local dbs
+*.tbx
