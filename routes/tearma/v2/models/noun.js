@@ -2,6 +2,12 @@ const {createRecord, getRecords} = require("../../../../common/record");
 const Joi = require("joi");
 
 const collection = "nouns";
+const exampleSchema = Joi.object().keys(
+    {
+        ga: Joi.string().required(),
+        en: Joi.string().required()
+    }
+);
 const schema = Joi.object().keys({
     ga: {
         term: Joi.string().required(),
@@ -12,29 +18,19 @@ const schema = Joi.object().keys({
             genitivePlural: Joi.string(),
         },
         gender: Joi.string().valid("masculine", "feminine", "verbal noun").required(),
-        declension: Joi.number().required()
+        declension: Joi.number().valid(-1, 1, 2, 3, 4, 5).required()
     },
     en: {
         term: Joi.string().required()
     },
-    domain: Joi.array().items(Joi.object.keys(
-        {
-            ga: Joi.string().required(),
-            en: Joi.string().required()
-        }
-    )).required(),
-    examples: Joi.array().items(Joi.object.keys(
-        {
-            ga: Joi.string().required(),
-            en: Joi.string().required()
-        }
-    )).required()
+    domain: Joi.array().items(exampleSchema).required(),
+    examples: Joi.array().items(exampleSchema).required()
 });
 
 function validate(data) {
     return new Promise((res, rej) => {
         let result = Joi.validate(data, schema, {allowUnknown: false});
-        result["error"] === null ? res() : rej("bad_noun_schema")
+        result["error"] === null ? res() : rej(result["error"])
     });
 }
 
