@@ -1,9 +1,9 @@
 let config = require("../config/db");
-let db = require('monk')(config.mongoUrl);
 let ObjectId = require("mongodb").ObjectId;
+let db = require('monk')(config.mongoUrl);
 
 module.exports = {
-    createRecord: function (collection, data) {
+    createRecord: (collection, data) => {
         return new Promise((res, rej) => {
             if (!collection) rej(new Error("empty_collection"));
             if (!data) rej(new Error("empty_data"));
@@ -15,7 +15,7 @@ module.exports = {
         })
     },
 
-    getRecords: function (collection, filter = {}) {
+    getRecords: (collection, filter = {}) => {
         return new Promise((res, rej) => {
             db.get(collection)
                 .find(filter)
@@ -24,7 +24,7 @@ module.exports = {
         })
     },
 
-    modifyRecord: function (collection, data, id) {
+    modifyRecord: (collection, data, id) => {
         return new Promise((res, rej) => {
             db.get(collection)
                 .update({_id: ObjectId(id)}, {"$set": data})
@@ -33,7 +33,7 @@ module.exports = {
         })
     },
 
-    deleteRecord: function (collection, id) {
+    deleteRecord: (collection, id) => {
         return new Promise((res, rej) => {
             db.get(collection)
                 .remove({_id: ObjectId(id)})
@@ -42,7 +42,7 @@ module.exports = {
         })
     },
 
-    dropCollection: function (collection) {
+    dropCollection: (collection) => {
         return new Promise((res, rej) => {
             db.get(collection)
                 .drop()
