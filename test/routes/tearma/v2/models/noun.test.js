@@ -176,7 +176,7 @@ describe("noun model", () => {
         });
 
         describe(".domains", () => {
-            it('should allow empty domains property', function () {
+            it('should allow empty domains property', () => {
                 let fixture = deepClone(noun);
                 fixture["domains"] = [];
 
@@ -187,7 +187,7 @@ describe("noun model", () => {
         });
 
         describe(".examples", () => {
-            it('should allow empty examples property', function () {
+            it('should allow empty examples property', () => {
                 let fixture = deepClone(noun);
                 fixture["examples"] = [];
 
