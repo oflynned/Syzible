@@ -20,6 +20,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "^4.1.0",
     "dotenv": "^6.0.0",
+    "elementtree": "^0.1.7",
     "express": "^4.16.4",
     "filterxml": "^1.1.4",
     "formidable": "^1.0.17",
@@ -39,6 +40,6 @@
     "serve-favicon": "^2.5.0",
     "xml2js": "^0.4.19",
     "xmldom": "^0.1.27",
-    "xpath": "0.0.27"
+    "xpath": "0.0.24"
   }
 }
