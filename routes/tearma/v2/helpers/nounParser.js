@@ -126,7 +126,7 @@ function saveNoun(noun) {
         }
     }
 
-    create(item).catch((err) => console.log(err, item))
+    if (item !== {}) create(item).catch((err) => console.log(err, item))
 }
 
 module.exports.parseNouns = (path) => {
