@@ -15,10 +15,10 @@ module.exports = {
         })
     },
 
-    getRecords: (collection, filter = {}) => {
+    getRecords: (collection, filter = {}, limit = 10, offset = 0) => {
         return new Promise((res, rej) => {
             db.get(collection)
-                .find(filter)
+                .find(filter, {limit: parseInt(limit), skip: parseInt(offset), sort: {name: 1}})
                 .then((records) => res(records))
                 .catch((err) => rej(err))
         })
