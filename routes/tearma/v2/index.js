@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-const {save, findAll} = require("./controllers/nounsController");
+const {findAll, findByGaTerm, findByEnTerm} = require("./controllers/nounsController");
 const {parseTbxFile} = require("./controllers/datastoreController");
 
 module.exports = ({dbName}) => {
@@ -11,7 +11,18 @@ module.exports = ({dbName}) => {
     });
 
     router.get('/find', (req, res) => {
-        return findAll().then((data) => res.json(data));
+        let {query, queryLanguage, limit, offset} = req.query;
+        let operation;
+
+        if (queryLanguage === "ga") {
+            operation = findByGaTerm(query, limit, offset)
+        } else if (queryLanguage === "en") {
+            operation = findByEnTerm(query, limit, offset)
+        } else {
+            operation = findAll(query, limit, offset)
+        }
+
+        return operation.then((results) => res.json(results))
     });
 
     return router;
