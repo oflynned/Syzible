@@ -1,5 +1,5 @@
 const collections = require("./collections");
-const dbName = collections.getCollection()["dbName"];
+const {dbName} = collections.getCollection();
 
 module.exports = {
     get dbName() {
