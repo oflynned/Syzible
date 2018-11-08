@@ -27,13 +27,14 @@ function splitMultipleForms(groupForm) {
     return groupForm.split(",").map((form) => form.trim())
 }
 
-function saveNoun(noun) {
+function groomNounFromDefinition(noun) {
     // TODO iterate over domains
 
-    let maxCountEn = xpath.select('count(//langSet[@lang="en"]/tig)', noun).toString();
-    let maxCountGa = xpath.select('count(//langSet[@lang="ga"]/tig)', noun).toString();
-    let item = {};
+    let maxCountEn = parseInt(xpath.select('count(//langSet[@lang="en"]/tig)', noun));
+    let maxCountGa = parseInt(xpath.select('count(//langSet[@lang="ga"]/tig)', noun));
+    let definitions = [];
 
+    // TODO refactor to use just one for loop and reduce duplicated logic
     if (maxCountEn === maxCountGa) {
         for (let i = 1; i <= maxCountEn; i++) {
             let enNominativeSingular = xpath.select(`//termEntry/langSet[@lang="en"]/tig/term[${i}]/text()`, noun).toString();
@@ -44,10 +45,10 @@ function saveNoun(noun) {
 
             let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[${i}]/text()`, noun).toString();
             let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][${i}]/text()`, noun).toString();
-            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${i}]/text()`, noun).toString();
-            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ni" or @type="iol"][${i}]/text()`, noun).toString();
+            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][${i}]/text()`, noun).toString();
+            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${i}]/text()`, noun).toString();
 
-            item = {
+            let item = {
                 ga: {
                     term: gaNominativeSingular,
                     mutations: {
@@ -63,6 +64,8 @@ function saveNoun(noun) {
                     term: enNominativeSingular
                 }
             };
+
+            definitions.push(item);
         }
     } else if (maxCountEn > maxCountGa && maxCountGa === 1) {
         for (let i = 1; i <= maxCountEn; i++) {
@@ -74,10 +77,10 @@ function saveNoun(noun) {
 
             let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[1]/text()`, noun).toString();
             let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][1]/text()`, noun).toString();
-            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][1]/text()`, noun).toString();
-            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ni" or @type="iol"][1]/text()`, noun).toString();
+            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][1]/text()`, noun).toString();
+            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][1]/text()`, noun).toString();
 
-            item = {
+            let item = {
                 ga: {
                     term: gaNominativeSingular,
                     mutations: {
@@ -93,6 +96,8 @@ function saveNoun(noun) {
                     term: enNominativeSingular
                 }
             };
+
+            definitions.push(item);
         }
     } else if (maxCountGa > maxCountEn && maxCountEn === 1) {
         for (let i = 1; i <= maxCountGa; i++) {
@@ -104,10 +109,10 @@ function saveNoun(noun) {
 
             let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[${i}]/text()`, noun).toString();
             let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][${i}]/text()`, noun).toString();
-            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${i}]/text()`, noun).toString();
-            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ni" or @type="iol"][${i}]/text()`, noun).toString();
+            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][${i}]/text()`, noun).toString();
+            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${i}]/text()`, noun).toString();
 
-            item = {
+            let item = {
                 ga: {
                     term: gaNominativeSingular,
                     mutations: {
@@ -123,13 +128,15 @@ function saveNoun(noun) {
                     term: enNominativeSingular
                 }
             };
+
+            definitions.push(item);
         }
     }
 
-    if (item !== {}) create(item).catch((err) => console.log(err, item))
+    return definitions;
 }
 
-module.exports.parseNouns = (path) => {
+module.exports.parseNounsFromPath = (path) => {
     const shouldWriteNounsXml = false;
 
     return new Promise((res) => {
@@ -151,7 +158,7 @@ module.exports.parseNouns = (path) => {
 
             if (termEntry) {
                 if (shouldWriteNounsXml) stream.write(termEntry + "\n");
-                saveNoun(noun)
+                groomNounFromDefinition(noun)
             }
         });
 
@@ -161,5 +168,27 @@ module.exports.parseNouns = (path) => {
         }
 
         res();
+    });
+};
+
+module.exports.parseNounsFromData = (xml) => {
+    return new Promise((res) => {
+        let modifiedXml = xml.replace(/xml:lang/g, 'lang');
+        const tree = elementTree.parse(modifiedXml.toString());
+        const root = tree.getroot();
+        let nouns = [];
+
+        root.iter('termEntry', (data) => {
+            let root = elementTree.tostring(data, {encoding: 'utf8', method: 'xml'});
+            let noun = parser.parseFromString(root, 'text/xml');
+            let termEntry = xpath.select(nounsQuery, noun).toString();
+            if (termEntry) {
+                let nounSet = groomNounFromDefinition(noun);
+                nouns = nouns.concat(nounSet)
+            }
+        });
+
+        let saveOperations = nouns.map((noun) => create(noun));
+        Promise.all(saveOperations).then(() => res());
     });
 };

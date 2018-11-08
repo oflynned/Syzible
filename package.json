@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha test './test/**/*.test.js' --exit"
+    "test": "ENVIRONMENT=test mocha test './test/**/*.test.js' --exit"
   },
   "dependencies": {
     "@rgrove/parse-xml": "^1.1.1",
@@ -31,6 +31,7 @@
     "jquery": "^3.1.1",
     "lokijs": "^1.4.1",
     "mocha": "^5.2.0",
+    "mock-fs": "^4.7.0",
     "mongodb": "latest",
     "monk": "^6.0.6",
     "morgan": "^1.9.1",

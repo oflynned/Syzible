@@ -31,7 +31,5 @@ module.exports = (env) => {
     app.use('/tearma/api/v1', tearmaV1);
     app.use('/tearma/api/v2', tearmaV2);
 
-    // require("./routes/tearma/v2/controllers/datastoreController").parseTbxFile("noun");
-
     return app;
 };
