@@ -1,46 +1,115 @@
 const chai = require('chai'), expect = chai.expect;
-const assert = require("assert");
 
 process.env.ENVIRONMENT = "test";
 const config = require('../../../../../config/db');
 const db = require('monk')(config.mongoUrl);
 
-const {oneToOneFixture} = require("./nounParserExamples");
+const fixtures = require("./nounParserExamples");
 const nounModel = require("../../../../../routes/tearma/v2/models/noun");
 const nounParser = require("../../../../../routes/tearma/v2/helpers/nounParser");
 
-// 1-1 en ga
-// 3-1 en ga
-// 1-3 en ga
-// 2-3 en ga (should return {})
-
 describe("noun parsing", () => {
-    beforeEach((done) => {
-        dropDb().then(() => done());
-    });
+    describe("#parseNounsFromData", () => {
+        beforeEach((done) => {
+            dropDb()
+                .then(() => done())
+                .catch((err) => done(err))
+        });
 
-    function dropDb() {
-        return db._db.dropDatabase();
-    }
+        function dropDb() {
+            return Promise.all([db.get("nouns").drop()])
+        }
 
-    it('should parse 1-1 terms', () => {
-        return nounParser.parseNounsFromData(oneToOneFixture)
-            .then(() => nounModel.findAll())
-            .then((nouns) => {
-                expect(nouns).to.be.an("array");
-                expect(nouns.length).to.equal(1);
-                return nouns[0];
-            })
-            .then((noun) => {
-                expect(noun).to.be.an("object");
-                expect(noun.en.term).to.equal("occupier");
-                expect(noun.ga.term).to.equal("áititheoir");
-                expect(noun.ga.mutations.nominativeSingular).to.equal("áititheoir");
-                expect(noun.ga.mutations.genitiveSingular).to.equal("áititheora");
-                expect(noun.ga.mutations.nominativePlural).to.equal("áititheoirí");
-                expect(noun.ga.mutations.genitivePlural).to.equal("áititheoirí");
-                expect(noun.ga.declension).to.equal(3);
-                expect(noun.ga.gender).to.equal("masculine");
-            })
+        it("with separate plurals", (done) => {
+            nounParser.parseNounsFromData(fixtures.separatePlurals)
+                .then(() => nounModel.findAll())
+                .then((nouns) => {
+                    expect(nouns).to.be.an("array");
+                    expect(nouns.length).to.equal(1);
+                    return nouns[0];
+                })
+                .then((noun) => {
+                    expect(noun).to.be.an("object");
+                    expect(noun.en.term).to.equal("adductor muscle");
+                    expect(noun.ga.term).to.equal("matán aduchtach");
+                    expect(noun.ga.mutations.nominativeSingular).to.equal("matán aduchtach");
+                    expect(noun.ga.mutations.genitiveSingular).to.equal("matáin aduchtaigh");
+                    expect(noun.ga.mutations.nominativePlural).to.equal("matáin aduchtacha");
+                    expect(noun.ga.mutations.genitivePlural).to.equal("matán aduchtach");
+                    expect(noun.ga.declension).to.equal(1);
+                    expect(noun.ga.gender).to.equal("masculine");
+                    done()
+                })
+                .catch((err) => done(err));
+        });
+
+        it("with combined plurals", (done) => {
+            nounParser.parseNounsFromData(fixtures.combinedPlural)
+                .then(() => nounModel.findAll())
+                .then((nouns) => {
+                    expect(nouns).to.be.an("array");
+                    expect(nouns.length).to.equal(1);
+                    return nouns[0];
+                })
+                .then((noun) => {
+                    expect(noun).to.be.an("object");
+                    expect(noun.en.term).to.equal("occupier");
+                    expect(noun.ga.term).to.equal("áititheoir");
+                    expect(noun.ga.mutations.nominativeSingular).to.equal("áititheoir");
+                    expect(noun.ga.mutations.genitiveSingular).to.equal("áititheora");
+                    expect(noun.ga.mutations.nominativePlural).to.equal("áititheoirí");
+                    expect(noun.ga.mutations.genitivePlural).to.equal("áititheoirí");
+                    expect(noun.ga.declension).to.equal(3);
+                    expect(noun.ga.gender).to.equal("masculine");
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+
+        it('with only nominative singular', (done) => {
+            nounParser.parseNounsFromData(fixtures.onlyNominativeSingularForm)
+                .then(() => nounModel.findAll())
+                .then((nouns) => {
+                    expect(nouns).to.be.an("array");
+                    expect(nouns.length).to.equal(1);
+                    return nouns[0];
+                })
+                .then((noun) => {
+                    expect(noun).to.be.an("object");
+                    expect(noun.en.term).to.equal("contingent charge");
+                    expect(noun.ga.term).to.equal("muirear teagmhasach");
+                    expect(noun.ga.mutations.nominativeSingular).to.equal("muirear teagmhasach");
+                    expect(noun.ga.mutations.genitiveSingular).to.equal("");
+                    expect(noun.ga.mutations.nominativePlural).to.equal("");
+                    expect(noun.ga.mutations.genitivePlural).to.equal("");
+                    expect(noun.ga.declension).to.equal(1);
+                    expect(noun.ga.gender).to.equal("masculine");
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+
+        it('with no declension', (done) => {
+            nounParser.parseNounsFromData(fixtures.noDeclension)
+                .then(() => nounModel.findAll())
+                .then((nouns) => {
+                    expect(nouns).to.be.an("array");
+                    expect(nouns.length).to.equal(1);
+                    return nouns[0];
+                })
+                .then((noun) => {
+                    expect(noun).to.be.an("object");
+                    expect(noun.en.term).to.equal("customs");
+                    expect(noun.ga.term).to.equal("custaim");
+                    expect(noun.ga.mutations.nominativeSingular).to.equal("custaim");
+                    expect(noun.ga.mutations.genitiveSingular).to.equal("");
+                    expect(noun.ga.mutations.nominativePlural).to.equal("");
+                    expect(noun.ga.mutations.genitivePlural).to.equal("custam");
+                    expect(noun.ga.declension).to.equal(-1);
+                    expect(noun.ga.gender).to.equal("masculine");
+                    done();
+                })
+                .catch((err) => done(err));
+        });
     });
 });
