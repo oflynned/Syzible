@@ -23,11 +23,13 @@ module.exports = (env) => {
     let tearmaV2 = require('./routes/tearma/v2/index')(env);
 
     // routes
+    // /
     app.use('/', root);
 
-    // TODO deprecate route
+    // /tearma
     app.use('/tearma/backend', tearmaV1);
-    app.use('/tearma/v2', tearmaV2);
+    app.use('/tearma/api/v1', tearmaV1);
+    app.use('/tearma/api/v2', tearmaV2);
 
     return app;
 };

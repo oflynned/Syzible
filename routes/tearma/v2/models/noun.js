@@ -10,21 +10,19 @@ const exampleSchema = Joi.object().keys(
 );
 const schema = Joi.object().keys({
     ga: {
-        term: Joi.string().required(),
+        term: Joi.string(),
         mutations: {
             nominativeSingular: Joi.string().required(),
-            genitiveSingular: Joi.string().required(),
-            nominativePlural: Joi.string(),
-            genitivePlural: Joi.string(),
+            genitiveSingular: Joi.string().allow(""),
+            nominativePlural: Joi.string().allow(""),
+            genitivePlural: Joi.string().allow("")
         },
         gender: Joi.string().valid("masculine", "feminine", "verbal noun").required(),
         declension: Joi.number().valid(-1, 1, 2, 3, 4, 5).required()
     },
     en: {
         term: Joi.string().required()
-    },
-    domains: Joi.array().items(exampleSchema).required(),
-    examples: Joi.array().items(exampleSchema).required()
+    }
 });
 
 function validate(data) {
@@ -43,7 +41,7 @@ module.exports.create = (data) => {
 };
 
 module.exports.findAll = () => {
-    return getRecords(collection);
+    return getRecords(collection)
 };
 
 module.exports.findByEnglishTerm = (queryTerm) => {

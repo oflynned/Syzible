@@ -4,21 +4,25 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha test './test/**/*.test.js' --exit"
+    "test": "ENVIRONMENT=test mocha test './test/**/*.test.js' --exit"
   },
   "dependencies": {
+    "@rgrove/parse-xml": "^1.1.1",
     "adm-zip": "^0.4.11",
     "animate.css": "^3.5.2",
     "axios": "^0.17.1",
     "body-parser": "^1.18.3",
     "bulma": "^0.3.2",
+    "camaro": "^3.0.13",
     "chai": "^3.5.0",
     "chai-as-promised": "^7.1.1",
     "cheerio": "^0.22.0",
     "cookie-parser": "~1.4.3",
     "debug": "^4.1.0",
     "dotenv": "^6.0.0",
+    "elementtree": "^0.1.7",
     "express": "^4.16.4",
+    "filterxml": "^1.1.4",
     "formidable": "^1.0.17",
     "froala-design-blocks": "^1.0.0",
     "fs": "0.0.1-security",
@@ -27,12 +31,16 @@
     "jquery": "^3.1.1",
     "lokijs": "^1.4.1",
     "mocha": "^5.2.0",
+    "mock-fs": "^4.7.0",
     "mongodb": "latest",
     "monk": "^6.0.6",
     "morgan": "^1.9.1",
     "node-fetch": "^2.2.0",
     "promise": "^7.1.1",
     "request": "^2.88.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "xml2js": "^0.4.19",
+    "xmldom": "^0.1.27",
+    "xpath": "0.0.24"
   }
 }
