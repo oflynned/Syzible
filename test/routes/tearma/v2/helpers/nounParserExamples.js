@@ -30,29 +30,29 @@ module.exports.combinedPlural = `
 
 module.exports.separatePlurals = `
 <termEntry id="concept-3465400">
-				<descrip type="domain" xml:lang="ga">Bitheolaíocht</descrip>
-				<descrip type="domain" xml:lang="en">Biology</descrip>
-				<descrip type="domain" xml:lang="ga">Leigheas › Fiseolaíocht</descrip>
-				<descrip type="domain" xml:lang="en">Medicine, Medical › Physiology</descrip>
-				<langSet xml:lang="en">
-					<tig>
-						<term>adductor muscle</term>
-						<termNote type="partOfSpeech">s</termNote>
-					</tig>
-				</langSet>
-				<langSet xml:lang="ga">
-					<tig>
-						<term>matán aduchtach</term>
-						<termNote type="partOfSpeech">fir1</termNote>
-						<termNote type="gu">matáin aduchtaigh</termNote>
-						<termNote type="ai">matáin aduchtacha</termNote>
-						<termNote type="gi">matán aduchtach</termNote>
-					</tig>
-				</langSet>
-				<descrip type="collection">Oll-liosta Téarmaíochta 1985-2000</descrip>
-				<descrip type="collection">Foclóir Geolaíochta agus Geoifisice/Dictionary of Geology and Geophysics</descrip>
-				<descrip type="collection">Foclóir Bitheolaíochta/Dictionary of Biology</descrip>
-			</termEntry>
+	<descrip type="domain" xml:lang="ga">Bitheolaíocht</descrip>
+	<descrip type="domain" xml:lang="en">Biology</descrip>
+	<descrip type="domain" xml:lang="ga">Leigheas › Fiseolaíocht</descrip>
+	<descrip type="domain" xml:lang="en">Medicine, Medical › Physiology</descrip>
+	<langSet xml:lang="en">
+	    <tig>
+		    <term>adductor muscle</term>
+			<termNote type="partOfSpeech">s</termNote>
+		</tig>
+	</langSet>
+	<langSet xml:lang="ga">
+        <tig>
+            <term>matán aduchtach</term>
+            <termNote type="partOfSpeech">fir1</termNote>
+            <termNote type="gu">matáin aduchtaigh</termNote>
+            <termNote type="ai">matáin aduchtacha</termNote>
+            <termNote type="gi">matán aduchtach</termNote>
+        </tig>
+	</langSet>
+	<descrip type="collection">Oll-liosta Téarmaíochta 1985-2000</descrip>
+	<descrip type="collection">Foclóir Geolaíochta agus Geoifisice/Dictionary of Geology and Geophysics</descrip>
+	<descrip type="collection">Foclóir Bitheolaíochta/Dictionary of Biology</descrip>
+</termEntry>
 `;
 
 module.exports.onlyNominativeSingularForm = `
@@ -145,65 +145,65 @@ module.exports.verbalNoun = ``;
 
 module.exports.multipleEnglishToOneIrish = `
 <termEntry id="concept-950213">
-				<descrip type="domain" xml:lang="ga">Dlí › Dlí an Chomharbais</descrip>
-				<descrip type="domain" xml:lang="en">Law › Law of Succession</descrip>
-				<langSet xml:lang="en">
-					<tig>
-						<term>heir-at-law</term>
-						<termNote type="partOfSpeech">s</termNote>
-					</tig>
-					<tig>
-						<term>heir at law</term>
-						<termNote type="partOfSpeech">s</termNote>
-					</tig>
-				</langSet>
-				<langSet xml:lang="ga">
-					<tig>
-						<term>oidhre ginearálta</term>
-						<termNote type="partOfSpeech">fir4</termNote>
-					</tig>
-				</langSet>
-				<descrip type="definition" xml:lang="ga">An duine atá i dteideal maoin duine éagtha a fháil faoi rialacha díthiomnachta.</descrip>
-				<descrip type="definition" xml:lang="en">The person who is entitled to inherit a deceased's property under rules of intestacy.</descrip>
-				<descrip type="example" xml:lang="en">In any such action the indorsement shall show whether the plaintiff claims as creditor, executor, administrator, residuary legatee, legatee, next-of-kin, heir-at-law, devisee, or in what other character.</descrip>
-				<descrip type="example" xml:lang="ga">In aon chaingean den sórt sin taispeánfaidh an formhuiniú cé acu an mar chreidiúnaí, seiceadóir, riarthóir, leagáidí iarmharach, leagáidí, neasghaol, oidhre ginearálta, nó réadtiomnaí atá an gearánaí ag éileamh, nó cad é an cháilíocht eile ina bhfuil sé ag éileamh. FOINSE: I.R. Uimh 510 de 2001</descrip>
-				<descrip type="example" xml:lang="en">On signing, settling or approving any advertisement, or authority for a broadcast announcement, for any person entitled as next-of-kin, heir-at-law or otherwise to share in any property</descrip>
-				<descrip type="example" xml:lang="ga">Ar aon fhógrán nó údarás d'fhógra craolta a shíniú, a shocrú nó a cheadú, d'aon duine ag a bhfuil teideal mar neasghaol nó mar oidhre ginearálta nó eile chun scair d'aon mhaoin a fháil-FOINSE: I.R. 1980</descrip>
-				<descrip type="collection">Téarmaí Faofa as Ionstraimí Reachtúla (2013)/Approved Terms from Statutory Instruments (2013)</descrip>
-			</termEntry>
+	<descrip type="domain" xml:lang="ga">Dlí › Dlí an Chomharbais</descrip>
+	<descrip type="domain" xml:lang="en">Law › Law of Succession</descrip>
+	<langSet xml:lang="en">
+	    <tig>
+		    <term>heir-at-law</term>
+			<termNote type="partOfSpeech">s</termNote>
+		</tig>
+		<tig>
+		    <term>heir at law</term>
+			<termNote type="partOfSpeech">s</termNote>
+		</tig>
+	</langSet>
+	<langSet xml:lang="ga">
+	    <tig>
+		    <term>oidhre ginearálta</term>
+			<termNote type="partOfSpeech">fir4</termNote>
+		</tig>
+	</langSet>
+	<descrip type="definition" xml:lang="ga">An duine atá i dteideal maoin duine éagtha a fháil faoi rialacha díthiomnachta.</descrip>
+	<descrip type="definition" xml:lang="en">The person who is entitled to inherit a deceased's property under rules of intestacy.</descrip>
+	<descrip type="example" xml:lang="en">In any such action the indorsement shall show whether the plaintiff claims as creditor, executor, administrator, residuary legatee, legatee, next-of-kin, heir-at-law, devisee, or in what other character.</descrip>
+	<descrip type="example" xml:lang="ga">In aon chaingean den sórt sin taispeánfaidh an formhuiniú cé acu an mar chreidiúnaí, seiceadóir, riarthóir, leagáidí iarmharach, leagáidí, neasghaol, oidhre ginearálta, nó réadtiomnaí atá an gearánaí ag éileamh, nó cad é an cháilíocht eile ina bhfuil sé ag éileamh. FOINSE: I.R. Uimh 510 de 2001</descrip>
+	<descrip type="example" xml:lang="en">On signing, settling or approving any advertisement, or authority for a broadcast announcement, for any person entitled as next-of-kin, heir-at-law or otherwise to share in any property</descrip>
+	<descrip type="example" xml:lang="ga">Ar aon fhógrán nó údarás d'fhógra craolta a shíniú, a shocrú nó a cheadú, d'aon duine ag a bhfuil teideal mar neasghaol nó mar oidhre ginearálta nó eile chun scair d'aon mhaoin a fháil-FOINSE: I.R. 1980</descrip>
+	<descrip type="collection">Téarmaí Faofa as Ionstraimí Reachtúla (2013)/Approved Terms from Statutory Instruments (2013)</descrip>
+</termEntry>
 `;
 
 module.exports.multipleIrishToOneEnglish = `
 <termEntry id="concept-953813">
-				<descrip type="domain" xml:lang="ga">Dlí</descrip>
-				<descrip type="domain" xml:lang="en">Law</descrip>
-				<descrip type="domain" xml:lang="ga">Póilíneacht</descrip>
-				<descrip type="domain" xml:lang="en">Policing</descrip>
-				<langSet xml:lang="en">
-					<tig>
-						<term>customs clearance</term>
-						<termNote type="partOfSpeech">s</termNote>
-					</tig>
-				</langSet>
-				<langSet xml:lang="ga">
-					<tig>
-						<term>imréiteach custam</term>
-						<termNote type="partOfSpeech">fir1</termNote>
-					</tig>
-					<tig>
-						<term>imréiteach custaim</term>
-						<termNote type="partOfSpeech">fir1</termNote>
-						<termNote type="acceptability">dímholta/superseded</termNote>
-					</tig>
-				</langSet>
-				<descrip type="definition" xml:lang="ga">Cead doiciméadaithe arna dheonú ag údarás náisiúnta custaim lena gceadaítear allmhairí isteach sa tír nó onnmhairí amach as</descrip>
-				<descrip type="definition" xml:lang="en">Documented permission granted by a national customs authority to allow imports to enter the country or exports to leave it</descrip>
-				<descrip type="example" xml:lang="en">This Warrant applies to the Inland Post service and comes into operation on the 1st April, 1981. It authorises increases in the letter, postcard, printed packet, newspaper, sample packet and parcel post rates of postage and in the fees charged for the express delivery, registration, customs clearance, cash-on-delivery and other miscellaneous services.</descrip>
-				<descrip type="example" xml:lang="ga">Baineann an Barántas seo leis an tSeirbhís Phoist Intíre agus tiocfaidh sé i ngníomh an 1 Aibreán, 1981. Údaraítear leis arduithe ar na rátaí postais ar litreacha, cártaí poist, paicéid chlóite, nuachtáin, sampla-phaicéid agus ar bheartáin phoist agus ar na táillí a mhuirearaítear ar luas-seachadadh, ar chlárú, ar imréiteach custam, ar sheirbhísí íoc-ar-sheachadadh agus ar sheirbhísí ilghnéitheacha eile.FOINSE: I.R. 1981</descrip>
-				<descrip type="collection">Téarmaí Faofa as Ionstraimí Reachtúla (2013)/Approved Terms from Statutory Instruments (2013)</descrip>
-				<descrip type="collection">Oll-liosta Téarmaíochta 2000-2005</descrip>
-				<descrip type="collection">Foclóir Parlaiminte/Dictionary of Parliamentary Terms</descrip>
-				<descrip type="collection">Téarmaí Ilghnéitheacha 4 (2005-2006)</descrip>
-				<descrip type="collection">Téarmaí Ilghnéitheacha 2015 / Miscellaneous Terms 2015</descrip>
-			</termEntry>
+	<descrip type="domain" xml:lang="ga">Dlí</descrip>
+	<descrip type="domain" xml:lang="en">Law</descrip>
+	<descrip type="domain" xml:lang="ga">Póilíneacht</descrip>
+	<descrip type="domain" xml:lang="en">Policing</descrip>
+	<langSet xml:lang="en">
+	    <tig>
+		    <term>customs clearance</term>
+			<termNote type="partOfSpeech">s</termNote>
+		</tig>
+	</langSet>
+	<langSet xml:lang="ga">
+	    <tig>
+		    <term>imréiteach custam</term>
+			<termNote type="partOfSpeech">fir1</termNote>
+		</tig>
+	    <tig>
+	    <term>imréiteach custaim</term>
+		<termNote type="partOfSpeech">fir1</termNote>
+		<termNote type="acceptability">dímholta/superseded</termNote>
+	    </tig>
+    </langSet>
+    <descrip type="definition" xml:lang="ga">Cead doiciméadaithe arna dheonú ag údarás náisiúnta custaim lena gceadaítear allmhairí isteach sa tír nó onnmhairí amach as</descrip>
+    <descrip type="definition" xml:lang="en">Documented permission granted by a national customs authority to allow imports to enter the country or exports to leave it</descrip>
+    <descrip type="example" xml:lang="en">This Warrant applies to the Inland Post service and comes into operation on the 1st April, 1981. It authorises increases in the letter, postcard, printed packet, newspaper, sample packet and parcel post rates of postage and in the fees charged for the express delivery, registration, customs clearance, cash-on-delivery and other miscellaneous services.</descrip>
+    <descrip type="example" xml:lang="ga">Baineann an Barántas seo leis an tSeirbhís Phoist Intíre agus tiocfaidh sé i ngníomh an 1 Aibreán, 1981. Údaraítear leis arduithe ar na rátaí postais ar litreacha, cártaí poist, paicéid chlóite, nuachtáin, sampla-phaicéid agus ar bheartáin phoist agus ar na táillí a mhuirearaítear ar luas-seachadadh, ar chlárú, ar imréiteach custam, ar sheirbhísí íoc-ar-sheachadadh agus ar sheirbhísí ilghnéitheacha eile.FOINSE: I.R. 1981</descrip>
+    <descrip type="collection">Téarmaí Faofa as Ionstraimí Reachtúla (2013)/Approved Terms from Statutory Instruments (2013)</descrip>
+    <descrip type="collection">Oll-liosta Téarmaíochta 2000-2005</descrip>
+    <descrip type="collection">Foclóir Parlaiminte/Dictionary of Parliamentary Terms</descrip>
+    <descrip type="collection">Téarmaí Ilghnéitheacha 4 (2005-2006)</descrip>
+    <descrip type="collection">Téarmaí Ilghnéitheacha 2015 / Miscellaneous Terms 2015</descrip>
+</termEntry>
 `;

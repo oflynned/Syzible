@@ -111,5 +111,39 @@ describe("noun parsing", () => {
                 })
                 .catch((err) => done(err));
         });
+
+        it('with multiple English terms to one Irish term', (done) => {
+            nounParser.parseNounsFromData(fixtures.multipleEnglishToOneIrish)
+                .then(() => nounModel.findAll())
+                .then((nouns) => {
+                    expect(nouns).to.be.an("array");
+                    expect(nouns.length).to.equal(2);
+                    return nouns;
+                })
+                .then((nouns) => {
+                    expect(nouns[0]).to.be.an("object");
+                    expect(nouns[0].en.term).to.equal("heir-at-law");
+                    expect(nouns[0].ga.term).to.equal("oidhre ginearálta");
+                    expect(nouns[0].ga.mutations.nominativeSingular).to.equal("oidhre ginearálta");
+                    expect(nouns[0].ga.mutations.genitiveSingular).to.equal("");
+                    expect(nouns[0].ga.mutations.nominativePlural).to.equal("");
+                    expect(nouns[0].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[0].ga.declension).to.equal(4);
+                    expect(nouns[0].ga.gender).to.equal("masculine");
+                    
+                    expect(nouns[1]).to.be.an("object");
+                    expect(nouns[1].en.term).to.equal("heir at law");
+                    expect(nouns[1].ga.term).to.equal("oidhre ginearálta");
+                    expect(nouns[1].ga.mutations.nominativeSingular).to.equal("oidhre ginearálta");
+                    expect(nouns[1].ga.mutations.genitiveSingular).to.equal("");
+                    expect(nouns[1].ga.mutations.nominativePlural).to.equal("");
+                    expect(nouns[1].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[1].ga.declension).to.equal(4);
+                    expect(nouns[1].ga.gender).to.equal("masculine");
+
+                    done();
+                })
+                .catch((err) => done(err));
+        });
     });
 });

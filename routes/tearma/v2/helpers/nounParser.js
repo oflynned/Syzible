@@ -30,8 +30,8 @@ function splitMultipleForms(groupForm) {
 function groomNounFromDefinition(noun) {
     // TODO iterate over domains
 
-    let maxCountEn = xpath.select('count(//langSet[@lang="en"]/tig)', noun).toString();
-    let maxCountGa = xpath.select('count(//langSet[@lang="ga"]/tig)', noun).toString();
+    let maxCountEn = parseInt(xpath.select('count(//langSet[@lang="en"]/tig)', noun));
+    let maxCountGa = parseInt(xpath.select('count(//langSet[@lang="ga"]/tig)', noun));
     let definitions = [];
 
     // TODO refactor to use just one for loop and reduce duplicated logic
@@ -75,10 +75,10 @@ function groomNounFromDefinition(noun) {
             let declension = rawGenderDeclension.replace(/\D/g, '');
             let gender = rawGenderDeclension.replace(/[0-9]/g, '');
 
-            let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[${i}]/text()`, noun).toString();
-            let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][${i}]/text()`, noun).toString();
-            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][${i}]/text()`, noun).toString();
-            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${i}]/text()`, noun).toString();
+            let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[1]/text()`, noun).toString();
+            let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][1]/text()`, noun).toString();
+            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][1]/text()`, noun).toString();
+            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][1]/text()`, noun).toString();
 
             let item = {
                 ga: {
