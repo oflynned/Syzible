@@ -130,7 +130,7 @@ describe("noun parsing", () => {
                     expect(nouns[0].ga.mutations.genitivePlural).to.equal("");
                     expect(nouns[0].ga.declension).to.equal(4);
                     expect(nouns[0].ga.gender).to.equal("masculine");
-                    
+
                     expect(nouns[1]).to.be.an("object");
                     expect(nouns[1].en.term).to.equal("heir at law");
                     expect(nouns[1].ga.term).to.equal("oidhre ginearálta");
@@ -139,6 +139,40 @@ describe("noun parsing", () => {
                     expect(nouns[1].ga.mutations.nominativePlural).to.equal("");
                     expect(nouns[1].ga.mutations.genitivePlural).to.equal("");
                     expect(nouns[1].ga.declension).to.equal(4);
+                    expect(nouns[1].ga.gender).to.equal("masculine");
+
+                    done();
+                })
+                .catch((err) => done(err));
+        });
+
+        it('with multiple Irish terms to one English term', (done) => {
+            nounParser.parseNounsFromData(fixtures.multipleIrishToOneEnglish)
+                .then(() => nounModel.findAll())
+                .then((nouns) => {
+                    expect(nouns).to.be.an("array");
+                    expect(nouns.length).to.equal(2);
+                    return nouns;
+                })
+                .then((nouns) => {
+                    expect(nouns[0]).to.be.an("object");
+                    expect(nouns[0].en.term).to.equal("customs clearance");
+                    expect(nouns[0].ga.term).to.equal("imréiteach custam");
+                    expect(nouns[0].ga.mutations.nominativeSingular).to.equal("imréiteach custam");
+                    expect(nouns[0].ga.mutations.genitiveSingular).to.equal("");
+                    expect(nouns[0].ga.mutations.nominativePlural).to.equal("");
+                    expect(nouns[0].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[0].ga.declension).to.equal(1);
+                    expect(nouns[0].ga.gender).to.equal("masculine");
+
+                    expect(nouns[1]).to.be.an("object");
+                    expect(nouns[1].en.term).to.equal("customs clearance");
+                    expect(nouns[1].ga.term).to.equal("imréiteach custaim");
+                    expect(nouns[1].ga.mutations.nominativeSingular).to.equal("imréiteach custaim");
+                    expect(nouns[1].ga.mutations.genitiveSingular).to.equal("");
+                    expect(nouns[1].ga.mutations.nominativePlural).to.equal("");
+                    expect(nouns[1].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[1].ga.declension).to.equal(1);
                     expect(nouns[1].ga.gender).to.equal("masculine");
 
                     done();
