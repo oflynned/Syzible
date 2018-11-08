@@ -40,14 +40,23 @@ module.exports.create = (data) => {
         });
 };
 
-module.exports.findAll = () => {
-    return getRecords(collection)
+module.exports.findAll = (query, limit, offset) => {
+    let queryExpression = new RegExp(query);
+    return getRecords(collection, {
+        "$or": [{
+            "en.term": queryExpression
+        }, {
+            "ga.term": queryExpression
+        }]
+    }, limit, offset)
 };
 
-module.exports.findByEnglishTerm = (queryTerm) => {
-
+module.exports.findByIrishTerm = (query, limit, offset) => {
+    let queryExpression = new RegExp(query);
+    return getRecords(collection, {"ga.term": queryExpression}, limit, offset)
 };
 
-module.exports.findByIrishTerm = (queryTerm) => {
-
+module.exports.findByEnglishTerm = (query, limit, offset) => {
+    let queryExpression = new RegExp(query);
+    return getRecords(collection, {"en.term": queryExpression}, limit, offset)
 };
