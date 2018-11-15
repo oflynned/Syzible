@@ -34,109 +34,54 @@ function groomNounFromDefinition(noun) {
     let maxCountGa = parseInt(xpath.select('count(//langSet[@lang="ga"]/tig)', noun));
     let definitions = [];
 
-    // TODO refactor to use just one for loop and reduce duplicated logic
-    if (maxCountEn === maxCountGa) {
-        for (let i = 1; i <= maxCountEn; i++) {
-            let enNominativeSingular = xpath.select(`//termEntry/langSet[@lang="en"]/tig/term[${i}]/text()`, noun).toString();
-
-            let rawGenderDeclension = xpath.select(`//termEntry/langSet[2]/tig/termNote[@type="partOfSpeech"][${i}]/text()`, noun).toString();
-            let declension = rawGenderDeclension.replace(/\D/g, '');
-            let gender = rawGenderDeclension.replace(/[0-9]/g, '');
-
-            let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[${i}]/text()`, noun).toString();
-            let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][${i}]/text()`, noun).toString();
-            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][${i}]/text()`, noun).toString();
-            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${i}]/text()`, noun).toString();
-
-            let item = {
-                ga: {
-                    term: gaNominativeSingular,
-                    mutations: {
-                        nominativeSingular: gaNominativeSingular,
-                        genitiveSingular: gaGenitiveSingular,
-                        nominativePlural: gaNominativePlural,
-                        genitivePlural: gaGenitivePlural
-                    },
-                    gender: classifyGender(gender),
-                    declension: classifyDeclension(declension)
-                },
-                en: {
-                    term: enNominativeSingular
-                }
-            };
-
-            definitions.push(item);
+    let enIterable = 0;
+    let gaIterable = 0;
+    for (let i = 1; i <= Math.max(maxCountGa, maxCountEn); i++) {
+        if (maxCountEn === maxCountGa) {
+            enIterable = gaIterable = i;
+        } else if (maxCountEn > maxCountGa) {
+            enIterable = i;
+            gaIterable = 1;
+        } else if (maxCountGa > maxCountEn) {
+            enIterable = 1;
+            gaIterable = i;
         }
-    } else if (maxCountEn > maxCountGa && maxCountGa === 1) {
-        for (let i = 1; i <= maxCountEn; i++) {
-            let enNominativeSingular = xpath.select(`//termEntry/langSet[@lang="en"]/tig/term[${i}]/text()`, noun).toString();
 
-            let rawGenderDeclension = xpath.select(`//termEntry/langSet[2]/tig/termNote[@type="partOfSpeech"][1]/text()`, noun).toString();
-            let declension = rawGenderDeclension.replace(/\D/g, '');
-            let gender = rawGenderDeclension.replace(/[0-9]/g, '');
+        let enNominativeSingular = xpath.select(`//termEntry/langSet[@lang="en"]/tig/term[${enIterable}]/text()`, noun).toString();
 
-            let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[1]/text()`, noun).toString();
-            let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][1]/text()`, noun).toString();
-            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][1]/text()`, noun).toString();
-            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][1]/text()`, noun).toString();
+        let rawGenderDeclension = xpath.select(`//termEntry/langSet[2]/tig/termNote[@type="partOfSpeech"][${gaIterable}]/text()`, noun).toString();
+        let declension = rawGenderDeclension.replace(/\D/g, '');
+        let gender = rawGenderDeclension.replace(/[0-9]/g, '');
 
-            let item = {
-                ga: {
-                    term: gaNominativeSingular,
-                    mutations: {
-                        nominativeSingular: gaNominativeSingular,
-                        genitiveSingular: gaGenitiveSingular,
-                        nominativePlural: gaNominativePlural,
-                        genitivePlural: gaGenitivePlural
-                    },
-                    gender: classifyGender(gender),
-                    declension: classifyDeclension(declension)
+        let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[${gaIterable}]/text()`, noun).toString();
+        let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][${gaIterable}]/text()`, noun).toString();
+        let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][${gaIterable}]/text()`, noun).toString();
+        let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${gaIterable}]/text()`, noun).toString();
+
+        let item = {
+            ga: {
+                term: gaNominativeSingular,
+                mutations: {
+                    nominativeSingular: gaNominativeSingular,
+                    genitiveSingular: gaGenitiveSingular.length === 0 ? null : gaGenitiveSingular,
+                    nominativePlural: gaNominativePlural.length === 0 ? null : gaNominativePlural,
+                    genitivePlural: gaGenitivePlural.length === 0 ? null : gaGenitivePlural
                 },
-                en: {
-                    term: enNominativeSingular
-                }
-            };
+                gender: classifyGender(gender),
+                declension: classifyDeclension(declension)
+            },
+            en: {
+                term: enNominativeSingular
+            }
+        };
 
-            definitions.push(item);
-        }
-    } else if (maxCountGa > maxCountEn && maxCountEn === 1) {
-        for (let i = 1; i <= maxCountGa; i++) {
-            let enNominativeSingular = xpath.select(`//termEntry/langSet[@lang="en"]/tig/term[1]/text()`, noun).toString();
-
-            let rawGenderDeclension = xpath.select(`//termEntry/langSet[2]/tig/termNote[@type="partOfSpeech"][${i}]/text()`, noun).toString();
-            let declension = rawGenderDeclension.replace(/\D/g, '');
-            let gender = rawGenderDeclension.replace(/[0-9]/g, '');
-
-            let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[${i}]/text()`, noun).toString();
-            let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][${i}]/text()`, noun).toString();
-            let gaNominativePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="ai" or @type="iol"][${i}]/text()`, noun).toString();
-            let gaGenitivePlural = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gi" or @type="iol"][${i}]/text()`, noun).toString();
-
-            let item = {
-                ga: {
-                    term: gaNominativeSingular,
-                    mutations: {
-                        nominativeSingular: gaNominativeSingular,
-                        genitiveSingular: gaGenitiveSingular,
-                        nominativePlural: gaNominativePlural,
-                        genitivePlural: gaGenitivePlural
-                    },
-                    gender: classifyGender(gender),
-                    declension: classifyDeclension(declension)
-                },
-                en: {
-                    term: enNominativeSingular
-                }
-            };
-
-            definitions.push(item);
-        }
+        definitions.push(item);
     }
 
     return definitions;
 }
 
-module.exports.parseNounsFromPath = (path) => {
+module.exports.parseNouns = (path) => {
     const shouldWriteNounsXml = false;
 
     return new Promise((res) => {
@@ -158,7 +103,10 @@ module.exports.parseNounsFromPath = (path) => {
 
             if (termEntry) {
                 if (shouldWriteNounsXml) stream.write(termEntry + "\n");
-                groomNounFromDefinition(noun)
+                let nounSet = groomNounFromDefinition(noun);
+                let nouns = [].concat(nounSet);
+                let saveOperations = nouns.map((noun) => create(noun));
+                Promise.all(saveOperations);
             }
         });
 
@@ -168,6 +116,7 @@ module.exports.parseNounsFromPath = (path) => {
         }
 
         res();
+
     });
 };
 

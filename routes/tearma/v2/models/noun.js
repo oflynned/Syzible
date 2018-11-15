@@ -13,9 +13,9 @@ const schema = Joi.object().keys({
         term: Joi.string(),
         mutations: {
             nominativeSingular: Joi.string().required(),
-            genitiveSingular: Joi.string().allow(""),
-            nominativePlural: Joi.string().allow(""),
-            genitivePlural: Joi.string().allow("")
+            genitiveSingular: Joi.string().allow(null),
+            nominativePlural: Joi.string().allow(null),
+            genitivePlural: Joi.string().allow(null)
         },
         gender: Joi.string().valid("masculine", "feminine", "verbal noun").required(),
         declension: Joi.number().valid(-1, 1, 2, 3, 4, 5).required()
