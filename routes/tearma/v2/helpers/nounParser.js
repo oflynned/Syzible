@@ -10,12 +10,12 @@ const nounsQuery = '//termEntry[./langSet/tig/termNote[@type="partOfSpeech" and 
 
 function classifyGender (gender) {
 	switch (gender.toString().toLowerCase()) {
-	case 'fir':
-		return 'masculine';
-	case 'bain':
-		return 'feminine';
-	default:
-		return 'verbal noun';
+		case 'fir':
+			return 'masculine';
+		case 'bain':
+			return 'feminine';
+		default:
+			return 'verbal noun';
 	}
 }
 
