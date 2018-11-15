@@ -1,0 +1,21 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "extends": "standard",
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "semi": [
+      1,
+      "always"
+    ],
+    "indent": [
+      2,
+      "tab"
+    ],
+    "no-tabs": 0
+  }
+}
