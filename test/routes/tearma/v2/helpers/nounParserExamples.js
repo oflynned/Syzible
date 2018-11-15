@@ -191,9 +191,9 @@ module.exports.multipleIrishToOneEnglish = `
 			<termNote type="partOfSpeech">fir1</termNote>
 		</tig>
 	    <tig>
-	    <term>imréiteach custaim</term>
-		<termNote type="partOfSpeech">fir1</termNote>
-		<termNote type="acceptability">dímholta/superseded</termNote>
+            <term>imréiteach custaim</term>
+            <termNote type="partOfSpeech">fir1</termNote>
+            <termNote type="acceptability">dímholta/superseded</termNote>
 	    </tig>
     </langSet>
     <descrip type="definition" xml:lang="ga">Cead doiciméadaithe arna dheonú ag údarás náisiúnta custaim lena gceadaítear allmhairí isteach sa tír nó onnmhairí amach as</descrip>

@@ -79,9 +79,9 @@ describe("noun parsing", () => {
                     expect(noun.en.term).to.equal("contingent charge");
                     expect(noun.ga.term).to.equal("muirear teagmhasach");
                     expect(noun.ga.mutations.nominativeSingular).to.equal("muirear teagmhasach");
-                    expect(noun.ga.mutations.genitiveSingular).to.equal("");
-                    expect(noun.ga.mutations.nominativePlural).to.equal("");
-                    expect(noun.ga.mutations.genitivePlural).to.equal("");
+                    expect(noun.ga.mutations.genitiveSingular).to.equal(null);
+                    expect(noun.ga.mutations.nominativePlural).to.equal(null);
+                    expect(noun.ga.mutations.genitivePlural).to.equal(null);
                     expect(noun.ga.declension).to.equal(1);
                     expect(noun.ga.gender).to.equal("masculine");
                     done();
@@ -102,8 +102,8 @@ describe("noun parsing", () => {
                     expect(noun.en.term).to.equal("customs");
                     expect(noun.ga.term).to.equal("custaim");
                     expect(noun.ga.mutations.nominativeSingular).to.equal("custaim");
-                    expect(noun.ga.mutations.genitiveSingular).to.equal("");
-                    expect(noun.ga.mutations.nominativePlural).to.equal("");
+                    expect(noun.ga.mutations.genitiveSingular).to.equal(null);
+                    expect(noun.ga.mutations.nominativePlural).to.equal(null);
                     expect(noun.ga.mutations.genitivePlural).to.equal("custam");
                     expect(noun.ga.declension).to.equal(-1);
                     expect(noun.ga.gender).to.equal("masculine");
@@ -125,9 +125,9 @@ describe("noun parsing", () => {
                     expect(nouns[0].en.term).to.equal("heir-at-law");
                     expect(nouns[0].ga.term).to.equal("oidhre ginearálta");
                     expect(nouns[0].ga.mutations.nominativeSingular).to.equal("oidhre ginearálta");
-                    expect(nouns[0].ga.mutations.genitiveSingular).to.equal("");
-                    expect(nouns[0].ga.mutations.nominativePlural).to.equal("");
-                    expect(nouns[0].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[0].ga.mutations.genitiveSingular).to.equal(null);
+                    expect(nouns[0].ga.mutations.nominativePlural).to.equal(null);
+                    expect(nouns[0].ga.mutations.genitivePlural).to.equal(null);
                     expect(nouns[0].ga.declension).to.equal(4);
                     expect(nouns[0].ga.gender).to.equal("masculine");
 
@@ -135,9 +135,9 @@ describe("noun parsing", () => {
                     expect(nouns[1].en.term).to.equal("heir at law");
                     expect(nouns[1].ga.term).to.equal("oidhre ginearálta");
                     expect(nouns[1].ga.mutations.nominativeSingular).to.equal("oidhre ginearálta");
-                    expect(nouns[1].ga.mutations.genitiveSingular).to.equal("");
-                    expect(nouns[1].ga.mutations.nominativePlural).to.equal("");
-                    expect(nouns[1].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[1].ga.mutations.genitiveSingular).to.equal(null);
+                    expect(nouns[1].ga.mutations.nominativePlural).to.equal(null);
+                    expect(nouns[1].ga.mutations.genitivePlural).to.equal(null);
                     expect(nouns[1].ga.declension).to.equal(4);
                     expect(nouns[1].ga.gender).to.equal("masculine");
 
@@ -159,9 +159,9 @@ describe("noun parsing", () => {
                     expect(nouns[0].en.term).to.equal("customs clearance");
                     expect(nouns[0].ga.term).to.equal("imréiteach custam");
                     expect(nouns[0].ga.mutations.nominativeSingular).to.equal("imréiteach custam");
-                    expect(nouns[0].ga.mutations.genitiveSingular).to.equal("");
-                    expect(nouns[0].ga.mutations.nominativePlural).to.equal("");
-                    expect(nouns[0].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[0].ga.mutations.genitiveSingular).to.equal(null);
+                    expect(nouns[0].ga.mutations.nominativePlural).to.equal(null);
+                    expect(nouns[0].ga.mutations.genitivePlural).to.equal(null);
                     expect(nouns[0].ga.declension).to.equal(1);
                     expect(nouns[0].ga.gender).to.equal("masculine");
 
@@ -169,9 +169,9 @@ describe("noun parsing", () => {
                     expect(nouns[1].en.term).to.equal("customs clearance");
                     expect(nouns[1].ga.term).to.equal("imréiteach custaim");
                     expect(nouns[1].ga.mutations.nominativeSingular).to.equal("imréiteach custaim");
-                    expect(nouns[1].ga.mutations.genitiveSingular).to.equal("");
-                    expect(nouns[1].ga.mutations.nominativePlural).to.equal("");
-                    expect(nouns[1].ga.mutations.genitivePlural).to.equal("");
+                    expect(nouns[1].ga.mutations.genitiveSingular).to.equal(null);
+                    expect(nouns[1].ga.mutations.nominativePlural).to.equal(null);
+                    expect(nouns[1].ga.mutations.genitivePlural).to.equal(null);
                     expect(nouns[1].ga.declension).to.equal(1);
                     expect(nouns[1].ga.gender).to.equal("masculine");
 
