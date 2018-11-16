@@ -79,7 +79,7 @@ module.exports.onlyNominativeSingularForm = `
 </termEntry>
 `;
 
-module.exports.onlySingularForms = ``;
+module.exports.onlySingularForms = "";
 
 module.exports.onlyNominativePlural = `
 <termEntry id="concept-949339">
@@ -141,7 +141,7 @@ module.exports.noDeclension = `
 </termEntry>
 `;
 
-module.exports.verbalNoun = ``;
+module.exports.verbalNoun = "";
 
 module.exports.multipleEnglishToOneIrish = `
 <termEntry id="concept-950213">
