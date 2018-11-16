@@ -1,4 +1,4 @@
-const collections = require('./collections');
+const collections = require("./collections");
 const { dbName } = collections.getCollection();
 
 module.exports = {
@@ -9,6 +9,6 @@ module.exports = {
 	get mongoUrl () {
 		let developmentUrl = `mongodb://localhost:27017/${dbName}`;
 		let productionUrl = process.env.MONGODB_URL;
-		return collections.getEnvironment() === 'production' ? productionUrl : developmentUrl;
+		return collections.getEnvironment() === "production" ? productionUrl : developmentUrl;
 	}
 };

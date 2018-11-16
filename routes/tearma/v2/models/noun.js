@@ -1,7 +1,7 @@
-const { createRecord, getRecords } = require('../../../../common/record');
-const Joi = require('joi');
+const { createRecord, getRecords } = require("../../../../common/record");
+const Joi = require("joi");
 
-const collection = 'nouns';
+const collection = "nouns";
 const schema = Joi.object().keys({
 	ga: {
 		term: Joi.string(),
@@ -11,7 +11,7 @@ const schema = Joi.object().keys({
 			nominativePlural: Joi.string().allow(null),
 			genitivePlural: Joi.string().allow(null)
 		},
-		gender: Joi.string().valid('masculine', 'feminine', 'verbal noun').required(),
+		gender: Joi.string().valid("masculine", "feminine", "verbal noun").required(),
 		declension: Joi.number().valid(-1, 1, 2, 3, 4, 5).required()
 	},
 	en: {
@@ -22,7 +22,7 @@ const schema = Joi.object().keys({
 function validate (data) {
 	return new Promise((resolve, reject) => {
 		let result = Joi.validate(data, schema, { allowUnknown: false });
-		result['error'] === null ? resolve() : reject(result['error']);
+		result["error"] === null ? resolve() : reject(result["error"]);
 	});
 }
 
@@ -37,20 +37,20 @@ module.exports.create = (data) => {
 module.exports.findAll = (query, limit, offset) => {
 	let queryExpression = new RegExp(query);
 	return getRecords(collection, {
-		'$or': [{
-			'en.term': queryExpression
+		"$or": [{
+			"en.term": queryExpression
 		}, {
-			'ga.term': queryExpression
+			"ga.term": queryExpression
 		}]
 	}, limit, offset);
 };
 
 module.exports.findByIrishTerm = (query, limit, offset) => {
 	let queryExpression = new RegExp(query);
-	return getRecords(collection, { 'ga.term': queryExpression }, limit, offset);
+	return getRecords(collection, { "ga.term": queryExpression }, limit, offset);
 };
 
 module.exports.findByEnglishTerm = (query, limit, offset) => {
 	let queryExpression = new RegExp(query);
-	return getRecords(collection, { 'en.term': queryExpression }, limit, offset);
+	return getRecords(collection, { "en.term": queryExpression }, limit, offset);
 };

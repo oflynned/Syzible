@@ -17,6 +17,7 @@
       "tab",
       {"SwitchCase": 1}
     ],
-    "no-tabs": 0
+    "no-tabs": 0,
+    "quotes": [2, "double"]
   }
 }

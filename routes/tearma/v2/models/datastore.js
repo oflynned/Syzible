@@ -1,7 +1,7 @@
-const { createRecord, getRecords } = require('../../../../common/record');
-const Joi = require('joi');
+const { createRecord, getRecords } = require("../../../../common/record");
+const Joi = require("joi");
 
-const collection = 'datastoreUpdates';
+const collection = "datastoreUpdates";
 
 const schema = Joi.object().keys({
 	collectionDate: Joi.date().required(),
@@ -11,7 +11,7 @@ const schema = Joi.object().keys({
 function validate (data) {
 	return new Promise((resolve, reject) => {
 		let result = Joi.validate(data, schema, { allowUnknown: false });
-		result['error'] === null ? resolve() : reject(result['error']);
+		result["error"] === null ? resolve() : reject(result["error"]);
 	});
 }
 

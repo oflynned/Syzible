@@ -1,4 +1,4 @@
-const { create, findAll, findByIrishTerm, findByEnglishTerm } = require('../models/noun');
+const { create, findAll, findByIrishTerm, findByEnglishTerm } = require("../models/noun");
 
 module.exports.save = (noun) => {
 	return create(noun);

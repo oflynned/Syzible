@@ -1,21 +1,21 @@
-const fs = require('fs');
-const elementTree = require('elementtree');
-const xmldom = require('xmldom');
-const xpath = require('xpath');
+const fs = require("fs");
+const elementTree = require("elementtree");
+const xmldom = require("xmldom");
+const xpath = require("xpath");
 const parser = new xmldom.DOMParser();
 
-const { create } = require('../models/noun');
+const { create } = require("../models/noun");
 
-const nounsQuery = '//termEntry[./langSet/tig/termNote[@type="partOfSpeech" and text()="s"]]';
+const nounsQuery = "//termEntry[./langSet/tig/termNote[@type=\"partOfSpeech\" and text()=\"s\"]]";
 
 function classifyGender (gender) {
 	switch (gender.toString().toLowerCase()) {
-		case 'fir':
-			return 'masculine';
-		case 'bain':
-			return 'feminine';
+		case "fir":
+			return "masculine";
+		case "bain":
+			return "feminine";
 		default:
-			return 'verbal noun';
+			return "verbal noun";
 	}
 }
 
@@ -26,8 +26,8 @@ function classifyDeclension (declension) {
 function groomNounFromDefinition (noun) {
 	// TODO iterate over domains
 
-	let maxCountEn = parseInt(xpath.select('count(//langSet[@lang="en"]/tig)', noun));
-	let maxCountGa = parseInt(xpath.select('count(//langSet[@lang="ga"]/tig)', noun));
+	let maxCountEn = parseInt(xpath.select("count(//langSet[@lang=\"en\"]/tig)", noun));
+	let maxCountGa = parseInt(xpath.select("count(//langSet[@lang=\"ga\"]/tig)", noun));
 	let definitions = [];
 
 	let enIterable = 0;
@@ -46,8 +46,8 @@ function groomNounFromDefinition (noun) {
 		let enNominativeSingular = xpath.select(`//termEntry/langSet[@lang="en"]/tig/term[${enIterable}]/text()`, noun).toString();
 
 		let rawGenderDeclension = xpath.select(`//termEntry/langSet[2]/tig/termNote[@type="partOfSpeech"][${gaIterable}]/text()`, noun).toString();
-		let declension = rawGenderDeclension.replace(/\D/g, '');
-		let gender = rawGenderDeclension.replace(/[0-9]/g, '');
+		let declension = rawGenderDeclension.replace(/\D/g, "");
+		let gender = rawGenderDeclension.replace(/[0-9]/g, "");
 
 		let gaNominativeSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/term[${gaIterable}]/text()`, noun).toString();
 		let gaGenitiveSingular = xpath.select(`//termEntry/langSet[@lang="ga"]/tig/termNote[@type="gu"][${gaIterable}]/text()`, noun).toString();
@@ -81,24 +81,24 @@ module.exports.parseNouns = (path) => {
 	const shouldWriteNounsXml = false;
 
 	return new Promise((resolve) => {
-		let xml = fs.readFileSync(path, 'utf8');
-		let modifiedXml = xml.replace(/xml:lang/g, 'lang');
+		let xml = fs.readFileSync(path, "utf8");
+		let modifiedXml = xml.replace(/xml:lang/g, "lang");
 		const tree = elementTree.parse(modifiedXml.toString());
 		const root = tree.getroot();
 
 		let stream;
 		if (shouldWriteNounsXml) {
-			stream = fs.createWriteStream('nouns.xml', { 'flags': 'a' });
-			stream.write('<nouns>\n');
+			stream = fs.createWriteStream("nouns.xml", { "flags": "a" });
+			stream.write("<nouns>\n");
 		}
 
-		root.iter('termEntry', (data) => {
-			let root = elementTree.tostring(data, { encoding: 'utf8', method: 'xml' });
-			let noun = parser.parseFromString(root, 'text/xml');
+		root.iter("termEntry", (data) => {
+			let root = elementTree.tostring(data, { encoding: "utf8", method: "xml" });
+			let noun = parser.parseFromString(root, "text/xml");
 			let termEntry = xpath.select(nounsQuery, noun).toString();
 
 			if (termEntry) {
-				if (shouldWriteNounsXml) stream.write(termEntry + '\n');
+				if (shouldWriteNounsXml) stream.write(termEntry + "\n");
 				let nounSet = groomNounFromDefinition(noun);
 				let nouns = [].concat(nounSet);
 				let saveOperations = nouns.map((noun) => create(noun));
@@ -107,7 +107,7 @@ module.exports.parseNouns = (path) => {
 		});
 
 		if (shouldWriteNounsXml) {
-			stream.write('</nouns>');
+			stream.write("</nouns>");
 			stream.end();
 		}
 
@@ -117,14 +117,14 @@ module.exports.parseNouns = (path) => {
 
 module.exports.parseNounsFromData = (xml) => {
 	return new Promise((resolve) => {
-		let modifiedXml = xml.replace(/xml:lang/g, 'lang');
+		let modifiedXml = xml.replace(/xml:lang/g, "lang");
 		const tree = elementTree.parse(modifiedXml.toString());
 		const root = tree.getroot();
 		let nouns = [];
 
-		root.iter('termEntry', (data) => {
-			let root = elementTree.tostring(data, { encoding: 'utf8', method: 'xml' });
-			let noun = parser.parseFromString(root, 'text/xml');
+		root.iter("termEntry", (data) => {
+			let root = elementTree.tostring(data, { encoding: "utf8", method: "xml" });
+			let noun = parser.parseFromString(root, "text/xml");
 			let termEntry = xpath.select(nounsQuery, noun).toString();
 			if (termEntry) {
 				let nounSet = groomNounFromDefinition(noun);

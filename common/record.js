@@ -1,12 +1,12 @@
-let config = require('../config/db');
-let ObjectId = require('mongodb').ObjectId;
-let db = require('monk')(config.mongoUrl);
+let config = require("../config/db");
+let ObjectId = require("mongodb").ObjectId;
+let db = require("monk")(config.mongoUrl);
 
 module.exports = {
 	createRecord: (collection, data) => {
 		return new Promise((resolve, reject) => {
-			if (!collection) reject(new Error('empty_collection'));
-			if (!data) reject(new Error('empty_data'));
+			if (!collection) reject(new Error("empty_collection"));
+			if (!data) reject(new Error("empty_data"));
 
 			db.get(collection)
 				.insert(data)
@@ -27,7 +27,7 @@ module.exports = {
 	modifyRecord: (collection, data, id) => {
 		return new Promise((resolve, reject) => {
 			db.get(collection)
-				.update({ _id: ObjectId(id) }, { '$set': data })
+				.update({ _id: ObjectId(id) }, { "$set": data })
 				.then(() => resolve(data))
 				.catch((err) => reject(err));
 		});
