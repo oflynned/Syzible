@@ -20,7 +20,7 @@ describe("noun parsing", () => {
 			return Promise.all([db.get("nouns").drop()]);
 		}
 
-		function loadFixture (fixture, length) {
+		function loadFixture (fixture, length = 1) {
 			return new Promise((resolve) => {
 				nounParser.parseNounsFromData(fixture)
 					.then(() => nounModel.findAll())
@@ -28,12 +28,12 @@ describe("noun parsing", () => {
 						expect(nouns).to.be.an("array");
 						expect(nouns.length).to.equal(length);
 						resolve(nouns);
-					})
+					});
 			});
 		}
 
 		it("with separate plurals", (done) => {
-			loadFixture(fixtures.separatePlurals, 1)
+			loadFixture(fixtures.separatePlurals)
 				.then((nouns) => {
 					expect(nouns[0]).to.be.an("object");
 					expect(nouns[0].en.term).to.equal("adductor muscle");
@@ -50,7 +50,7 @@ describe("noun parsing", () => {
 		});
 
 		it("with combined plurals", (done) => {
-			loadFixture(fixtures.combinedPlural, 1)
+			loadFixture(fixtures.combinedPlural)
 				.then((nouns) => {
 					expect(nouns[0]).to.be.an("object");
 					expect(nouns[0].en.term).to.equal("occupier");
@@ -67,7 +67,7 @@ describe("noun parsing", () => {
 		});
 
 		it("with only nominative singular", (done) => {
-			loadFixture(fixtures.onlyNominativeSingularForm, 1)
+			loadFixture(fixtures.onlyNominativeSingularForm)
 				.then((nouns) => {
 					expect(nouns[0]).to.be.an("object");
 					expect(nouns[0].en.term).to.equal("contingent charge");
@@ -84,7 +84,7 @@ describe("noun parsing", () => {
 		});
 
 		it("with no declension", (done) => {
-			loadFixture(fixtures.noDeclension, 1)
+			loadFixture(fixtures.noDeclension)
 				.then((nouns) => {
 					expect(nouns[0]).to.be.an("object");
 					expect(nouns[0].en.term).to.equal("customs");
