@@ -6,8 +6,7 @@ const { parseTbxFile } = require("./controllers/datastoreController");
 
 module.exports = ({ dbName }) => {
 	router.get("/", (req, res) => {
-		return parseTbxFile("noun")
-			.then(() => res.send("parsed"));
+		return parseTbxFile("noun").then(() => res.send("parsed"));
 	});
 
 	router.get("/find", (req, res) => {
