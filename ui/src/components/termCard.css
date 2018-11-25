@@ -3,11 +3,20 @@
 }
 
 .card {
+    margin: 0 auto;
     max-width: 1024px;
-    margin: 8px;
+    justify-content: center;
     text-align: left;
 }
 
 .contents {
-    padding: 8px;
+    padding: 32px;
+}
+
+.margin-content {
+    margin-top: 16px;
+}
+
+h5 {
+    font-size: 50em;
 }
