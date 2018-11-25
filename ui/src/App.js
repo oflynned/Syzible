@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import fetch from "isomorphic-fetch";
 import Navbar from "./navbar";
 
-import "typeface-roboto";
 import "./App.css";
-import CardList from "./components/cardList";
+import TermCardList from "./components/termCardList";
 
 export default class App extends Component {
 	constructor() {
@@ -26,7 +25,7 @@ export default class App extends Component {
 	}
 
 	componentDidMount() {
-		this.getDefinitions()
+		this.getDefinitions();
 	}
 
 	getDefinitions() {
@@ -40,7 +39,7 @@ export default class App extends Component {
 		return(
 			<div className="App">
 				<Navbar />
-				<CardList results={results} />
+				<TermCardList results={results} />
 			</div>
 		);
 	}
