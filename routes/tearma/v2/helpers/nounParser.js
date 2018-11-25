@@ -133,6 +133,6 @@ module.exports.parseNounsFromData = (xml) => {
 		});
 
 		let saveOperations = nouns.map((noun) => create(noun));
-		Promise.all(saveOperations).then(() => resolve());
+		Promise.all(saveOperations).then((values) => resolve(values));
 	});
 };
