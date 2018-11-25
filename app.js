@@ -30,5 +30,11 @@ module.exports = (env) => {
 	app.use("/tearma/api/v1", tearmaV1);
 	app.use("/tearma/api/v2", tearmaV2);
 
+	// todo put this behind a feature flag
+	if (process.env.ENVIRONMENT === "production") {
+		app.use(express.static(path.join(__dirname, "ui/build")));
+		app.get("*", (_req, res) => res.sendFile(path.join(__dirname, "/ui/build/index.html")));
+	}
+
 	return app;
 };

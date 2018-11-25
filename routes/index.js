@@ -5,25 +5,25 @@ let router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-router.get("/", function (req, res) {
+router.get("/", (_req, res) => {
 	res.render("index", {
 		year: new Date().getFullYear()
 	});
 });
 
-router.get("/apps", function (req, res) {
+router.get("/apps", (_req, res) => {
 	res.render("apps", {
 		year: new Date().getFullYear()
 	});
 });
 
-router.get("/developers", function (req, res) {
+router.get("/developers", (_req, res) => {
 	res.render("developers", {
 		year: new Date().getFullYear()
 	});
 });
 
-router.get("/thesis", function (req, res) {
+router.get("/thesis", (_req, res) => {
 	const filePath = path.join(__dirname, "/../public/media/Thesis.pdf");
 	fs.readFile(filePath, function (err, data) {
 		if (err) return res.status(500).send();
@@ -33,7 +33,7 @@ router.get("/thesis", function (req, res) {
 	});
 });
 
-router.get("/snapchat-filter", (req, res) => {
+router.get("/snapchat-filter", (_req, res) => {
 	const filePath = path.join(__dirname, "/../public/media/Snapchat-Filters-Project.pdf");
 	fs.readFile(filePath, (err, data) => {
 		if (err) return res.status(500).send();

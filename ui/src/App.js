@@ -24,10 +24,6 @@ export default class App extends Component {
 		this.state = {results: results};
 	}
 
-	componentDidMount() {
-		this.getDefinitions();
-	}
-
 	getDefinitions() {
 		fetch("/tearma/api/v2/find?query=government&queryLanguage=en&limit=10&offset=0")
 			.then((res) => res.json())

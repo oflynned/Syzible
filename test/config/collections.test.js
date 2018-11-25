@@ -1,5 +1,3 @@
-let chai = require("chai"); let expect = chai.expect;
-
 const environments = require("../../config/environments");
 const collections = require("../../config/collections");
 const config = require("../../config/db");
@@ -16,29 +14,29 @@ describe("collection categorisation", () => {
 
 	describe("#getEnvironment", () => {
 		environments.forEach((env) => {
-			it(`should return ${env} as legal environment`, () => {
+			test(`should return ${env} as legal environment`, () => {
 				process.env.ENVIRONMENT = env;
-				expect(collections.getEnvironment()).to.equal(env);
+				expect(collections.getEnvironment()).toBe(env);
 			});
 		});
 
-		it("should default to development for illegal environment", () => {
+		test("should default to development for illegal environment", () => {
 			[undefined, null, "not an environment"].forEach((env) => {
 				process.env.ENVIRONMENT = env;
-				expect(collections.getEnvironment()).to.equal("development");
+				expect(collections.getEnvironment()).toBe("development");
 			});
 		});
 	});
 
 	describe("#getCollection", () => {
 		environments.forEach((env) => {
-			it(`should classify ${env} as a legal environment`, () => {
+			test(`should classify ${env} as a legal environment`, () => {
 				process.env.ENVIRONMENT = env;
 				let col = collections.getCollection();
-				expect(col).to.be.an("object");
-				expect(col).to.have.property("dbName");
-				expect(col).to.have.property("collections");
-				expect(col.dbName).to.equal(env === "production" ? "tearma" : `tearma_${env}`);
+				expect(typeof col).toBe("object");
+				expect(col).toHaveProperty("dbName");
+				expect(col).toHaveProperty("collections");
+				expect(col.dbName).toBe(env === "production" ? "tearma" : `tearma_${env}`);
 			});
 		});
 	});

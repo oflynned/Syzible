@@ -2,13 +2,17 @@
   "parserOptions": {
     "ecmaVersion": 6
   },
+  "plugins": [ "jest" ],
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:jest/recommended"
   ],
   "env": {
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "jest": true,
+    "jest/globals": true
   },
   "rules": {
     "semi": [
