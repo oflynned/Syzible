@@ -30,6 +30,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^4.0.0",
     "express": "^4.16.4",
     "filterxml": "^1.1.4",
@@ -51,6 +52,8 @@
     "promise": "^7.1.1",
     "request": "^2.88.0",
     "serve-favicon": "^2.5.0",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
     "xml2js": "^0.4.19",
     "xmldom": "^0.1.27",
     "xpath": "0.0.24"
