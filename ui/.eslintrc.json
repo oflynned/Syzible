@@ -4,12 +4,16 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:jest/recommended"
   ],
   "env": {
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "jest": true,
+    "jest/globals": true
   },
+  "plugins": [ "jest" ],
   "rules": {
     "semi": [
       1,

@@ -4,8 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "ENVIRONMENT=test mocha test './test/**/*.test.js' --exit",
-    "lint": "eslint --ignore-path .eslintignore . --fix"
+    "test": "jest test",
+    "test-backend": "jest test test",
+    "test-frontend": "jest test src",
+    "coverage": "jest --coverage",
+    "lint": "eslint --ignore-path .eslintignore . --fix",
+    "heroku-postbuild": "cd ui && npm install && npm run build"
   },
   "pre-commit": [
     "lint"
@@ -28,6 +32,7 @@
     "eslint": "^5.9.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.0.1",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.11.1",
@@ -38,10 +43,10 @@
     "froala-design-blocks": "^1.0.0",
     "fs": "0.0.1-security",
     "hbs": "~4.0.0",
+    "jest": "^23.6.0",
     "joi": "^14.0.1",
     "jquery": "^3.1.1",
     "lokijs": "^1.4.1",
-    "mocha": "^5.2.0",
     "mock-fs": "^4.7.0",
     "mongodb": "latest",
     "monk": "^6.0.6",

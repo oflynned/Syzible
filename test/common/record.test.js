@@ -1,6 +1,4 @@
 let record = require("../../common/record");
-let chai = require("chai");
-let expect = chai.expect;
 
 const config = require("../../config/db");
 const db = require("monk")(config.mongoUrl);
@@ -17,34 +15,34 @@ describe("db operations", () => {
 
 	describe("#createRecord", () => {
 		[undefined, null, ""].forEach((fixture) => {
-			it(`should not allow ${fixture} as a collection name`, (done) => {
+			test(`should not allow ${fixture} as a collection name`, (done) => {
 				record.createRecord(fixture, { test: 123 })
 					.then(() => done("should have failed"))
 					.catch((err) => {
-						expect(err.message).to.equal("empty_collection");
+						expect(err.message).toBe("empty_collection");
 						done();
 					});
 			});
 		});
 
 		[undefined, null, ""].forEach((fixture) => {
-			it(`should not allow ${fixture} as data`, (done) => {
+			test(`should not allow ${fixture} as data`, (done) => {
 				record.createRecord(collection, fixture)
 					.then(() => done("should have failed"))
 					.catch((err) => {
-						expect(err.message).to.equal("empty_data");
+						expect(err.message).toBe("empty_data");
 						done();
 					});
 			});
 		});
 
-		it("should create a new record", (done) => {
+		test("should create a new record", (done) => {
 			record.createRecord(collection, { test: 123 })
 				.then((data) => {
-					expect(data).to.be.an("object");
-					expect(data).to.have.property("_id");
-					expect(data).to.have.property("test");
-					expect(data.test).to.equal(123);
+					expect(typeof data).toBe("object");
+					expect(data).toHaveProperty("_id");
+					expect(data).toHaveProperty("test");
+					expect(data.test).toBe(123);
 					done();
 				})
 				.catch((err) => done(err));
@@ -57,25 +55,25 @@ describe("db operations", () => {
 				.then(() => done());
 		});
 
-		it("should retrieve with filter", (done) => {
+		test("should retrieve with filter", (done) => {
 			record.getRecords(collection, { test: 123 })
 				.then((data) => {
-					expect(data).to.be.an("array");
-					expect(data.length).to.equal(1);
-					expect(data[0]).to.have.property("_id");
-					expect(data[0]).to.have.property("test");
+					expect(Array.isArray(data)).toBe(true);
+					expect(data.length).toBe(1);
+					expect(data[0]).toHaveProperty("_id");
+					expect(data[0]).toHaveProperty("test");
 					done();
 				})
 				.catch((err) => done(err));
 		});
 
-		it("should retrieve without filter", (done) => {
+		test("should retrieve without filter", (done) => {
 			record.getRecords(collection, {})
 				.then((data) => {
-					expect(data).to.be.an("array");
-					expect(data.length).to.equal(1);
-					expect(data[0]).to.have.property("_id");
-					expect(data[0]).to.have.property("test");
+					expect(Array.isArray(data)).toBe(true);
+					expect(data.length).toBe(1);
+					expect(data[0]).toHaveProperty("_id");
+					expect(data[0]).toHaveProperty("test");
 					done();
 				})
 				.catch((err) => done(err));
@@ -93,14 +91,14 @@ describe("db operations", () => {
 				.then(() => done());
 		});
 
-		it("should modify record", (done) => {
+		test("should modify record", (done) => {
 			let modified = Object.assign({}, data, { test: 321 });
 			record.modifyRecord(collection, modified, modified["_id"])
 				.then((data) => {
-					expect(data).to.be.an("object");
-					expect(data).to.have.property("_id");
-					expect(data).to.have.property("test");
-					expect(data.test).to.equal(321);
+					expect(typeof data).toBe("object");
+					expect(data).toHaveProperty("_id");
+					expect(data).toHaveProperty("test");
+					expect(data.test).toBe(321);
 					done();
 				})
 				.catch((err) => done(err));
@@ -118,11 +116,11 @@ describe("db operations", () => {
 				.then(() => done());
 		});
 
-		it("should delete record", (done) => {
+		test("should delete record", (done) => {
 			record.deleteRecord(collection, id)
 				.then(() => record.getRecords(collection, {}))
 				.then((data) => {
-					expect(data.length).to.equal(0);
+					expect(data.length).toBe(0);
 					done();
 				})
 				.catch((err) => done(err));
