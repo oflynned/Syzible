@@ -41,6 +41,7 @@ routes/tearma/v2/datasets
 
 # production
 /build
+/ui/build
 
 # misc
 .DS_Store
