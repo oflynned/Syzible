@@ -5,7 +5,6 @@ const config = require("../../../../../config/db");
 const db = require("monk")(config.mongoUrl);
 
 const fixtures = require("./nounParserExamples");
-const nounModel = require("../../../../../routes/tearma/v2/models/noun");
 const nounParser = require("../../../../../routes/tearma/v2/helpers/nounParser");
 
 describe("noun parsing", () => {
@@ -23,7 +22,7 @@ describe("noun parsing", () => {
 		function loadFixture (fixture, length = 1) {
 			return new Promise((resolve) => {
 				nounParser.parseNounsFromData(fixture)
-					.then(() => nounModel.findAll())
+					.then((nouns) => nouns.sort((a, b) => a.ga.term - b.ga.term))
 					.then((nouns) => {
 						expect(nouns).to.be.an("array");
 						expect(nouns.length).to.equal(length);
