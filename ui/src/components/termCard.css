@@ -1,0 +1,13 @@
+.chip {
+    margin: 0 4px 0 4px;
+}
+
+.card {
+    max-width: 1024px;
+    margin: 8px;
+    text-align: left;
+}
+
+.contents {
+    padding: 8px;
+}
