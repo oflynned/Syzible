@@ -4,15 +4,29 @@ import Navbar from "./navbar";
 
 import "typeface-roboto";
 import "./App.css";
+import CardList from "./components/cardList";
 
-class App extends Component {
+export default class App extends Component {
 	constructor() {
 		super();
-		this.state = { results: [] };
+		const results = [{
+			"_id" : "5bede1f13b488b201bcbce58", 
+			"ga" : { 
+				"term" : "rialtas", 
+				"mutations" : { 
+					"nominativeSingular" : 	"rialtas", 
+					"genitiveSingular" : 	"rialtais", 
+					"nominativePlural" : 	"rialtais", 
+					"genitivePlural" : 		"rialtas" 
+				}, 
+				"gender" : "masculine", 
+				"declension" : 1 }, 
+			"en" : { "term" : "government" }}];
+		this.state = {results: results};
 	}
 
 	componentDidMount() {
-		this.getDefinitions();
+		this.getDefinitions()
 	}
 
 	getDefinitions() {
@@ -23,23 +37,11 @@ class App extends Component {
 
 	render() {
 		const { results } = this.state;
-
 		return(
 			<div className="App">
 				<Navbar />
-
-				<ul className="results">
-					{}
-					{
-						results.map((result) =>
-							<li key={result._id}>
-								{result.ga.mutations.nominativeSingular} / {result.ga.mutations.genitiveSingular} / {result.ga.mutations.nominativePlural} / {result.ga.mutations.genitivePlural}
-							</li>
-						)}
-				</ul>
+				<CardList results={results} />
 			</div>
 		);
 	}
 }
-
-export default App;
