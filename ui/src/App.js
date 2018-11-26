@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import fetch from "isomorphic-fetch";
-import Navbar from "./navbar";
 
 import "./App.css";
 import TermCardList from "./components/termCardList";
+import WebsiteHeader from "./components/websiteHeader";
 
 export default class App extends Component {
 	constructor() {
@@ -34,7 +34,7 @@ export default class App extends Component {
 		const { results } = this.state;
 		return(
 			<div className="App">
-				<Navbar />
+				<WebsiteHeader />
 				<TermCardList results={results} />
 			</div>
 		);

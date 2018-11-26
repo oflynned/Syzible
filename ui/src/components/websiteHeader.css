@@ -1,0 +1,19 @@
+.primary-font {
+    font-family: 'Poiret One', cursive;
+}
+
+.primary-colour {
+    background-color: #673AB7;
+}
+
+.px-40 {
+    font-size: 32px;
+}
+
+.link-margin {
+    margin: 0 8px;
+}
+
+.float-right {
+    float: right;
+}
