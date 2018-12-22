@@ -3,7 +3,7 @@
 }
 
 .card {
-    margin: 0 auto;
+    margin: 16px auto;
     max-width: 1024px;
     justify-content: center;
     text-align: left;

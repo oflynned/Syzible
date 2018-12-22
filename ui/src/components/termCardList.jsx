@@ -4,13 +4,9 @@ import TermCard from "./termCard";
 import "./termCardList.css"
 
 export default class TermCardList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { results: props["results"] }
-    }
 
     render() {
-        const { results } = this.state;
+        const { results } = this.props;
         return ( 
             <ul>
                 { results.map((result) => {
