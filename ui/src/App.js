@@ -21,7 +21,7 @@ export default class App extends Component {
 	render() {
 		return(
 			<div className="App">
-				<WebsiteHeader />
+				<WebsiteHeader meta={this.state.results.length} />
 				<TermCardList results={this.state.results} />
 			</div>
 		);

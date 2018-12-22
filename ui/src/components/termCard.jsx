@@ -68,21 +68,21 @@ export default class TermCard extends Component {
                             <Grid container spacing={16}>
                                 <Grid item xs={6}>
                                     <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "nominative", "singular")}</Typography>
-                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">Nominative Singular</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">nominative singular</Typography>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "nominative", "plural")}</Typography>
-                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">Nominative Plural</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">nominative plural</Typography>
                                 </Grid>
                             </Grid>
                             <Grid container spacing={16}>
                                 <Grid item xs={6}>                                    
                                     <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "genitive", "singular")}</Typography>
-                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">Genitive Singular</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">genitive singular</Typography>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "genitive", "plural")}</Typography>
-                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">Genitive Plural</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">genitive plural</Typography>
                                 </Grid>
                             </Grid>
                         </div>

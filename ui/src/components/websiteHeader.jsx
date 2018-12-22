@@ -49,7 +49,7 @@ export default class WebsiteHeader extends Component {
 
                     <div className="margin-content">
                         <Tabs value={selected} onChange={this.handleChange} centered>
-                            <Tab label="Gaeilge (1)" />
+                            <Tab label={"Gaeilge (" + this.props.meta + ")"} />
                             <Tab label="English (0)" />
                         </Tabs>
                     </div>
