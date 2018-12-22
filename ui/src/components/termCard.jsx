@@ -7,16 +7,19 @@ import Typography from '@material-ui/core/Typography';
 import './termCard.css'
 
 export default class TermCard extends Component {    
-    constructor(props) {
-        super(props);
-        this.state = props
-    }
-
     style = {
         height: 48,
     };
 
-    mutate = (mutation, func, count) => {
+    lenite = (noun) => {
+
+    }
+
+    mutate = (noun) => {
+
+    }
+
+    declineDefiniteNoun = (mutation, func, count) => {
         if(func === "nominative" && count === "singular") {
             return "an " + mutation.nominativeSingular;
         } else if(func === "nominative" && count === "plural") {
@@ -43,48 +46,48 @@ export default class TermCard extends Component {
             case 5:
                 return "5th declension";
             default:
-                return null;
+                return "no declension";
         }
     }
 
     render() {
-        const { ga, en } = this.state.result;
+        const { ga, en } = this.props.result;
         return  <Card className="card">
                     <div className="contents">
                         <div>
-                            <Typography variant="h5" className="header">{this.capitalise(ga.term)} / {this.capitalise(en.term)}</Typography>
+                            <Typography style={{ fontSize: '18px' }} variant="h5" className="header">{this.capitalise(ga.term)} / {this.capitalise(en.term)}</Typography>
                         </div>
                         <div className="margin-content">
-                            <Chip label="noun" className="chip"/>
-                            <Chip label={ga.gender} className="chip"/>
-                            <Chip label={this.ordinate(ga.declension)} className="chip"/>
-                            <Chip label="politics" className="chip"/>
-                            <Chip label="history" className="chip"/>
+                            <Chip style={{ fontSize: '14px' }} label="noun" className="chip"/>
+                            <Chip style={{ fontSize: '14px' }} label={ga.gender} className="chip"/>
+                            <Chip style={{ fontSize: '14px' }} label={this.ordinate(ga.declension)} className="chip"/>
+                            <Chip style={{ fontSize: '14px' }} label="politics" className="chip"/>
+                            <Chip style={{ fontSize: '14px' }} label="history" className="chip"/>
                         </div>
-                        <div className="margin-content">                        
+                        <div className="margin-content">
                             <Grid container spacing={16}>
                                 <Grid item xs={6}>
-                                    <Typography variant="h5">{this.mutate(ga.mutations, "nominative", "singular")}</Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">Nominative Singular</Typography>
+                                    <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "nominative", "singular")}</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">nominative singular</Typography>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography variant="h5">{this.mutate(ga.mutations, "nominative", "plural")}</Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">Nominative Plural</Typography>
+                                    <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "nominative", "plural")}</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">nominative plural</Typography>
                                 </Grid>
                             </Grid>
                             <Grid container spacing={16}>
                                 <Grid item xs={6}>                                    
-                                    <Typography variant="h5">{this.mutate(ga.mutations, "genitive", "singular")}</Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">Genitive Singular</Typography>
+                                    <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "genitive", "singular")}</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">genitive singular</Typography>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography variant="h5">{this.mutate(ga.mutations, "genitive", "plural")}</Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">Genitive Plural</Typography>
+                                    <Typography style={{ fontSize: '16px' }} variant="h5">{this.declineDefiniteNoun(ga.mutations, "genitive", "plural")}</Typography>
+                                    <Typography style={{ fontSize: '14px' }} variant="subtitle1" color="textSecondary">genitive plural</Typography>
                                 </Grid>
                             </Grid>
                         </div>
                         <div className="margin-content">
-                            <Typography color="textSecondary">Related terms: administration</Typography>
+                            <Typography style={{ fontSize: '14px' }} color="textSecondary">Related terms: administration</Typography>
                         </div>
                     </div>
                 </Card>
