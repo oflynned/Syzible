@@ -9,6 +9,9 @@ export default class App extends Component {
 	constructor() {
 		super();
 		this.state = { results: [], meta: [] };
+	}
+
+	componentDidMount() {
 		this.getDefinitions();
 	}
 
