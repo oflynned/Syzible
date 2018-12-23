@@ -1,0 +1,22 @@
+.chip {
+    margin: 0 4px 0 4px;
+}
+
+.card {
+    margin: 16px auto;
+    max-width: 1024px;
+    justify-content: center;
+    text-align: left;
+}
+
+.contents {
+    padding: 32px;
+}
+
+.margin-content {
+    margin-top: 16px;
+}
+
+.px-18 {
+    font-size: 18px 
+ }
