@@ -1,0 +1,724 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TermCard snapshot card renders correctly 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 card"
+>
+  <div
+    className="contents"
+  >
+    <div>
+      <h5
+        className="MuiTypography-root-29 MuiTypography-h5-45 header"
+        style={
+          Object {
+            "fontSize": "18px",
+          }
+        }
+      >
+        Ga term
+         / 
+        En term
+      </h5>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          noun
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          masculine
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          1st declension
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          politics
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          history
+        </span>
+      </div>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <div
+        className="MuiGrid-container-89 MuiGrid-spacing-xs-16-112"
+      >
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            an nom sing
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            nominative singular
+          </h6>
+        </div>
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            na nom plu
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            nominative plural
+          </h6>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-container-89 MuiGrid-spacing-xs-16-112"
+      >
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            an gen sing
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            genitive singular
+          </h6>
+        </div>
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            na gen plu
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            genitive plural
+          </h6>
+        </div>
+      </div>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <p
+        className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-colorTextSecondary-62"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+      >
+        Related terms: administration
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TermCard snapshot card renders correctly 2`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 card"
+>
+  <div
+    className="contents"
+  >
+    <div>
+      <h5
+        className="MuiTypography-root-29 MuiTypography-h5-45 header"
+        style={
+          Object {
+            "fontSize": "18px",
+          }
+        }
+      >
+        Ga term
+         / 
+        En term
+      </h5>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          noun
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          masculine
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          1st declension
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          politics
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          history
+        </span>
+      </div>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <div
+        className="MuiGrid-container-89 MuiGrid-spacing-xs-16-112"
+      >
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            an nom sing
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            nominative singular
+          </h6>
+        </div>
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            n/a
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            nominative plural
+          </h6>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-container-89 MuiGrid-spacing-xs-16-112"
+      >
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            n/a
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            genitive singular
+          </h6>
+        </div>
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            n/a
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            genitive plural
+          </h6>
+        </div>
+      </div>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <p
+        className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-colorTextSecondary-62"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+      >
+        Related terms: administration
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TermCard snapshot card with null mutation fields renders correctly 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation1-5 MuiPaper-rounded-3 MuiCard-root-1 card"
+>
+  <div
+    className="contents"
+  >
+    <div>
+      <h5
+        className="MuiTypography-root-29 MuiTypography-h5-45 header"
+        style={
+          Object {
+            "fontSize": "18px",
+          }
+        }
+      >
+        Ga term
+         / 
+        En term
+      </h5>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          noun
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          masculine
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          1st declension
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          politics
+        </span>
+      </div>
+      <div
+        className="MuiChip-root-64 chip"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+        tabIndex={-1}
+      >
+        <span
+          className="MuiChip-label-83"
+        >
+          history
+        </span>
+      </div>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <div
+        className="MuiGrid-container-89 MuiGrid-spacing-xs-16-112"
+      >
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            an nom sing
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            nominative singular
+          </h6>
+        </div>
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            n/a
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            nominative plural
+          </h6>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-container-89 MuiGrid-spacing-xs-16-112"
+      >
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            n/a
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            genitive singular
+          </h6>
+        </div>
+        <div
+          className="MuiGrid-item-90 MuiGrid-grid-xs-6-123"
+        >
+          <h5
+            className="MuiTypography-root-29 MuiTypography-h5-45"
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            n/a
+          </h5>
+          <h6
+            className="MuiTypography-root-29 MuiTypography-subtitle1-47 MuiTypography-colorTextSecondary-62"
+            style={
+              Object {
+                "fontSize": "14px",
+              }
+            }
+          >
+            genitive plural
+          </h6>
+        </div>
+      </div>
+    </div>
+    <div
+      className="margin-content"
+    >
+      <p
+        className="MuiTypography-root-29 MuiTypography-body1-38 MuiTypography-colorTextSecondary-62"
+        style={
+          Object {
+            "fontSize": "14px",
+          }
+        }
+      >
+        Related terms: administration
+      </p>
+    </div>
+  </div>
+</div>
+`;

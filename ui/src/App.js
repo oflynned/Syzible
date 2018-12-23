@@ -16,7 +16,7 @@ export default class App extends Component {
 	}
 
 	getDefinitions() {
-		fetch("/tearma/api/v2/find?query=plenary&queryLanguage=en&limit=10&offset=0")
+		fetch("/tearma/api/v2/find?query=clock&queryLanguage=en&limit=10&offset=0")
 			.then((res) => res.json())
 			.then((terms) => this.setState({ results: terms }));
 	}
