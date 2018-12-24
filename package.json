@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest test",
+    "test": "jest",
     "test-backend": "jest test test",
     "test-frontend": "jest test src",
     "coverage": "jest --coverage",

@@ -1,9 +1,10 @@
 import React from "react";
-import TermCard from "../../components/termCard";
 import renderer from "react-test-renderer";
 
+import TermCard from "../../components/termCard";
+
 describe("<TermCard />", () => {
-	it("renders correctly", () => {
+	it("should render correctly", () => {
 		const result = {
 			en: {
 				term: "en term"
