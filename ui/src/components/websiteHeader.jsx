@@ -40,7 +40,7 @@ export default class WebsiteHeader extends Component {
                         </FormControl>
                     </Card>
 
-                    <div className="margin-content" style={{ 'padding-top': '16px' }}>
+                    <div className="margin-content" style={{ 'paddingTop': '16px' }}>
                         <Chip style={{ fontSize: '14px', padding: '0 8px' }} label="rialta" className="chip"/>
                         <Chip style={{ fontSize: '14px', padding: '0 8px' }} label="rialtán" className="chip"/>
                         <Chip style={{ fontSize: '14px', padding: '0 8px' }} label="rialtais" className="chip"/>
