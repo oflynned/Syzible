@@ -4,6 +4,7 @@ import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import { lenite, eclipse } from '../helpers/mutation';
 import './termCard.css'
 
 export default class TermCard extends Component {    
@@ -13,58 +14,19 @@ export default class TermCard extends Component {
 
     mutate = (noun, gender, func, count) => {
         if(noun === null) return noun;
-        
         if(noun.split(" ").length !== 1) return noun;
-
-        if(func === "nominative" && count === "singular" && gender === "feminine") {
-            return this.lenite(noun);
-        } 
+        
+        if(func === "nominative" && count === "singular" && gender === "feminine")
+            return lenite(noun);
         
         if(func === "genitive") {
             if(count === "singular" && gender === "masculine")
-                return this.lenite(noun);
+                return lenite(noun);
             else if(count === "plural")
-                return this.eclipse(noun)
+                return eclipse(noun)
         }
 
         return noun;
-    }
-
-    lenite = (noun) => {
-        const lenitableInitials = {
-            "b": "bh", 
-            "c": "ch", 
-            "d": "dh", 
-            "f": "fh", 
-            "g": "gh", 
-            "m": "mh", 
-            "p": "ph", 
-            "s": "ts", 
-            "t": "th"
-        };
-
-        let initial = noun.charAt(0).toLowerCase();
-        return Object.keys(lenitableInitials).includes(initial) ? lenitableInitials[initial] + noun.slice(1) : noun;
-    }
-
-    eclipse = (noun) => {
-        const eclipsableInitials = {
-            "a": "n-a",
-            "b": "mb",
-            "c": "gc",
-            "d": "nd",
-            "e": "n-e",
-            "f": "bhf",
-            "g": "ng",
-            "i": "n-i",
-            "o": "n-o",
-            "p": "bp",
-            "t": "dt",
-            "u": "n-u"
-        };
-
-        let initial = noun.charAt(0).toLowerCase();
-        return Object.keys(eclipsableInitials).includes(initial) ? eclipsableInitials[initial] + noun.slice(1) : noun;
     }
 
     declineDefiniteNoun = (ga, func, count) => {
