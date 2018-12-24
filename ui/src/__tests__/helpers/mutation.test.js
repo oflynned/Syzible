@@ -1,4 +1,4 @@
-let { lenite, eclipse } = require("../../helpers/mutation");
+import { lenite, eclipse } from "../../helpers/mutation";
 
 describe("mutation", () => {
 	describe("eclipse", () => {
