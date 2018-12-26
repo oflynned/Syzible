@@ -8,7 +8,18 @@ import WebsiteHeader from "./components/websiteHeader";
 export default class App extends Component {
 	constructor() {
 		super();
-		this.state = { query: "", results: [], meta: [] };
+		const defaultMeta = {
+			count: 0,
+			limit: 0,
+			offset: 0
+		};
+		this.state = { 
+			query: "", 
+			results: { 
+				ga: { meta: defaultMeta, results: [] }, 
+				en: { meta: defaultMeta, results: [] } 
+			}
+		};
 		this.handleSubmission = this.handleSubmission.bind(this);
 	}
 
@@ -31,7 +42,7 @@ export default class App extends Component {
 	render() {
 		return(
 			<div className="App">
-				<WebsiteHeader meta={this.state.results.length} handleSubmission={this.handleSubmission} />
+				<WebsiteHeader results={this.state.results} handleSubmission={this.handleSubmission} />
 				<TermCardList results={this.state.results} />
 			</div>
 		);
