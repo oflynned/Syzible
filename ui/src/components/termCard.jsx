@@ -4,7 +4,7 @@ import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import { lenite, eclipse } from '../helpers/mutation';
+import { classifyArticle, lenite, eclipse } from '../helpers/mutation';
 import './termCard.css'
 
 export default class TermCard extends Component {    
@@ -13,8 +13,7 @@ export default class TermCard extends Component {
     };
 
     mutate = (noun, gender, func, count) => {
-        if(noun === null) return noun;
-        if(noun.split(" ").length !== 1) return noun;
+        if(noun === null || noun.split(" ").length !== 1) return noun;
         
         if(func === "nominative" && count === "singular" && gender === "feminine")
             return lenite(noun);
@@ -30,16 +29,8 @@ export default class TermCard extends Component {
     }
 
     declineDefiniteNoun = (ga, func, count) => {
-        let showArticle = ga.term.split(" ").length === 1;
-        if(func === "nominative" && count === "singular") {
-            return (showArticle ? "an " : "") + this.mutate(ga.mutations.nominativeSingular, ga.gender, func, count);
-        } else if(func === "nominative" && count === "plural") {
-            return (showArticle ? "na " : "") + this.mutate(ga.mutations.nominativePlural, ga.gender, func, count);
-        } else if(func === "genitive" && count === "singular") {
-            return (showArticle ? "an " : "") + this.mutate(ga.mutations.genitiveSingular, ga.gender, func, count);
-        } else if(func === "genitive" && count === "plural") {
-            return (showArticle ? "na " : "") + this.mutate(ga.mutations.genitivePlural, ga.gender, func, count);
-        }
+        let article = classifyArticle(ga.term, ga.gender, func, count);
+        return article + this.mutate(ga.mutations[`${func}${this.capitalise(count)}`], ga.gender, func, count);
     }
 
     capitalise = (word) => word.charAt(0).toUpperCase() + word.slice(1);

@@ -1,10 +1,42 @@
-import { classifyArticle, lenite, eclipse } from "../../helpers/mutation";
+import { isVowelInitial, classifyArticle, lenite, eclipse } from "../../helpers/mutation";
 
 describe("mutation", () => {
+	describe("#isVowelInitial", () => {
+		test("vowel initial returns true", () => {
+			let result = isVowelInitial("ualach");
+			expect(result).toEqual(true); 
+		});
+
+		test("vowel with fada initial returns true", () => {
+			let result = isVowelInitial("úalach");
+			expect(result).toEqual(true); 
+		});
+
+		test("consonant initial returns false", () => {
+			let result = isVowelInitial("vowel");
+			expect(result).toEqual(false); 
+		});
+
+		test("null noun return false", () => {
+			let result = isVowelInitial(null);
+			expect(result).toEqual(false); 
+		});
+
+		test("noun with length 0 return false", () => {
+			let result = isVowelInitial("");
+			expect(result).toEqual(false); 
+		});
+	});
+
 	describe("#classifyArticle", () => {
 		test("should return na for singular feminine noun in the genitive case", () => {
 			let result = classifyArticle("noun", "feminine", "genitive", "singular");
 			expect(result).toEqual("na ");
+		});
+
+		test("should return na h- for singular feminine noun with vowel initial in the genitive case", () => {
+			let result = classifyArticle("ualach", "feminine", "genitive", "singular");
+			expect(result).toEqual("na h-");
 		});
 
 		test("should return an for singular masculine noun in the genitive case", () => {
@@ -24,6 +56,11 @@ describe("mutation", () => {
 		
 		test("should return na for plural noun in the genitive case", () => {
 			let result = classifyArticle("noun", "masculine", "genitive", "plural");
+			expect(result).toEqual("na ");
+		});
+
+		test("should return na for plural noun with vowel initial in the genitive case", () => {
+			let result = classifyArticle("ualach", "masculine", "genitive", "plural");
 			expect(result).toEqual("na ");
 		});
 
