@@ -23,7 +23,7 @@ export default class WebsiteHeader extends Component {
     }
 
     render() {
-        const { selected } = this.state
+        const { selected } = this.state;
 
         return(
             <div>
@@ -33,11 +33,12 @@ export default class WebsiteHeader extends Component {
                     </Toolbar>
 
                     <Card className="card margin-content" style={{ padding: '16px' }}>
-                        <Search style={{ fontSize: '32', color: '#999999', margin: 'auto' }} />
-                        <FormControl style={{ width: '488px' }}>
-                            <InputLabel htmlFor="component-simple">Search term...</InputLabel>
-                            <Input id="component-simple" />
-                        </FormControl>
+                        <form onSubmit={this.props.handleSubmission}>
+                            <FormControl style={{ width: '488px' }}>
+                                <InputLabel htmlFor="component-simple">Search term...</InputLabel>
+                                <Input id="component-simple" />
+                            </FormControl>
+                        </form>
                     </Card>
 
                     <div className="margin-content" style={{ 'paddingTop': '16px' }}>
