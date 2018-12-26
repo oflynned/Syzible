@@ -30,7 +30,8 @@ export default class TermCard extends Component {
 
     declineDefiniteNoun = (ga, func, count) => {
         let article = classifyArticle(ga.term, ga.gender, func, count);
-        return article + this.mutate(ga.mutations[`${func}${this.capitalise(count)}`], ga.gender, func, count);
+        let form = ga.mutations[func + this.capitalise(count)]
+        return form === null ? "n/a" : article + this.mutate(form, ga.gender, func, count);
     }
 
     capitalise = (word) => word.charAt(0).toUpperCase() + word.slice(1);
