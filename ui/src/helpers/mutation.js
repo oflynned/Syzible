@@ -1,3 +1,22 @@
+function isVowelInitial(noun) {
+	if(noun === null || noun.length === 0) return false;
+	const vowels = ["a", "á", "e", "é", "i", "í", "o", "ó", "u", "ú"];
+	return vowels.includes(noun.charAt(0).toLowerCase());
+}
+
+module.exports.isVowelInitial = isVowelInitial;
+
+module.exports.classifyArticle = (noun, gender, func, count) => {
+	if(noun === null || noun.split(" ").length > 1) 
+		return "";
+	if(count === "plural") 
+		return func === "nominative" && isVowelInitial(noun) ? "na h-" : "na ";
+	if(func === "genitive" && gender === "feminine" && count === "singular") 
+		return isVowelInitial(noun) ? "na h-" : "na ";
+		
+	return "an ";
+};
+
 module.exports.lenite = (noun) => {
 	const lenitableInitials = {
 		"b": "bh", 
