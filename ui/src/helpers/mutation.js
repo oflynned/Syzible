@@ -1,3 +1,15 @@
+module.exports.classifyArticle = (noun, gender, func, count) => {
+	if(noun.split(" ").length > 1) return "";
+
+	if(count === "plural")
+		return "na ";
+	
+	if(func === "genitive" && gender === "feminine" && count === "singular")
+		return "na ";
+		
+	return "an ";
+};
+
 module.exports.lenite = (noun) => {
 	const lenitableInitials = {
 		"b": "bh", 

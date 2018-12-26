@@ -1,7 +1,39 @@
-import { lenite, eclipse } from "../../helpers/mutation";
+import { classifyArticle, lenite, eclipse } from "../../helpers/mutation";
 
 describe("mutation", () => {
-	describe("eclipse", () => {
+	describe("#classifyArticle", () => {
+		test("should return na for singular feminine noun in the genitive case", () => {
+			let result = classifyArticle("noun", "feminine", "genitive", "singular");
+			expect(result).toEqual("na ");
+		});
+
+		test("should return an for singular masculine noun in the genitive case", () => {
+			let result = classifyArticle("noun", "masculine", "genitive", "singular");
+			expect(result).toEqual("an ");
+		});
+
+		test("should return an for singular noun in the nominative case", () => {
+			let result = classifyArticle("noun", "masculine", "nominative", "singular");
+			expect(result).toEqual("an ");
+		});
+
+		test("should return na for plural noun in the nominative case", () => {
+			let result = classifyArticle("noun", "masculine", "nominative", "plural");
+			expect(result).toEqual("na ");
+		});
+		
+		test("should return na for plural noun in the genitive case", () => {
+			let result = classifyArticle("noun", "masculine", "genitive", "plural");
+			expect(result).toEqual("na ");
+		});
+
+		test("should not return article for multiple words", () => {
+			let result = classifyArticle("two words", "masculine", "genitive", "plural");
+			expect(result).toEqual("");
+		});
+	});
+
+	describe("#eclipse", () => {
 		test("should eclipse consonant", () => {
 			let result = eclipse("bean");
 			expect(result).toEqual("mbean");
@@ -28,7 +60,7 @@ describe("mutation", () => {
 		});
 	});
     
-	describe("lenite", () => {
+	describe("#lenite", () => {
 		test("should lenite consonant", () => {
 			let result = lenite("bean");
 			expect(result).toEqual("bhean");
