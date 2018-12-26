@@ -9,7 +9,7 @@ export default class TermCardList extends Component {
         const { results, meta } = this.props; 
         return ( 
             <ul>
-                { results.ga.results.map((result) => {
+                { results.en.results.map((result) => {
                     return <li key={result["_id"]}>
                                 <TermCard meta={meta} result={result} />
                             </li>

@@ -50,8 +50,8 @@ export default class WebsiteHeader extends Component {
 
                     <div className="margin-content">
                         <Tabs value={selected} onChange={this.handleChange} centered>
-                            <Tab label={"Gaeilge (" + results.ga.meta.count + ")"} />
-                            <Tab label={"English (" + results.en.meta.count + ")"} />
+                            <Tab label={"Gaeilge (" + results.en.meta.count + ")"} />
+                            <Tab label={"English (" + results.ga.meta.count + ")"} />
                         </Tabs>
                     </div>
                 </AppBar>
