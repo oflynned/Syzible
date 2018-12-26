@@ -8,7 +8,7 @@ import WebsiteHeader from "./components/websiteHeader";
 export default class App extends Component {
 	constructor() {
 		super();
-		this.state = { query: "test", results: [], meta: [] };
+		this.state = { query: "", results: [], meta: [] };
 		this.handleSubmission = this.handleSubmission.bind(this);
 	}
 
@@ -17,8 +17,9 @@ export default class App extends Component {
 		this.setState({ query: e.target.elements[0].value });
 	}
 
-	componentDidUpdate() {
-		this.getDefinitions();
+	componentDidUpdate(_nextProps, nextState) {
+		if(nextState.query !== this.state.query)
+			this.getDefinitions();
 	}
 
 	getDefinitions() {
