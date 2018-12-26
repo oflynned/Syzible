@@ -10,7 +10,7 @@ export default class App extends Component {
 		super();
 		const defaultMeta = {
 			count: 0,
-			limit: 0,
+			limit: 10,
 			offset: 0
 		};
 		this.state = { 
