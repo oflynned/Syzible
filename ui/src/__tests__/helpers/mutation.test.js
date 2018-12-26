@@ -49,6 +49,11 @@ describe("mutation", () => {
 			expect(result).toEqual("an ");
 		});
 
+		test("should return an for singular noun with vowel initial in the nominative case", () => {
+			let result = classifyArticle("ualach", "masculine", "nominative", "singular");
+			expect(result).toEqual("an t-");
+		});
+
 		test("should return na for plural noun in the nominative case", () => {
 			let result = classifyArticle("noun", "masculine", "nominative", "plural");
 			expect(result).toEqual("na ");

@@ -13,6 +13,8 @@ module.exports.classifyArticle = (noun, gender, func, count) => {
 		return func === "nominative" && isVowelInitial(noun) ? "na h-" : "na ";
 	if(func === "genitive" && gender === "feminine" && count === "singular") 
 		return isVowelInitial(noun) ? "na h-" : "na ";
+	if(func === "nominative" && gender === "masculine" && count === "singular")
+		return isVowelInitial(noun) ? "an t-" : "an ";
 		
 	return "an ";
 };

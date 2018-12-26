@@ -8,7 +8,6 @@ import Card from '@material-ui/core/Card';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import { Search } from '@material-ui/icons';
 
 import "typeface-poiret-one"
 import './websiteHeader.css'
