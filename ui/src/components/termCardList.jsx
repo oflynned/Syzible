@@ -6,14 +6,14 @@ import "./termCardList.css"
 export default class TermCardList extends Component {
 
     render() {
-        const { results } = this.props;
+        const { results, meta } = this.props; 
         return ( 
             <ul>
-                { results.map((result) => {
-                    return  <li key={result["_id"]}>
-                                <TermCard result={result} />
+                { results.ga.results.map((result) => {
+                    return <li key={result["_id"]}>
+                                <TermCard meta={meta} result={result} />
                             </li>
-                }) }
+                })}
             </ul>
         );
     }

@@ -5,6 +5,8 @@
  */
 
 require('dotenv').load();
+require("babel-core/register");
+require("babel-polyfill");
 const { getEnvironment, getCollection } = require('../config/collections');
 
 let app = require('../app')(getCollection());

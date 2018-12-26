@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = (env) => {
 	let express = require("express");
 	let path = require("path");

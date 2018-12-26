@@ -23,7 +23,8 @@ export default class WebsiteHeader extends Component {
 
     render() {
         const { selected } = this.state;
-
+        const { results } = this.props;
+        
         return(
             <div>
                 <AppBar position="static" style={{ backgroundColor: "#673AB7" }}>
@@ -49,8 +50,8 @@ export default class WebsiteHeader extends Component {
 
                     <div className="margin-content">
                         <Tabs value={selected} onChange={this.handleChange} centered>
-                            <Tab label={"Gaeilge (" + this.props.meta + ")"} />
-                            <Tab label="English (0)" />
+                            <Tab label={"Gaeilge (" + results.ga.meta.count + ")"} />
+                            <Tab label={"English (" + results.en.meta.count + ")"} />
                         </Tabs>
                     </div>
                 </AppBar>
