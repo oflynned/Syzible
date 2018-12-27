@@ -13,18 +13,8 @@ import "typeface-poiret-one"
 import './websiteHeader.css'
 
 export default class WebsiteHeader extends Component { 
-    state = {
-        selected: 0
-    }
-
-    handleChange = (_event, selected) => {
-        this.setState({selected});
-    }
-
     render() {
-        const { selected } = this.state;
         const { results } = this.props;
-        
         return(
             <div>
                 <AppBar position="static" style={{ backgroundColor: "#673AB7" }}>
@@ -49,7 +39,7 @@ export default class WebsiteHeader extends Component {
                     </div>
 
                     <div className="margin-content">
-                        <Tabs value={selected} onChange={this.handleChange} centered>
+                        <Tabs value={this.props.selectedTab} onChange={this.props.handleTabChange} centered>
                             <Tab label={"Gaeilge (" + results.en.meta.count + ")"} />
                             <Tab label={"English (" + results.ga.meta.count + ")"} />
                         </Tabs>
