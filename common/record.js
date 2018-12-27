@@ -23,8 +23,8 @@ module.exports.getQueryMetaData = (collection, filter = {}, limit = 10, offset =
 				return resolve({
 					count: count,
 					pagination: Math.ceil(count / limit),
-					limit: limit,
-					offset: offset
+					limit: parseInt(limit),
+					offset: parseInt(offset)
 				});
 			})
 			.catch((err) => reject(err));
