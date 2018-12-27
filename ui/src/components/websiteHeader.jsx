@@ -8,23 +8,13 @@ import Card from '@material-ui/core/Card';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import { Search } from '@material-ui/icons';
 
 import "typeface-poiret-one"
 import './websiteHeader.css'
 
 export default class WebsiteHeader extends Component { 
-    state = {
-        selected: 0
-    }
-
-    handleChange = (_event, selected) => {
-        this.setState({selected});
-    }
-
     render() {
-        const { selected } = this.state
-
+        const { results } = this.props;
         return(
             <div>
                 <AppBar position="static" style={{ backgroundColor: "#673AB7" }}>
@@ -33,14 +23,15 @@ export default class WebsiteHeader extends Component {
                     </Toolbar>
 
                     <Card className="card margin-content" style={{ padding: '16px' }}>
-                        <Search style={{ fontSize: '32', color: '#999999', margin: 'auto' }} />
-                        <FormControl style={{ width: '488px' }}>
-                            <InputLabel htmlFor="component-simple">Search term...</InputLabel>
-                            <Input id="component-simple" />
-                        </FormControl>
+                        <form onSubmit={this.props.handleSubmission}>
+                            <FormControl style={{ width: '488px' }}>
+                                <InputLabel htmlFor="component-simple">Search term...</InputLabel>
+                                <Input id="component-simple" />
+                            </FormControl>
+                        </form>
                     </Card>
 
-                    <div className="margin-content" style={{ 'padding-top': '16px' }}>
+                    <div className="margin-content" style={{ 'paddingTop': '16px' }}>
                         <Chip style={{ fontSize: '14px', padding: '0 8px' }} label="rialta" className="chip"/>
                         <Chip style={{ fontSize: '14px', padding: '0 8px' }} label="rialtán" className="chip"/>
                         <Chip style={{ fontSize: '14px', padding: '0 8px' }} label="rialtais" className="chip"/>
@@ -48,9 +39,9 @@ export default class WebsiteHeader extends Component {
                     </div>
 
                     <div className="margin-content">
-                        <Tabs value={selected} onChange={this.handleChange} centered>
-                            <Tab label={"Gaeilge (" + this.props.meta + ")"} />
-                            <Tab label="English (0)" />
+                        <Tabs value={this.props.selectedTab} onChange={this.props.handleTabChange} centered>
+                            <Tab label={"Gaeilge (" + results.en.meta.count + ")"} />
+                            <Tab label={"English (" + results.ga.meta.count + ")"} />
                         </Tabs>
                     </div>
                 </AppBar>

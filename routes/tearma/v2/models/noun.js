@@ -1,4 +1,4 @@
-const { createRecord, getRecords } = require("../../../../common/record");
+const { getQueryMetaData, createRecord, getRecords } = require("../../../../common/record");
 const Joi = require("joi");
 
 const collection = "nouns";
@@ -26,7 +26,7 @@ function validate (data) {
 	});
 }
 
-module.exports.create = (data) => {
+module.exports.create = async (data) => {
 	return validate(data)
 		.then(() => createRecord(collection, data))
 		.catch((err) => {
@@ -34,23 +34,33 @@ module.exports.create = (data) => {
 		});
 };
 
-module.exports.findAll = (query, limit, offset) => {
+module.exports.find = async (query, limit, offset) => {
 	let queryExpression = new RegExp(query);
-	return getRecords(collection, {
-		"$or": [{
-			"en.term": queryExpression
-		}, {
-			"ga.term": queryExpression
-		}]
-	}, limit, offset);
+	let gaResults = await module.exports.findByIrishTerm(queryExpression, limit, offset);
+	let enResults = await module.exports.findByEnglishTerm(queryExpression, limit, offset);
+	return Object.assign({}, gaResults, enResults);
 };
 
-module.exports.findByIrishTerm = (query, limit, offset) => {
+module.exports.findByIrishTerm = async (query, limit, offset) => {
 	let queryExpression = new RegExp(query);
-	return getRecords(collection, { "ga.term": queryExpression }, limit, offset);
+	let metaData = await getQueryMetaData(collection, { "ga.term": queryExpression }, limit, offset);
+	let result = await getRecords(collection, { "ga.term": queryExpression }, limit, offset);
+	return {
+		ga: {
+			meta: metaData,
+			results: result
+		}
+	};
 };
 
-module.exports.findByEnglishTerm = (query, limit, offset) => {
+module.exports.findByEnglishTerm = async (query, limit, offset) => {
 	let queryExpression = new RegExp(query);
-	return getRecords(collection, { "en.term": queryExpression }, limit, offset);
+	let metaData = await getQueryMetaData(collection, { "en.term": queryExpression }, limit, offset);
+	let result = await getRecords(collection, { "en.term": queryExpression }, limit, offset);
+	return {
+		en: {
+			meta: metaData,
+			results: result
+		}
+	};
 };

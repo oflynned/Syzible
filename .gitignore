@@ -27,6 +27,7 @@ crashlytics-build.properties
 fabric.properties
 
 .DS_STORE
+.vscode
 
 ## omit any local dbs
 routes/tearma/v2/datasets
@@ -54,3 +55,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+coverage/
