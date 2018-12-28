@@ -23,10 +23,18 @@ function classifyDeclension (declension) {
 	return (declension.length > 0) ? parseInt(declension) : -1;
 }
 
-// TODO needs parsing to a standard format
-// there are some domains and subcategories for domains separated by a › symbol
+function parseQuotation (domain) {
+	return domain.split("›")[0].trim();
+}
+
+function parseCommaSeparation (domain) {
+	return domain.split(",").map(d => d.trim());
+}
+
 function classifyDomains (domains) {
-	return domains;
+	let classifiedDomains = domains.map(e => parseQuotation(e));
+	classifiedDomains = classifiedDomains.map(e => parseCommaSeparation(e));
+	return [].concat.apply([], classifiedDomains);
 }
 
 function groomNounFromDefinition (noun) {

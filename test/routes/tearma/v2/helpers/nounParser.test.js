@@ -51,12 +51,12 @@ describe("noun parsing", () => {
 				.catch((err) => done(err));
 		});
 
-		describe("domain parsing", () => {
+		describe("#classifyDomains", () => {
 			test("with one domain", (done) => {
 				loadFixture(fixtures.singleDomain)
 					.then((noun) => {
-						expect(noun.en.domains).toEqual(["Law › Property Law"]);
-						expect(noun.ga.domains).toEqual(["Dlí › Dlí Réadmhaoine"]);
+						expect(noun.en.domains).toEqual(["Law"]);
+						expect(noun.ga.domains).toEqual(["Dlí"]);
 						done();
 					});
 			});
@@ -64,8 +64,8 @@ describe("noun parsing", () => {
 			test("with multiple domains", (done) => {
 				loadFixture(fixtures.multipleDomains)
 					.then((noun) => {
-						expect(noun.en.domains).toEqual(["Biology", "Medicine, Medical › Physiology"]);
-						expect(noun.ga.domains).toEqual(["Bitheolaíocht", "Leigheas › Fiseolaíocht"]);
+						expect(noun.en.domains).toEqual(["Biology", "Medicine", "Medical"]);
+						expect(noun.ga.domains).toEqual(["Bitheolaíocht", "Leigheas"]);
 						done();
 					});
 			});
