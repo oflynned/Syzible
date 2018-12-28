@@ -12,10 +12,12 @@ const schema = Joi.object().keys({
 			genitivePlural: Joi.string().allow(null)
 		},
 		gender: Joi.string().valid("masculine", "feminine", "verbal noun").required(),
-		declension: Joi.number().valid(-1, 1, 2, 3, 4, 5).required()
+		declension: Joi.number().valid(-1, 1, 2, 3, 4, 5).required(),
+		domains: Joi.array().items(Joi.string())
 	},
 	en: {
-		term: Joi.string().required()
+		term: Joi.string().required(),
+		domains: Joi.array().items(Joi.string())
 	}
 });
 
