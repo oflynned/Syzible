@@ -13,11 +13,11 @@ const schema = Joi.object().keys({
 		},
 		gender: Joi.string().valid("masculine", "feminine", "verbal noun").required(),
 		declension: Joi.number().valid(-1, 1, 2, 3, 4, 5).required(),
-		domains: Joi.array().items(Joi.string())
+		domains: Joi.array().items(Joi.string()).required()
 	},
 	en: {
 		term: Joi.string().required(),
-		domains: Joi.array().items(Joi.string())
+		domains: Joi.array().items(Joi.string()).required()
 	}
 });
 
