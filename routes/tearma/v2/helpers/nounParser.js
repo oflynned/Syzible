@@ -23,15 +23,22 @@ function classifyDeclension (declension) {
 	return (declension.length > 0) ? parseInt(declension) : -1;
 }
 
-function groomNounFromDefinition (noun) {
-	// TODO iterate over domains
+// TODO needs parsing to a standard format
+// there are some domains and subcategories for domains separated by a › symbol
+function classifyDomains (domains) {
+	return domains;
+}
 
+function groomNounFromDefinition (noun) {
 	let maxCountEn = parseInt(xpath.select("count(//langSet[@lang=\"en\"]/tig)", noun));
 	let maxCountGa = parseInt(xpath.select("count(//langSet[@lang=\"ga\"]/tig)", noun));
-	let definitions = [];
+	let enDomains = xpath.select("//descrip[@type=\"domain\" and @lang=\"en\"]/text()", noun).map(d => d.data);
+	let gaDomains = xpath.select("//descrip[@type=\"domain\" and @lang=\"ga\"]/text()", noun).map(d => d.data);
 
+	let definitions = [];
 	let enIterable = 0;
 	let gaIterable = 0;
+
 	for (let i = 1; i <= Math.max(maxCountGa, maxCountEn); i++) {
 		if (maxCountEn === maxCountGa) {
 			enIterable = gaIterable = i;
@@ -58,16 +65,21 @@ function groomNounFromDefinition (noun) {
 			ga: {
 				term: gaNominativeSingular,
 				mutations: {
+					// TODO not all nouns are singular, some are marked with `iol`
+					// plural/iol only nouns should be assigned to their appropriate mutations
+					// all fields are now nullable unless all are assigned null
 					nominativeSingular: gaNominativeSingular,
 					genitiveSingular: gaGenitiveSingular.length === 0 ? null : gaGenitiveSingular,
 					nominativePlural: gaNominativePlural.length === 0 ? null : gaNominativePlural,
 					genitivePlural: gaGenitivePlural.length === 0 ? null : gaGenitivePlural
 				},
 				gender: classifyGender(gender),
-				declension: classifyDeclension(declension)
+				declension: classifyDeclension(declension),
+				domains: classifyDomains(gaDomains)
 			},
 			en: {
-				term: enNominativeSingular
+				term: enNominativeSingular,
+				domains: classifyDomains(enDomains)
 			}
 		};
 
