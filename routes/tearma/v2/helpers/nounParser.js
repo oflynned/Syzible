@@ -31,10 +31,18 @@ function parseCommaSeparation (domain) {
 	return domain.split(",").map(d => d.trim());
 }
 
+function uniq (array) {
+	return array.reduce((a, b) => {
+		if (a.indexOf(b) < 0) a.push(b);
+		return a;
+	}, []);
+}
+
 function classifyDomains (domains) {
 	let classifiedDomains = domains.map(e => parseQuotation(e));
 	classifiedDomains = classifiedDomains.map(e => parseCommaSeparation(e));
-	return [].concat.apply([], classifiedDomains);
+	classifiedDomains = [].concat.apply([], classifiedDomains);
+	return uniq(classifiedDomains);
 }
 
 function groomNounFromDefinition (noun) {
@@ -102,8 +110,7 @@ module.exports.parseNouns = (path) => {
 
 	return new Promise((resolve) => {
 		let xml = fs.readFileSync(path, "utf8");
-		let modifiedXml = xml.replace(/xml:lang/g, "lang");
-		const tree = elementTree.parse(modifiedXml.toString());
+		const tree = elementTree.parse(xml.toString());
 		const root = tree.getroot();
 
 		let stream;

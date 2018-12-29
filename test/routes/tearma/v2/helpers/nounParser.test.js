@@ -69,6 +69,15 @@ describe("noun parsing", () => {
 						done();
 					});
 			});
+
+			test("with duplicated domains", (done) => {
+				loadFixture(fixtures.duplicatedItemDomains)
+					.then((noun) => {
+						expect(noun.en.domains).toEqual(["Agriculture", "Fishing", "Culinary"]);
+						expect(noun.ga.domains).toEqual(["Talmhaíocht", "Iascaireacht", "Cócaireacht"]);
+						done();
+					});
+			});
 		});
 
 		describe("mutation parsing", () => {

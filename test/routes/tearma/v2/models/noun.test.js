@@ -100,7 +100,7 @@ describe("noun model", () => {
 
 					nounModel.create(fixture)
 						.then(() => assert.fail("should not have succeeded"))
-						.catch((err) => expect(err).not.toBeNull())
+						.catch((err) => expect(err).not.toBeNull());
 				});
 
 				test("should not require genitive singular", () => {

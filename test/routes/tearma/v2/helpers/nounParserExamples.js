@@ -148,6 +148,40 @@ module.exports.noDeclension = `
 
 module.exports.verbalNoun = "";
 
+module.exports.duplicatedItemDomains = `
+<termEntry id="concept-3465837">
+	<descrip type="domain" lang="ga">Talmhaíocht, Iascaireacht › Talmhaíocht</descrip>
+	<descrip type="domain" lang="en">Agriculture, Fishing › Agriculture</descrip>
+	<descrip type="domain" lang="ga">Cócaireacht › Glasraí &amp; Luibheanna</descrip>
+	<descrip type="domain" lang="en">Culinary › Vegetables &amp; Herbs</descrip>
+	<descrip type="domain" lang="ga">Cócaireacht</descrip>
+	<descrip type="domain" lang="en">Culinary</descrip>
+	<langSet lang="en">
+		<tig>
+			<term>bean</term>
+			<termNote type="partOfSpeech">s</termNote>
+			<termNote type="pl">beans</termNote>
+		</tig>
+	</langSet>
+	<langSet lang="ga">
+		<tig>
+			<term>pónaire</term>
+			<termNote type="partOfSpeech">bain4</termNote>
+			<termNote type="gu">pónaire</termNote>
+			<termNote type="iol">pónairí</termNote>
+		</tig>
+	</langSet>
+	<descrip type="collection">Lámhleabhar Miondíola/Handbook of Retailing Terms</descrip>
+	<descrip type="collection">Lámhleabhar Bia agus Dí/Handbook of Food and Drink Terms</descrip>
+	<descrip type="collection">Foclóir Tíreolaíochta agus Pleanála mar aon le Téarmaí Seandálaíochta/Dictionary of Geography and Planning incorporating Archaeological Terms</descrip>
+	<descrip type="collection">Foclóir Talmhaíochta agus Déiríochta/Dictionary of Agriculture and Dairying</descrip>
+	<descrip type="collection">Foclóir Seandálaíochta/Dictionary of Archaeology Terms</descrip>
+	<descrip type="collection">Foclóir Eacnamaíocht Bhaile/Dictionary of Home Economics</descrip>
+	<descrip type="collection">Téarmaí Cócaireachta/Cookery Terms</descrip>
+	<descrip type="collection">Foclóir Ceirdeanna agus Teicneolaíochta/Dictionary of Trades and Technology</descrip>
+</termEntry>
+`;
+
 module.exports.multipleItemDomain =
 module.exports.multipleEnglishToOneIrish = `
 <termEntry id="concept-950213">
