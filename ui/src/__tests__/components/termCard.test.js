@@ -7,7 +7,8 @@ describe("<TermCard />", () => {
 	it("should render correctly", () => {
 		const result = {
 			en: {
-				term: "en term"
+				term: "en term",
+				domains: ["domain1", "domain2"]
 			},
 			ga: {
 				term: "ga term",
@@ -18,7 +19,8 @@ describe("<TermCard />", () => {
 					nominativePlural: "nom plu",
 					genitiveSingular: "gen sing",
 					genitivePlural: "gen plu"
-				}
+				},
+				domains: ["domain1", "domain2"]
 			}
 		};
 

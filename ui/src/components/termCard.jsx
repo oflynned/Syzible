@@ -64,7 +64,7 @@ export default class TermCard extends Component {
                             <Chip style={{ fontSize: '14px' }} label="noun" className="chip"/>
                             <Chip style={{ fontSize: '14px' }} label={ga.gender} className="chip"/>
                             <Chip style={{ fontSize: '14px' }} label={this.ordinate(ga.declension)} className="chip"/>
-                            { en.domains.map((domain) => <Chip style={{ fontSize: '14px' }} label={domain.toLowerCase()} className="chip"/>) }
+                            { en.domains.map((domain) => <Chip style={{ fontSize: '14px' }} key={domain} label={domain.toLowerCase()} className="chip"/>) }
                         </div>
                         <div className="margin-content">
                             <Grid container spacing={16}>
