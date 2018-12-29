@@ -1,3 +1,4 @@
+process.env.ENVIRONMENT = "test";
 let assert = require("assert");
 
 const collections = require("../../../../../config/collections");
@@ -25,10 +26,12 @@ describe("noun model", () => {
 				genitivePlural: "gp"
 			},
 			gender: "masculine",
-			declension: 1
+			declension: 1,
+			domains: ["domain1", "domain2"]
 		},
 		en: {
-			term: "term"
+			term: "term",
+			domains: ["domain1", "domain2"]
 		}
 	};
 
@@ -37,36 +40,46 @@ describe("noun model", () => {
 	}
 
 	describe("#create", () => {
-		test("should follow noun schema successfully", () => {
+		test("should follow schema successfully", (done) => {
 			let fixture = deepClone(noun);
-			return nounModel.create(fixture)
-				.then((data) => {
-					expect(typeof data).toBe("object");
-					expect(data).toHaveProperty("_id");
+			nounModel.create(fixture)
+				.then((noun) => {
+					expect(typeof noun).toBe("object");
+					expect(noun).toHaveProperty("_id");
+					expect(noun).toHaveProperty("ga");
 
-					expect(data).toHaveProperty("ga");
-					expect(typeof data.ga).toBe("object");
-					expect(data.ga).toHaveProperty("term");
-					expect(data.ga).toHaveProperty("mutations");
-					expect(typeof data.ga.mutations).toBe("object");
-					expect(data.ga.mutations).toHaveProperty("nominativeSingular");
-					expect(data.ga.mutations.nominativeSingular).toBe("ns");
-					expect(data.ga.mutations).toHaveProperty("genitiveSingular");
-					expect(data.ga.mutations.genitiveSingular).toBe("gs");
-					expect(data.ga.mutations).toHaveProperty("nominativePlural");
-					expect(data.ga.mutations.nominativePlural).toBe("np");
-					expect(data.ga.mutations).toHaveProperty("genitivePlural");
-					expect(data.ga.mutations.genitivePlural).toBe("gp");
+					expect(typeof noun.ga).toBe("object");
+					expect(noun.ga).toHaveProperty("term");
+					expect(noun.ga).toHaveProperty("mutations");
 
-					expect(data.ga).toHaveProperty("gender");
-					expect(data.ga.gender).toBe("masculine");
-					expect(data.ga).toHaveProperty("declension");
-					expect(data.ga.declension).toBe(1);
+					expect(typeof noun.ga.mutations).toBe("object");
+					expect(noun.ga.mutations).toHaveProperty("nominativeSingular");
+					expect(noun.ga.mutations.nominativeSingular).toBe("ns");
+					expect(noun.ga.mutations).toHaveProperty("genitiveSingular");
+					expect(noun.ga.mutations.genitiveSingular).toBe("gs");
+					expect(noun.ga.mutations).toHaveProperty("nominativePlural");
+					expect(noun.ga.mutations.nominativePlural).toBe("np");
+					expect(noun.ga.mutations).toHaveProperty("genitivePlural");
+					expect(noun.ga.mutations.genitivePlural).toBe("gp");
+					expect(noun.ga).toHaveProperty("gender");
+					expect(noun.ga.gender).toBe("masculine");
+					expect(noun.ga).toHaveProperty("declension");
+					expect(noun.ga.declension).toBe(1);
+					expect(noun).toHaveProperty("en");
 
-					expect(data).toHaveProperty("en");
-					expect(typeof data.en).toBe("object");
-					expect(data.en).toHaveProperty("term");
-					expect(data.en.term).toBe("term");
+					expect(typeof noun.en).toBe("object");
+					expect(noun.en).toHaveProperty("term");
+					expect(noun.en.term).toBe("term");
+
+					expect(noun.ga).toHaveProperty("domains");
+					expect(Array.isArray(noun.ga.domains)).toEqual(true);
+					expect(noun.ga.domains).toEqual(["domain1", "domain2"]);
+
+					expect(noun.en).toHaveProperty("domains");
+					expect(Array.isArray(noun.en.domains)).toEqual(true);
+					expect(noun.en.domains).toEqual(["domain1", "domain2"]);
+
+					done();
 				});
 		});
 
@@ -75,7 +88,7 @@ describe("noun model", () => {
 				let fixture = deepClone(noun);
 				delete fixture["ga"]["term"];
 
-				return nounModel.create(fixture)
+				nounModel.create(fixture)
 					.then(() => assert.fail("should not have succeeded"))
 					.catch((err) => expect(err).not.toBeNull());
 			});
@@ -83,36 +96,36 @@ describe("noun model", () => {
 			describe(".mutations", () => {
 				test("should require nominative singular", () => {
 					let fixture = deepClone(noun);
-					delete fixture["ga"]["mutations"]["nominativeSingular"];
+					delete fixture.ga.mutations.nominativeSingular;
 
-					return nounModel.create(fixture)
+					nounModel.create(fixture)
 						.then(() => assert.fail("should not have succeeded"))
 						.catch((err) => expect(err).not.toBeNull());
 				});
 
-				test("should require genitive singular", () => {
+				test("should not require genitive singular", () => {
 					let fixture = deepClone(noun);
-					delete fixture["ga"]["mutations"]["genitiveSingular"];
+					delete fixture.ga.mutations.genitiveSingular;
 
-					return nounModel.create(fixture)
-						.then(() => assert.fail("should not have succeeded"))
-						.catch((err) => expect(err).not.toBeNull());
+					nounModel.create(fixture)
+						.then((data) => expect(data.ga.mutations).not.toHaveProperty("genitiveSingular"))
+						.catch((err) => assert.fail(err));
 				});
 
 				test("should not require nominative plural", () => {
 					let fixture = deepClone(noun);
-					delete fixture["ga"]["mutations"]["nominativePlural"];
+					delete fixture.ga.mutations.nominativePlural;
 
-					return nounModel.create(fixture)
+					nounModel.create(fixture)
 						.then((data) => expect(data.ga.mutations).not.toHaveProperty("nominativePlural"))
 						.catch((err) => assert.fail(err));
 				});
 
 				test("should not require genitive plural", () => {
 					let fixture = deepClone(noun);
-					delete fixture["ga"]["mutations"]["genitivePlural"];
+					delete fixture.ga.mutations.genitivePlural;
 
-					return nounModel.create(fixture)
+					nounModel.create(fixture)
 						.then((data) => expect(data.ga.mutations).not.toHaveProperty("genitivePlural"))
 						.catch((err) => assert.fail(err));
 				});
@@ -120,18 +133,27 @@ describe("noun model", () => {
 
 			test("should require gender", () => {
 				let fixture = deepClone(noun);
-				delete fixture["ga"]["gender"];
+				delete fixture.ga.gender;
 
-				return nounModel.create(fixture)
+				nounModel.create(fixture)
 					.then(() => assert.fail("should not have succeeded"))
 					.catch((err) => expect(err).not.toBeNull());
 			});
 
 			test("should require declension", () => {
 				let fixture = deepClone(noun);
-				delete fixture["ga"]["declension"];
+				delete fixture.ga.declension;
 
-				return nounModel.create(fixture)
+				nounModel.create(fixture)
+					.then(() => assert.fail("should not have succeeded"))
+					.catch((err) => expect(err).not.toBeNull());
+			});
+
+			test("should require domains", () => {
+				let fixture = deepClone(noun);
+				delete fixture.ga.domains;
+
+				nounModel.create(fixture)
 					.then(() => assert.fail("should not have succeeded"))
 					.catch((err) => expect(err).not.toBeNull());
 			});
@@ -142,7 +164,16 @@ describe("noun model", () => {
 				let fixture = deepClone(noun);
 				delete fixture["en"]["term"];
 
-				return nounModel.create(fixture)
+				nounModel.create(fixture)
+					.then(() => assert.fail("should not have succeeded"))
+					.catch((err) => expect(err).not.toBeNull());
+			});
+
+			test("should require domains", () => {
+				let fixture = deepClone(noun);
+				delete fixture.en.domains;
+
+				nounModel.create(fixture)
 					.then(() => assert.fail("should not have succeeded"))
 					.catch((err) => expect(err).not.toBeNull());
 			});
