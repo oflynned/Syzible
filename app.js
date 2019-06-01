@@ -18,6 +18,7 @@ module.exports = (env) => {
 	let root = require("./routes/index");
 	let tearmaV1 = require("./routes/tearma/v1/index");
 	let tearmaV2 = require("./routes/tearma/v2/index")(env);
+	let irishRailApi = require("./routes/irishRail/v1/index");
 
 	// routes
 	// /
@@ -27,6 +28,7 @@ module.exports = (env) => {
 	app.use("/tearma/backend", tearmaV1);
 	app.use("/tearma/api/v1", tearmaV1);
 	app.use("/tearma/api/v2", tearmaV2);
+	app.use("/irish-rail/api/v1", irishRailApi);
 
 	// todo put this behind a feature flag
 	if (process.env.ENVIRONMENT === "production") {
