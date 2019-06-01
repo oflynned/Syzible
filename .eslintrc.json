@@ -3,7 +3,9 @@
     "ecmaVersion": 8
   },
   "extends": "standard",
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "env": {
     "node": true,
     "jest": true,
@@ -17,9 +19,14 @@
     "indent": [
       2,
       "tab",
-      {"SwitchCase": 1}
+      {
+        "SwitchCase": 1
+      }
     ],
     "no-tabs": 0,
-    "quotes": [2, "double"]
+    "quotes": [
+      2,
+      "double"
+    ]
   }
 }
