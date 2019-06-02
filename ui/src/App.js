@@ -1,60 +1,26 @@
 import React, { Component } from "react";
-import fetch from "isomorphic-fetch";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./App.css";
-import TermCardList from "./components/termCardList";
-import WebsiteHeader from "./components/websiteHeader";
 
-export default class App extends Component {
-	constructor() {
-		super();
-		const defaultMeta = { count: 0, limit: 10, offset: 0 };
-		this.state = { 
-			query: "", 
-			selectedTab: 0,
-			results: { 
-				ga: { meta: defaultMeta, results: [] }, 
-				en: { meta: defaultMeta, results: [] } 
-			}
-		};
-		
-		this.handleSubmission = this.handleSubmission.bind(this);
-		this.handleTabChange = this.handleTabChange.bind(this);
-	}
+import Tearma from "./screens/tearma/tearma";
+import IrishRail from "./screens/irishRail/irishRail";
+import PageNotFound from "./screens/common/pageNotFound";
 
-	handleSubmission(e) {
-		e.preventDefault();
-		this.setState({ query: e.target.elements[0].value });
-	}
-
-	handleTabChange(e, selected) {
-		e.preventDefault();
-		this.setState({ selectedTab: selected });
-	}
-
-	componentDidUpdate(_nextProps, nextState) {
-		if(nextState.query !== this.state.query)
-			this.getDefinitions();
-	}
-
-	getDefinitions() {
-		fetch(`/tearma/api/v2/find?query=${this.state.query}&limit=10&offset=0`)
-			.then((res) => res.json())
-			.then((terms) => this.setState({ results: terms }));
-	}
-
-	render() {
-		return(
-			<div className="App">
-				<WebsiteHeader 
-					results={this.state.results} 
-					selectedTab={this.state.selectedTab}
-					handleSubmission={this.handleSubmission} 
-					handleTabChange={this.handleTabChange} />
-				<TermCardList 
-					results={this.state.results} 
-					selectedTab={this.state.selectedTab} />
-			</div>
-		);
-	}
+class App extends Component {
+  render () {
+    return (
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/tearma" component={Tearma}/>
+            <Route exact path="/irish-rail" component={IrishRail}/>
+            <Route component={PageNotFound}/>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
+
+export default App;

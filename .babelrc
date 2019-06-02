@@ -2,14 +2,14 @@
   "presets": [
     "react",
     "env",
-    "es2015"
+    "es2017"
   ],
   "env": {
     "test": {
       "presets": [
         "react",
         "env",
-        "es2015"
+        "es2017"
       ],
       "plugins": [
         "transform-class-properties",
