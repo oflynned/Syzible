@@ -1,11 +1,21 @@
 import React, { Component } from "react";
+import Item from "../components/item";
 
-class Search extends Component {
+import "./results.css";
+
+class Results extends Component {
   render () {
     return (
-      <div>Search</div>
+      <div className={"results"}>
+        <ul>
+          {
+            this.props.results.map(item =>
+              <Item station={this.props.station} item={item}/>)
+          }
+        </ul>
+      </div>
     );
   }
 }
 
-export default Search;
+export default Results;
