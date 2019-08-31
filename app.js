@@ -32,8 +32,8 @@ module.exports = (env) => {
   app.use("/tearma/api/v2", tearmaV2);
   app.use("/irish-rail/api/v1", irishRailApi);
 
-  app.use(express.static(path.join(__dirname, "ui/build")));
-  app.get("*", (_req, res) => res.sendFile(path.join(__dirname, "/ui/build/index.html")));
+  // app.use(express.static(path.join(__dirname, "ui/build")));
+  // app.get("*", (_req, res) => res.sendFile(path.join(__dirname, "/ui/build/index.html")));
 
   return app;
 };
