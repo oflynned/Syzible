@@ -6,11 +6,6 @@ https://loinnir.syzible.com
 
 This is a non-functional, historic backup of the social network. There is no persistence layer hooked up to the service application.
 
-## Wedder
-https://wedder.syzible.com
-
-This is a colloquial weather web app to show current weather data for the corresponding user location.
-
 ## Tearma
 - Currently available on https://syzible.com/tearma, soon to be moved to https://tearma.syzible.com.
 - V1 is set to be completely removed
@@ -39,3 +34,9 @@ This is a micro-service based approach to polling the latest tbx repository of d
 * GET `/tearma/api/v2/find?query=[term]&queryLanguage=[language]&limit=[limit]&offset=[offset]`
 
 A full redesign and migration of the website is being done to React.js.
+
+
+## Wedder
+https://wedder.syzible.com
+
+This is a colloquial weather web app to show current weather data for the corresponding user location.
