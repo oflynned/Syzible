@@ -18,19 +18,7 @@ This is a non-functional, historic backup of the social network. There is no per
 - The Android app will also need to get updated to V2 at some point as it will become defunct. An update should be put out to put it in maintenance mode for the foreseeable future until V2 is releasable.
 
 ### v1
-#### :boom: deprecated as it does not work anymore since Tearma.ie redesigned their website
-This service is a man-in-the-middle parser for tearma.ie. Requests are relayed to Tearma, and the resulting HTML is parsed into a more usable JSON structure.
-
-The API is exposed by querying with parameters:
-
-* GET `/tearma/v1?term=[term]&limit=[limit]&lang=[lang]`
-
-There are 3 parameters, 2 of them are always required:
-* *term - this is the search term being provided, results will pertain to this word provided
-* *lang - this is the search language, is can either be en or ga
-* limit - this limits the returned JSON to the given limit. Note that the first result is always the searched language and is used in the web interface.
-
-The first element of the JSON array response contains meta data about the search.
+:boom: deprecated as it does not work anymore since Tearma.ie redesigned their website
 
 ### v2
 #### :wrench: in progress
