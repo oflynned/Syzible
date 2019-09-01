@@ -9,7 +9,8 @@
     "test-backend": "jest test test",
     "test-frontend": "jest test src",
     "coverage": "jest --coverage",
-    "lint": "eslint --ignore-path .eslintignore . --fix"
+    "lint": "eslint --ignore-path .eslintignore . --fix",
+    "heroku-postbuild": "cd ui && npm install && npm run build"
   },
   "pre-commit": [
     "lint"
