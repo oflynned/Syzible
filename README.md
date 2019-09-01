@@ -1,9 +1,24 @@
 # Syzible
 Some APIs made as a collection to host on an instance and generally either provide a web interface for some service and/or provide services for apps.
 
+## Loinnir
+https://loinnir.syzible.com
+
+This is a non-functional, historic backup of the social network. There is no persistence layer hooked up to the service application.
+
+## Wedder
+https://wedder.syzible.com
+
+This is a colloquial weather web app to show current weather data for the corresponding user location.
+
 ## Tearma
+- Currently available on https://syzible.com/tearma, soon to be moved to https://tearma.syzible.com.
+- V1 is set to be completely removed
+- V2 is set to become the defacto standard for use with the React web-app
+- The Android app will also need to get updated to V2 at some point as it will become defunct. An update should be put out to put it in maintenance mode for the foreseeable future until V2 is releasable.
+
 ### v1
-#### :boom: soon to be deprecated
+#### :boom: deprecated as it does not work anymore since Tearma.ie redesigned their website
 This service is a man-in-the-middle parser for tearma.ie. Requests are relayed to Tearma, and the resulting HTML is parsed into a more usable JSON structure.
 
 The API is exposed by querying with parameters:
