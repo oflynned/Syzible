@@ -2,7 +2,7 @@
 Some APIs made as a collection to host on an instance and generally either provide a web interface for some service and/or provide services for apps.
 
 ## Irish Rail
-Currently sitting on https://syzible.com/irihs-rail as a half-baked web app. Soon to be moved to https://irish-rail.syzible.com.
+Currently sitting on https://syzible.com/irish-rail as a half-baked web app. Soon to be moved to https://irish-rail.syzible.com.
 
 This is a service to subscribe to updates by push-notifications and see real-time information for train departures/arrivals.
 
