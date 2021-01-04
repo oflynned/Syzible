@@ -30,7 +30,7 @@
     "@rgrove/parse-xml": "^1.1.1",
     "adm-zip": "^0.4.11",
     "animate.css": "^3.5.2",
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.6.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
